@@ -17,6 +17,8 @@ import { validateKubernetesWorkloads } from './validateKubernetesWorkloads';
  *
  * Resolved secret values are deliberately absent. The projection carries only references for
  * runtime materialization immediately before apply.
+ *
+ * @readme
  */
 export function projectKubernetesResourcesAsync(
   request: KubernetesDriverRequest,

@@ -3,7 +3,7 @@
 
 # @ankhorage/kubernetes
 
-![license: MIT](././paradox/badges/license.svg) ![npm: v0.1.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
+![license: MIT](././paradox/badges/license.svg) ![npm: v0.2.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
 
 Shared Kubernetes workload driver for provider-neutral Ankhorage infrastructure.
 
@@ -36,5 +36,23 @@ standard Kubernetes workload projection and lifecycle semantics.
 Module: `src/features/workload-reconciliation/composition/createKubernetesDriver.ts`
 Source: `src/features/workload-reconciliation/composition/createKubernetesDriver.ts:19:1`
 Related symbols: `KubernetesDriver`, `KubernetesDriverOptions`
+
+</details>
+
+<details>
+<summary>projectKubernetesResourcesAsync</summary>
+
+```ts
+projectKubernetesResourcesAsync(request: KubernetesDriverRequest) => Promise<InfraResult<KubernetesProjection>>
+```
+
+Project portable workload desired state into deterministic standard Kubernetes resources.
+
+Resolved secret values are deliberately absent. The projection carries only references for
+runtime materialization immediately before apply.
+
+Module: `src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts`
+Source: `src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts:23:1`
+Related symbols: `KubernetesDriverRequest`, `KubernetesProjection`
 
 </details>

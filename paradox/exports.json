@@ -592,5 +592,37 @@
       }
     ],
     "structuredRows": []
+  },
+  {
+    "name": "projectKubernetesResourcesAsync",
+    "description": "Project portable workload desired state into deterministic standard Kubernetes resources.\n\nResolved secret values are deliberately absent. The projection carries only references for\nruntime materialization immediately before apply.",
+    "isReadme": true,
+    "examples": [],
+    "kind": "function",
+    "modulePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+    "sourceLocation": {
+      "filePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+      "line": 23,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesDriverRequest", "KubernetesProjection"],
+    "signatures": [
+      {
+        "label": "(request: KubernetesDriverRequest) => Promise<InfraResult<KubernetesProjection>>",
+        "parameters": [
+          {
+            "name": "request",
+            "type": "KubernetesDriverRequest",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "Promise<InfraResult<KubernetesProjection>>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
   }
 ]

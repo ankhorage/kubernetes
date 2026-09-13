@@ -6,7 +6,7 @@ import type {
 import { isInfraAdapterDescriptor } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
-import { createKubernetesDriver } from './index';
+import { createKubernetesDriver, projectKubernetesResourcesAsync } from './index';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('projects deterministic standard resources without claiming a provider identity', async () => {
@@ -14,8 +14,10 @@ it('projects deterministic standard resources without claiming a provider identi
   const driver = createKubernetesDriver({ api });
   const first = await driver.projectAsync(createRequest());
   const second = await driver.projectAsync(createRequest());
+  const standalone = await projectKubernetesResourcesAsync(createRequest());
 
   expect(first).toEqual(second);
+  expect(standalone).toEqual(first);
   expect(first.ok).toBe(true);
   if (!first.ok) return;
   expect(first.value.resources.map(({ resource }) => resource.kind)).toEqual([

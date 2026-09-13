@@ -71,3 +71,7 @@ graph LR
   export_KubernetesSecretBinding["KubernetesSecretBinding"]
   module_src_types_kubernetesResources_ts --> export_KubernetesSecretBinding
   export_KubernetesSecretBinding -.-> export_KubernetesResourceReference
+  export_projectKubernetesResourcesAsync["projectKubernetesResourcesAsync"]
+  module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts --> export_projectKubernetesResourcesAsync
+  export_projectKubernetesResourcesAsync -.-> export_KubernetesDriverRequest
+  export_projectKubernetesResourcesAsync -.-> export_KubernetesProjection
