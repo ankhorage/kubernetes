@@ -1,0 +1,8 @@
+sequenceDiagram
+  participant participant_createCommand as createCommand
+  participant participant_createKubectlKubernetesApi as createKubectlKubernetesApi
+  participant participant_createSubprocessKubernetesCommandRunner as createSubprocessKubernetesCommandRunner
+  participant_createKubectlKubernetesApi->>participant_createSubprocessKubernetesCommandRunner: createSubprocessKubernetesCommandRunner()
+  participant_createSubprocessKubernetesCommandRunner-->>participant_createKubectlKubernetesApi: return
+  participant_createKubectlKubernetesApi->>participant_createCommand: createCommand()
+  participant_createCommand-->>participant_createKubectlKubernetesApi: return

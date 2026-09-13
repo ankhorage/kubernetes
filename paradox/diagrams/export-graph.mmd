@@ -1,5 +1,8 @@
 graph LR
   module_examples_basic_usage_index_ts["examples/basic-usage/index.ts"]
+  module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts["src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"]
+  module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts["src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts"]
+  module_src_features_workload_reconciliation_adapters_kubectlResource_ts["src/features/workload-reconciliation/adapters/kubectlResource.ts"]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts["src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesExposure_ts["src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesPrerequisites_ts["src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"]
@@ -27,20 +30,39 @@ graph LR
   module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts["src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts"]
   module_src_features_workload_reconciliation_utils_toKubernetesName_ts["src/features/workload-reconciliation/utils/toKubernetesName.ts"]
   module_src_index_ts["src/index.ts"]
+  module_src_kubectlApi_test_ts["src/kubectlApi.test.ts"]
   module_src_kubernetesApi_test_ts["src/kubernetesApi.test.ts"]
   module_src_kubernetesDriver_test_ts["src/kubernetesDriver.test.ts"]
+  module_src_types_kubectl_ts["src/types/kubectl.ts"]
   module_src_types_kubernetesDriver_ts["src/types/kubernetesDriver.ts"]
   module_src_types_kubernetesResources_ts["src/types/kubernetesResources.ts"]
+  export_createKubectlKubernetesApi["createKubectlKubernetesApi"]
+  module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --> export_createKubectlKubernetesApi
+  export_createKubectlKubernetesApi -.-> export_KubectlKubernetesApiOptions
+  export_createKubectlKubernetesApi -.-> export_KubernetesApi
   export_createKubernetesDriver["createKubernetesDriver"]
   module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts --> export_createKubernetesDriver
   export_createKubernetesDriver -.-> export_KubernetesDriver
   export_createKubernetesDriver -.-> export_KubernetesDriverOptions
+  export_KubectlKubernetesApi["KubectlKubernetesApi"]
+  module_src_types_kubectl_ts --> export_KubectlKubernetesApi
+  export_KubectlKubernetesApiOptions["KubectlKubernetesApiOptions"]
+  module_src_types_kubectl_ts --> export_KubectlKubernetesApiOptions
+  export_KubectlKubernetesApiOptions -.-> export_KubernetesCommandRunner
   export_KubernetesApi["KubernetesApi"]
   module_src_types_kubernetesResources_ts --> export_KubernetesApi
   export_KubernetesApi -.-> export_KubernetesOwnershipQuery
   export_KubernetesApi -.-> export_KubernetesResource
   export_KubernetesApi -.-> export_KubernetesResourceObservation
   export_KubernetesApi -.-> export_KubernetesResourceReference
+  export_KubernetesCommandRequest["KubernetesCommandRequest"]
+  module_src_types_kubectl_ts --> export_KubernetesCommandRequest
+  export_KubernetesCommandResult["KubernetesCommandResult"]
+  module_src_types_kubectl_ts --> export_KubernetesCommandResult
+  export_KubernetesCommandRunner["KubernetesCommandRunner"]
+  module_src_types_kubectl_ts --> export_KubernetesCommandRunner
+  export_KubernetesCommandRunner -.-> export_KubernetesCommandRequest
+  export_KubernetesCommandRunner -.-> export_KubernetesCommandResult
   export_KubernetesDesiredResource["KubernetesDesiredResource"]
   module_src_types_kubernetesResources_ts --> export_KubernetesDesiredResource
   export_KubernetesDesiredResource -.-> export_KubernetesResource
