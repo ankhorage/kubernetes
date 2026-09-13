@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.3.0
+
+### Minor Changes
+
+- cc70cf4: Export the API-independent Kubernetes desired-resource projection for complete pre-cluster runtime planning and consume the current Contracts runtime boundary.
+
 ## 0.2.0
 
 ### Minor Changes
