@@ -178,6 +178,45 @@ it('fails closed when runtime secret materialization fails', async () => {
   expect(api.applied).toHaveLength(0);
 });
 
+it('materializes one keyed bootstrap credential only at the Kubernetes apply boundary', async () => {
+  const api = new FakeKubernetesApi();
+  const driver = createKubernetesDriver({ api });
+  const request = createCredentialRequest('bootstrap-token');
+  const projection = await driver.projectAsync(request);
+
+  expect(projection.ok).toBe(true);
+  expect(JSON.stringify(projection)).not.toContain('bootstrap-token');
+  expect(
+    projection.ok &&
+      projection.value.secretBindings.some(
+        ({ reference }) =>
+          reference.source === 'control-plane' &&
+          reference.name === 'DEPLOYMENT' &&
+          reference.key === 'token',
+      ),
+  ).toBe(true);
+
+  const reconciled = await driver.reconcileAsync(request);
+  expect(reconciled.ok).toBe(true);
+  expect(
+    api.applied.some((resource) => resource.stringData?.['env-deploy-token'] === 'bootstrap-token'),
+  ).toBe(true);
+  expect(JSON.stringify(reconciled)).not.toContain('bootstrap-token');
+});
+
+it('fails closed when a keyed bootstrap credential field is missing', async () => {
+  const api = new FakeKubernetesApi();
+  const driver = createKubernetesDriver({ api });
+  const failed = await driver.reconcileAsync(createCredentialRequest(undefined));
+
+  expect(failed.ok).toBe(false);
+  expect(
+    !failed.ok &&
+      failed.diagnostics.some(({ code }) => code === 'kubernetes-credential-key-missing'),
+  ).toBe(true);
+  expect(api.applied).toHaveLength(0);
+});
+
 /*** Create a complete generic workload request used by the API-boundary fixture. */
 function createRequest() {
   const workload: InfraWorkloadSpec = {
@@ -230,6 +269,41 @@ function createExecutionContext(): InfraExecutionContext {
           diagnostics: [],
         }),
     },
+  };
+}
+
+/*** Create a workload that consumes one keyed control-plane credential. */
+function createCredentialRequest(token: string | undefined) {
+  const request = createRequest();
+  const [workload] = request.workloads;
+  if (workload === undefined) throw new Error('Expected the workload fixture.');
+  const credentials: Readonly<Record<string, string>> = token === undefined ? {} : { token };
+  return {
+    ...request,
+    context: {
+      ...request.context,
+      credentials: {
+        resolveAsync: () =>
+          Promise.resolve({
+            ok: true as const,
+            value: credentials,
+            diagnostics: [],
+          }),
+      },
+    },
+    workloads: [
+      {
+        ...workload,
+        environment: {
+          ...workload.environment,
+          DEPLOY_TOKEN: {
+            kind: 'credential' as const,
+            reference: { source: 'control-plane' as const, name: 'DEPLOYMENT' },
+            key: 'token',
+          },
+        },
+      },
+    ],
   };
 }
 

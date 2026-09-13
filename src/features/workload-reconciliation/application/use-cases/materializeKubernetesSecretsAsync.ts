@@ -16,7 +16,10 @@ export async function materializeKubernetesSecretsAsync(
   const diagnostics: InfraDiagnostic[] = [];
 
   for (const binding of projection.secretBindings) {
-    const resolved = await request.context.secrets.resolveAsync(binding.reference);
+    const resolved =
+      binding.reference.source === 'secret-store'
+        ? await request.context.secrets.resolveAsync(binding.reference)
+        : await resolveCredentialValueAsync(request, binding.reference);
     if (!resolved.ok) {
       diagnostics.push(...resolved.diagnostics);
       continue;
@@ -40,4 +43,28 @@ export async function materializeKubernetesSecretsAsync(
     }),
     diagnostics: [],
   };
+}
+
+async function resolveCredentialValueAsync(
+  request: KubernetesDriverRequest,
+  reference: Extract<
+    KubernetesProjection['secretBindings'][number]['reference'],
+    { source: 'control-plane' }
+  >,
+): Promise<InfraResult<string>> {
+  const resolved = await request.context.credentials.resolveAsync(reference);
+  if (!resolved.ok) return resolved;
+  const value = resolved.value[reference.key];
+  return value === undefined
+    ? {
+        ok: false,
+        diagnostics: [
+          {
+            severity: 'error',
+            code: 'kubernetes-credential-key-missing',
+            message: 'A required control-plane credential field is missing.',
+          },
+        ],
+      }
+    : { ok: true, value, diagnostics: [] };
 }

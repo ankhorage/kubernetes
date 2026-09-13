@@ -18,6 +18,7 @@ export type {
   KubernetesApi,
   KubernetesDesiredResource,
   KubernetesOwnershipQuery,
+  KubernetesPrivilegedReference,
   KubernetesProjection,
   KubernetesResource,
   KubernetesResourceMetadata,
