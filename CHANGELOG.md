@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.4.0
+
+### Minor Changes
+
+- e3c0081: Add a shell-free, authenticated kubectl API adapter for concrete Kubernetes runtime integrations.
+
 ## 0.3.0
 
 ### Minor Changes
