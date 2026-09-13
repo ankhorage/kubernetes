@@ -60,7 +60,7 @@ Source: `src/types/kubectl.ts:21:1`
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:45:1`
+Source: `src/types/kubernetesResources.ts:49:1`
 
 ### Members
 
@@ -117,7 +117,7 @@ Source: `src/types/kubectl.ts:17:1`
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:65:1`
+Source: `src/types/kubernetesResources.ts:69:1`
 
 ### Members
 
@@ -178,7 +178,7 @@ Source: `src/types/kubernetesDriver.ts:20:1`
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:31:1`
+Source: `src/types/kubernetesResources.ts:35:1`
 
 ### Members
 
@@ -188,11 +188,17 @@ Source: `src/types/kubernetesResources.ts:31:1`
 | namespace | property | `string`                           | yes      |             |
 | signal    | property | `AbortSignal \| undefined`         | no       |             |
 
+## KubernetesPrivilegedReference
+
+Kind: `unknown`
+Module: `src/types/kubernetesResources.ts`
+Source: `src/types/kubernetesResources.ts:9:1`
+
 ## KubernetesProjection
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:71:1`
+Source: `src/types/kubernetesResources.ts:75:1`
 
 ### Members
 
@@ -205,7 +211,7 @@ Source: `src/types/kubernetesResources.ts:71:1`
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:15:1`
+Source: `src/types/kubernetesResources.ts:19:1`
 
 ### Members
 
@@ -222,7 +228,7 @@ Source: `src/types/kubernetesResources.ts:15:1`
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:8:1`
+Source: `src/types/kubernetesResources.ts:12:1`
 
 ### Members
 
@@ -237,7 +243,7 @@ Source: `src/types/kubernetesResources.ts:8:1`
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:37:1`
+Source: `src/types/kubernetesResources.ts:41:1`
 
 ### Members
 
@@ -251,7 +257,7 @@ Source: `src/types/kubernetesResources.ts:37:1`
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:24:1`
+Source: `src/types/kubernetesResources.ts:28:1`
 
 ### Members
 
@@ -266,15 +272,15 @@ Source: `src/types/kubernetesResources.ts:24:1`
 
 Kind: `type`
 Module: `src/types/kubernetesResources.ts`
-Source: `src/types/kubernetesResources.ts:59:1`
+Source: `src/types/kubernetesResources.ts:63:1`
 
 ### Members
 
-| Name      | Kind     | Type                          | Required | Description |
-| --------- | -------- | ----------------------------- | -------- | ----------- |
-| key       | property | `string`                      | yes      |             |
-| reference | property | `InfraSecretReference`        | yes      |             |
-| resource  | property | `KubernetesResourceReference` | yes      |             |
+| Name      | Kind     | Type                            | Required | Description |
+| --------- | -------- | ------------------------------- | -------- | ----------- |
+| key       | property | `string`                        | yes      |             |
+| reference | property | `KubernetesPrivilegedReference` | yes      |             |
+| resource  | property | `KubernetesResourceReference`   | yes      |             |
 
 ## projectKubernetesResourcesAsync
 

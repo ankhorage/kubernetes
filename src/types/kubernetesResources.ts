@@ -1,9 +1,13 @@
 import type {
+  InfraControlPlaneCredentialRef,
   InfraOwnedResource,
   InfraPlanAction,
   InfraResourceStatus,
   InfraSecretReference,
 } from '@ankhorage/contracts/infra';
+
+export type KubernetesPrivilegedReference =
+  InfraSecretReference | (InfraControlPlaneCredentialRef & { readonly key: string });
 
 export interface KubernetesResourceMetadata {
   readonly name: string;
@@ -59,7 +63,7 @@ export interface KubernetesApi {
 export interface KubernetesSecretBinding {
   readonly resource: KubernetesResourceReference;
   readonly key: string;
-  readonly reference: InfraSecretReference;
+  readonly reference: KubernetesPrivilegedReference;
 }
 
 export interface KubernetesDesiredResource {
@@ -87,7 +91,7 @@ export interface KubernetesResolvedWorkloadValues {
 
 export interface KubernetesSecretTarget {
   readonly key: string;
-  readonly reference: InfraSecretReference;
+  readonly reference: KubernetesPrivilegedReference;
   readonly target:
     | { readonly kind: 'environment'; readonly name: string }
     | { readonly kind: 'file'; readonly path: string };

@@ -137,7 +137,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 45,
+      "line": 49,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -309,7 +309,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 65,
+      "line": 69,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -504,7 +504,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 31,
+      "line": 35,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -536,6 +536,24 @@
     "structuredRows": []
   },
   {
+    "name": "KubernetesPrivilegedReference",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "unknown",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 9,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "KubernetesProjection",
     "description": null,
     "isReadme": false,
@@ -544,7 +562,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 71,
+      "line": 75,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -577,7 +595,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 15,
+      "line": 19,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -638,7 +656,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 8,
+      "line": 12,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -685,7 +703,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 37,
+      "line": 41,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -725,7 +743,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 24,
+      "line": 28,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -772,11 +790,11 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 59,
+      "line": 63,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["KubernetesResourceReference"],
+    "relatedSymbols": ["KubernetesPrivilegedReference", "KubernetesResourceReference"],
     "signatures": [],
     "members": [
       {
@@ -789,7 +807,7 @@
       {
         "name": "reference",
         "kind": "property",
-        "type": "InfraSecretReference",
+        "type": "KubernetesPrivilegedReference",
         "required": true,
         "description": null
       },

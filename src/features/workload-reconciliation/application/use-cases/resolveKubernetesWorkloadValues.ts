@@ -71,6 +71,14 @@ function assignValue(
     secrets.push({ key: toKubernetesName(key), reference: value.reference, target });
     return;
   }
+  if (value.kind === 'credential') {
+    secrets.push({
+      key: toKubernetesName(key),
+      reference: { ...value.reference, key: value.key },
+      target,
+    });
+    return;
+  }
 
   const matches = outputs.filter(
     (output) => output.owner.resourceId === value.resourceId && output.name === value.output,

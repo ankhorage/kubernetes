@@ -77,6 +77,8 @@ graph LR
   module_src_types_kubernetesDriver_ts --> export_KubernetesDriverRequest
   export_KubernetesOwnershipQuery["KubernetesOwnershipQuery"]
   module_src_types_kubernetesResources_ts --> export_KubernetesOwnershipQuery
+  export_KubernetesPrivilegedReference["KubernetesPrivilegedReference"]
+  module_src_types_kubernetesResources_ts --> export_KubernetesPrivilegedReference
   export_KubernetesProjection["KubernetesProjection"]
   module_src_types_kubernetesResources_ts --> export_KubernetesProjection
   export_KubernetesProjection -.-> export_KubernetesDesiredResource
@@ -92,6 +94,7 @@ graph LR
   module_src_types_kubernetesResources_ts --> export_KubernetesResourceReference
   export_KubernetesSecretBinding["KubernetesSecretBinding"]
   module_src_types_kubernetesResources_ts --> export_KubernetesSecretBinding
+  export_KubernetesSecretBinding -.-> export_KubernetesPrivilegedReference
   export_KubernetesSecretBinding -.-> export_KubernetesResourceReference
   export_projectKubernetesResourcesAsync["projectKubernetesResourcesAsync"]
   module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts --> export_projectKubernetesResourcesAsync
