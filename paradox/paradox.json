@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.0.0",
+      "value": "v0.1.0",
       "color": "cb3837"
     },
     {
@@ -75,54 +75,447 @@
       "exports": []
     },
     {
+      "path": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["createKubernetesController", "CreateKubernetesControllerInput"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["createKubernetesExposure", "CreateKubernetesExposureInput"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": [
+        "createKubernetesPrerequisites",
+        "CreateKubernetesPrerequisitesInput",
+        "KubernetesPrerequisites"
+      ]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "src/types/kubernetesDriver.ts"
+      ],
+      "exports": ["getKubernetesOutputsAsync"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "src/types/kubernetesDriver.ts"
+      ],
+      "exports": ["getKubernetesStatusAsync"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["materializeKubernetesSecretsAsync"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "src/types/kubernetesDriver.ts"
+      ],
+      "exports": ["planKubernetesResourcesAsync"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
+        "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["prepareKubernetesChangesAsync"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "src/features/workload-reconciliation/application/use-cases/validateKubernetesWorkloads.ts",
+        "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "src/features/workload-reconciliation/utils/createKubernetesIdentity.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["projectKubernetesResourcesAsync"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
+        "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["projectKubernetesWorkload", "ProjectKubernetesWorkloadInput"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "src/types/kubernetesDriver.ts"
+      ],
+      "exports": ["reconcileKubernetesResourcesAsync"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["removeKubernetesResourcesAsync"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["resolveKubernetesWorkloadValues"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/validateKubernetesWorkloads.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": ["validateKubernetesWorkloads"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/types/kubernetesDriver.ts"
+      ],
+      "exports": ["waitForKubernetesReadinessAsync"]
+    },
+    {
       "path": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/types/kubernetesDriver.ts"],
+      "dependencies": [
+        "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts",
+        "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts",
+        "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "src/types/kubernetesDriver.ts"
+      ],
       "exports": ["createKubernetesDriver"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/constants.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": ["KUBERNETES_OWNERSHIP"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesResources.ts"],
+      "exports": ["areKubernetesResourcesEquivalent"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/constants.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["createKubernetesDesiredResource"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/createKubernetesIdentity.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesDriver.ts"],
+      "exports": ["createKubernetesIdentity"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/constants.ts",
+        "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["getKubernetesOwnershipQuery"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesResources.ts"],
+      "exports": ["getKubernetesResourceKey"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesResources.ts"],
+      "exports": ["getKubernetesResourceReference"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/constants.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["readKubernetesOwnedResource"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": ["toKubernetesName"]
     },
     {
       "path": "src/index.ts",
       "isEntrypoint": true,
       "dependencies": [],
-      "exports": ["createKubernetesDriver", "KubernetesDriver"]
+      "exports": [
+        "createKubernetesDriver",
+        "KubernetesApi",
+        "KubernetesDesiredResource",
+        "KubernetesDriver",
+        "KubernetesDriverOptions",
+        "KubernetesDriverRequest",
+        "KubernetesOwnershipQuery",
+        "KubernetesProjection",
+        "KubernetesResource",
+        "KubernetesResourceMetadata",
+        "KubernetesResourceObservation",
+        "KubernetesResourceReference",
+        "KubernetesSecretBinding"
+      ]
+    },
+    {
+      "path": "src/kubernetesApi.test.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/index.ts"],
+      "exports": ["FakeKubernetesApi"]
     },
     {
       "path": "src/kubernetesDriver.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/index.ts"],
+      "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
       "exports": []
     },
     {
       "path": "src/types/kubernetesDriver.ts",
       "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesResources.ts"],
+      "exports": ["KubernetesDriver", "KubernetesDriverOptions", "KubernetesDriverRequest"]
+    },
+    {
+      "path": "src/types/kubernetesResources.ts",
+      "isEntrypoint": false,
       "dependencies": [],
-      "exports": ["KubernetesDriver"]
+      "exports": [
+        "KubernetesApi",
+        "KubernetesDesiredResource",
+        "KubernetesOwnershipQuery",
+        "KubernetesPreparedChange",
+        "KubernetesPreparedChanges",
+        "KubernetesProjection",
+        "KubernetesResolvedWorkloadValues",
+        "KubernetesResource",
+        "KubernetesResourceMetadata",
+        "KubernetesResourceObservation",
+        "KubernetesResourceReference",
+        "KubernetesSecretBinding",
+        "KubernetesSecretTarget",
+        "KubernetesWorkloadProjection"
+      ]
     }
   ],
   "exports": [
     {
       "name": "createKubernetesDriver",
-      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. Workload projection and reconciliation operations are added at this boundary in the\ndriver implementation phase.",
+      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. The supplied API port is already authenticated cluster access; the driver adds only\nstandard Kubernetes workload projection and lifecycle semantics.",
       "isReadme": true,
       "examples": [],
       "kind": "function",
       "modulePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
-        "line": 12,
+        "line": 19,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
-      "relatedSymbols": ["KubernetesDriver"],
+      "relatedSymbols": ["KubernetesDriver", "KubernetesDriverOptions"],
       "signatures": [
         {
-          "label": "() => KubernetesDriver",
-          "parameters": [],
+          "label": "(options: KubernetesDriverOptions) => KubernetesDriver",
+          "parameters": [
+            {
+              "name": "options",
+              "type": "KubernetesDriverOptions",
+              "required": true,
+              "description": null
+            }
+          ],
           "returnType": "KubernetesDriver",
           "returnDescription": null
         }
       ],
       "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesApi",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 45,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [
+        "KubernetesOwnershipQuery",
+        "KubernetesResource",
+        "KubernetesResourceObservation",
+        "KubernetesResourceReference"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "applyAsync",
+          "kind": "method",
+          "type": "(resource: KubernetesResource, signal?: AbortSignal) => Promise<void>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "deleteAsync",
+          "kind": "method",
+          "type": "(resource: KubernetesResourceReference, signal?: AbortSignal) => Promise<void>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "listOwnedAsync",
+          "kind": "method",
+          "type": "(query: KubernetesOwnershipQuery) => Promise<readonly KubernetesResource[]>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "observeAsync",
+          "kind": "method",
+          "type": "(resource: KubernetesResourceReference, signal?: AbortSignal) => Promise<KubernetesResourceObservation>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "waitUntilReadyAsync",
+          "kind": "method",
+          "type": "(resource: KubernetesResourceReference, options: { readonly timeoutSeconds: number; readonly signal?: AbortSignal; }) => Promise<KubernetesResourceObservation>",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesDesiredResource",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 65,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesResource"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "owner",
+          "kind": "property",
+          "type": "InfraOwnedResource",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "resource",
+          "kind": "property",
+          "type": "KubernetesResource",
+          "required": true,
+          "description": null
+        }
+      ],
       "structuredRows": []
     },
     {
@@ -134,7 +527,115 @@
       "modulePath": "src/types/kubernetesDriver.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesDriver.ts",
-        "line": 2,
+        "line": 29,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesDriverRequest", "KubernetesProjection"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "kind",
+          "kind": "property",
+          "type": "\"kubernetes\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "outputsAsync",
+          "kind": "method",
+          "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<readonly InfraOutput[]>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "planAsync",
+          "kind": "method",
+          "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<readonly InfraPlanAction[]>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "projectAsync",
+          "kind": "method",
+          "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<KubernetesProjection>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "reconcileAsync",
+          "kind": "method",
+          "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<InfraReconcileResult>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "removeAsync",
+          "kind": "method",
+          "type": "(request: KubernetesDriverRequest, destroy: InfraDestroyRequest) => Promise<InfraResult<InfraReconcileResult>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "statusAsync",
+          "kind": "method",
+          "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<readonly InfraResourceStatus[]>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "waitUntilReadyAsync",
+          "kind": "method",
+          "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<readonly InfraResourceStatus[]>>",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesDriverOptions",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesDriver.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesDriver.ts",
+        "line": 15,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesApi"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "api",
+          "kind": "property",
+          "type": "KubernetesApi",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "defaultReadinessTimeoutSeconds",
+          "kind": "property",
+          "type": "number | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesDriverRequest",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesDriver.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesDriver.ts",
+        "line": 20,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -142,9 +643,345 @@
       "signatures": [],
       "members": [
         {
+          "name": "availableOutputs",
+          "kind": "property",
+          "type": "readonly InfraOutput[] | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "context",
+          "kind": "property",
+          "type": "InfraExecutionContext",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "namespace",
+          "kind": "property",
+          "type": "string | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "ownerAdapter",
+          "kind": "property",
+          "type": "\"local\" | \"hetzner\" | \"minikube\" | \"k3s\" | \"docker-compose\" | \"supabase\" | \"cerbos\" | \"r2\" | \"supabase-vault\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "workloads",
+          "kind": "property",
+          "type": "readonly InfraWorkloadSpec[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesOwnershipQuery",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 31,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "labels",
+          "kind": "property",
+          "type": "Readonly<Record<string, string>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "namespace",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "signal",
+          "kind": "property",
+          "type": "AbortSignal | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesProjection",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 71,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesDesiredResource", "KubernetesSecretBinding"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "resources",
+          "kind": "property",
+          "type": "readonly KubernetesDesiredResource[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "secretBindings",
+          "kind": "property",
+          "type": "readonly KubernetesSecretBinding[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesResource",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 15,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesResourceMetadata"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "apiVersion",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "data",
+          "kind": "property",
+          "type": "Readonly<Record<string, string>> | undefined",
+          "required": false,
+          "description": null
+        },
+        {
           "name": "kind",
           "kind": "property",
-          "type": "\"kubernetes\"",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "metadata",
+          "kind": "property",
+          "type": "KubernetesResourceMetadata",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "spec",
+          "kind": "property",
+          "type": "Readonly<Record<string, unknown>> | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "stringData",
+          "kind": "property",
+          "type": "Readonly<Record<string, string>> | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesResourceMetadata",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 8,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "annotations",
+          "kind": "property",
+          "type": "Readonly<Record<string, string>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "labels",
+          "kind": "property",
+          "type": "Readonly<Record<string, string>>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "namespace",
+          "kind": "property",
+          "type": "string | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesResourceObservation",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 37,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "detail",
+          "kind": "property",
+          "type": "string | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "publicOutputs",
+          "kind": "property",
+          "type": "Readonly<Record<string, string | number | boolean>> | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "state",
+          "kind": "property",
+          "type": "\"absent\" | \"pending\" | \"ready\" | \"degraded\" | \"stopped\" | \"retained\" | \"failed\" | \"unknown\"",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesResourceReference",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 24,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "apiVersion",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "kind",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "namespace",
+          "kind": "property",
+          "type": "string | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesSecretBinding",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 59,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesResourceReference"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "key",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "reference",
+          "kind": "property",
+          "type": "InfraSecretReference",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "resource",
+          "kind": "property",
+          "type": "KubernetesResourceReference",
           "required": true,
           "description": null
         }
@@ -155,11 +992,551 @@
   "components": [],
   "sourceFunctions": [
     {
+      "name": "createKubernetesController",
+      "description": "Create the standard Kubernetes workload controller and pod template.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 17,
+        "column": 1
+      }
+    },
+    {
+      "name": "createContainer",
+      "description": "Create the portable container projection.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 58,
+        "column": 1
+      }
+    },
+    {
+      "name": "createEnvironment",
+      "description": "Create literal and secret-backed environment entries.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 84,
+        "column": 1
+      }
+    },
+    {
+      "name": "createResources",
+      "description": "Create Kubernetes request quantities from portable workload resources.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 98,
+        "column": 1
+      }
+    },
+    {
+      "name": "createProbe",
+      "description": "Project portable health intent into Kubernetes probe fields.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 110,
+        "column": 1
+      }
+    },
+    {
+      "name": "createVolumes",
+      "description": "Create pod volumes for files and persistence.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 124,
+        "column": 1
+      }
+    },
+    {
+      "name": "createVolumeMounts",
+      "description": "Create exact file and persistence mount points.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 144,
+        "column": 1
+      }
+    },
+    {
+      "name": "isEnvironmentSecret",
+      "description": "Narrow a secret target to an environment entry.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 169,
+        "column": 1
+      }
+    },
+    {
+      "name": "isFileSecret",
+      "description": "Narrow a secret target to a mounted file.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 176,
+        "column": 1
+      }
+    },
+    {
+      "name": "createKubernetesExposure",
+      "description": "Create Services and optional Ingress from portable port and exposure intent.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "line": 13,
+        "column": 1
+      }
+    },
+    {
+      "name": "createService",
+      "description": "Create the stable service boundary for declared workload ports.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "line": 31,
+        "column": 1
+      }
+    },
+    {
+      "name": "createServicePort",
+      "description": "Project one generic port into a Service port.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "line": 61,
+        "column": 1
+      }
+    },
+    {
+      "name": "createIngress",
+      "description": "Create ingress only when public hostname intent and a TCP port both exist.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "line": 71,
+        "column": 1
+      }
+    },
+    {
+      "name": "createKubernetesPrerequisites",
+      "description": "Create config, secret and persistent-volume prerequisites in dependency order.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "createConfigMap",
+      "description": "Create portable file configuration without secret content.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "line": 53,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSecret",
+      "description": "Create a value-free Secret skeleton plus runtime-only materialization bindings.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "line": 79,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPersistentVolumeClaim",
+      "description": "Create one persistent volume claim from portable capacity and retention intent.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "line": 115,
+        "column": 1
+      }
+    },
+    {
+      "name": "getKubernetesOutputsAsync",
+      "description": "Read safe public outputs exposed by Infra-owned Kubernetes resources.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "getKubernetesStatusAsync",
+      "description": "Read provider-neutral status for every safely identified Infra-owned resource.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "materializeKubernetesSecretsAsync",
+      "description": "Resolve referenced secrets into ephemeral Kubernetes apply resources.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
+        "line": 11,
+        "column": 1
+      }
+    },
+    {
+      "name": "planKubernetesResourcesAsync",
+      "description": "Produce a side-effect-free Kubernetes reconciliation plan.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts",
+        "line": 10,
+        "column": 1
+      }
+    },
+    {
+      "name": "prepareKubernetesChangesAsync",
+      "description": "Prepare deterministic create, update, no-op, retain and stale-delete changes.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "line": 22,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDesiredChanges",
+      "description": "Compare desired resources against the observed resource map.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "line": 52,
+        "column": 1
+      }
+    },
+    {
+      "name": "createStaleChanges",
+      "description": "Identify obsolete owned resources without admitting malformed ownership metadata.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "line": 79,
+        "column": 1
+      }
+    },
+    {
+      "name": "sortForRemoval",
+      "description": "Sort stale resources deterministically with dependents before their dependencies.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "line": 103,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareStaleResourceKeys",
+      "description": "Compare stale resources by stable external resource identity.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "line": 126,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAction",
+      "description": "Create one non-secret plan action.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "line": 134,
+        "column": 1
+      }
+    },
+    {
+      "name": "projectKubernetesResourcesAsync",
+      "description": "Project portable workload desired state into deterministic standard Kubernetes resources.\n\nResolved secret values are deliberately absent. The projection carries only references for\nruntime materialization immediately before apply.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "line": 21,
+        "column": 1
+      }
+    },
+    {
+      "name": "createNamespace",
+      "description": "Create the environment namespace before all namespaced resources.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "line": 56,
+        "column": 1
+      }
+    },
+    {
+      "name": "projectKubernetesWorkload",
+      "description": "Project one workload while retaining dependency-first resource ordering.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "line": 16,
+        "column": 1
+      }
+    },
+    {
+      "name": "reconcileKubernetesResourcesAsync",
+      "description": "Apply desired changes and prune only obsolete, non-persistent Infra-owned resources.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "line": 17,
+        "column": 1
+      }
+    },
+    {
+      "name": "removeKubernetesResourcesAsync",
+      "description": "Remove owned resources in reverse dependency order while enforcing persistence authorization.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "line": 19,
+        "column": 1
+      }
+    },
+    {
+      "name": "performRemovalAsync",
+      "description": "Execute the already-confirmed removal against the narrow owned-resource selector.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "line": 55,
+        "column": 1
+      }
+    },
+    {
+      "name": "isConfirmed",
+      "description": "Confirm request identity at both destroy boundaries.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "line": 83,
+        "column": 1
+      }
+    },
+    {
+      "name": "canDelete",
+      "description": "Decide whether explicit persistence policy authorizes this exact owner.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "line": 93,
+        "column": 1
+      }
+    },
+    {
+      "name": "identitiesEqual",
+      "description": "Compare canonical resource identities without object-reference assumptions.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "line": 105,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareRemovalOrder",
+      "description": "Delete dependents before dependencies and namespaces last.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "line": 115,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveKubernetesWorkloadValues",
+      "description": "Resolve public outputs while retaining privileged workload values as secret references.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
+        "line": 16,
+        "column": 1
+      }
+    },
+    {
+      "name": "assignValue",
+      "description": "Assign one portable value without resolving privileged content.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
+        "line": 56,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateKubernetesWorkloads",
+      "description": "Validate portable invariants required for deterministic Kubernetes projection.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/validateKubernetesWorkloads.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "waitForKubernetesReadinessAsync",
+      "description": "Wait dependency-first for required Kubernetes resources to report ready.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "line": 19,
+        "column": 1
+      }
+    },
+    {
       "name": "createKubernetesDriver",
-      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. Workload projection and reconciliation operations are added at this boundary in the\ndriver implementation phase.",
+      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. The supplied API port is already authenticated cluster access; the driver adds only\nstandard Kubernetes workload projection and lifecycle semantics.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "line": 19,
+        "column": 1
+      }
+    },
+    {
+      "name": "areKubernetesResourcesEquivalent",
+      "description": "Compare desired and observed Kubernetes resources while ignoring server-owned metadata.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalize",
+      "description": "Normalize write-only Secret data and recursively order object keys.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
         "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "stableSerialize",
+      "description": "Serialize plain Kubernetes desired data with stable recursive key ordering.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
+        "line": 40,
+        "column": 1
+      }
+    },
+    {
+      "name": "createKubernetesDesiredResource",
+      "description": "Attach canonical Infra ownership to a standard Kubernetes desired resource.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "createKubernetesIdentity",
+      "description": "Create a runtime-owned Infra identity without provider-specific assumptions.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/createKubernetesIdentity.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "getKubernetesOwnershipQuery",
+      "description": "Build the narrow ownership selector used for every read and prune operation.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "line": 7,
+        "column": 1
+      }
+    },
+    {
+      "name": "getKubernetesResourceKey",
+      "description": "Build a stable comparison key for a Kubernetes resource identity.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "getKubernetesResourceReference",
+      "description": "Return the immutable Kubernetes identity of a desired or observed resource.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "line": 7,
+        "column": 1
+      }
+    },
+    {
+      "name": "readKubernetesOwnedResource",
+      "description": "Read trusted ownership metadata, rejecting resources outside the active Infra identity.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "line": 10,
+        "column": 1
+      }
+    },
+    {
+      "name": "readDependencies",
+      "description": "Decode dependency IDs without trusting arbitrary serialized identity objects.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "line": 51,
+        "column": 1
+      }
+    },
+    {
+      "name": "toKubernetesName",
+      "description": "Convert an arbitrary stable identifier into a deterministic Kubernetes DNS label.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "line": 2,
+        "column": 1
+      }
+    },
+    {
+      "name": "hash",
+      "description": "Produce a stable non-cryptographic suffix used only for Kubernetes name uniqueness.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "line": 16,
+        "column": 1
+      }
+    },
+    {
+      "name": "labelsInclude",
+      "description": "Match label records without dynamic object-property access.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesApi.test.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "materializeStoredSecret",
+      "description": "Store write-only Secret values in the shape returned by the Kubernetes API.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesApi.test.ts",
+        "line": 75,
+        "column": 1
+      }
+    },
+    {
+      "name": "referencesEqual",
+      "description": "Compare resources by standard Kubernetes identity fields.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesApi.test.ts",
+        "line": 90,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRequest",
+      "description": "Create a complete generic workload request used by the API-boundary fixture.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesDriver.test.ts",
+        "line": 179,
+        "column": 1
+      }
+    },
+    {
+      "name": "createExecutionContext",
+      "description": "Create the execution context without a technology-specific runtime fixture.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesDriver.test.ts",
+        "line": 208,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSecretReference",
+      "description": "Create one canonical secret reference.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesDriver.test.ts",
+        "line": 234,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRetainedDestroyRequest",
+      "description": "Create a confirmed destruction request with retained persistence.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesDriver.test.ts",
+        "line": 245,
         "column": 1
       }
     }
@@ -170,7 +1547,7 @@
       "name": "createKubernetesDriver",
       "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
       "symbolName": "createKubernetesDriver",
-      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. Workload projection and reconciliation operations are added at this boundary in the\ndriver implementation phase.",
+      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. The supplied API port is already authenticated cluster access; the driver adds only\nstandard Kubernetes workload projection and lifecycle semantics.",
       "isReadme": true
     }
   ],
@@ -187,8 +1564,23 @@
         "sourcePath": "src/index.ts"
       },
       {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/kubernetesApi.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesApi.test.ts"
+      },
+      {
         "fromPath": "src/kubernetesDriver.test.ts",
         "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesDriver.test.ts",
+        "toPath": "src/kubernetesApi.test.ts",
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
@@ -197,22 +1589,507 @@
         "sourcePath": "examples/basic-usage/index.ts"
       },
       {
+        "fromPath": "src/types/kubernetesDriver.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
         "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
         "toPath": "src/types/kubernetesDriver.ts",
         "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "toPath": "src/features/workload-reconciliation/constants.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "toPath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/createKubernetesIdentity.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesIdentity.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "toPath": "src/features/workload-reconciliation/constants.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "toPath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "toPath": "src/features/workload-reconciliation/constants.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "toPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "toPath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "toPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "toPath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "toPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "toPath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/createKubernetesIdentity.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/validateKubernetesWorkloads.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "toPath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
+        "toPath": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
       }
     ],
     "calls": [
       {
-        "fromSymbol": "src/kubernetesDriver.test.ts",
-        "toSymbol": "describe",
-        "callExpression": "describe",
-        "sourcePath": "src/kubernetesDriver.test.ts"
+        "fromSymbol": "src/kubernetesApi.test.ts",
+        "toSymbol": "labelsInclude",
+        "callExpression": "labelsInclude",
+        "sourcePath": "src/kubernetesApi.test.ts"
+      },
+      {
+        "fromSymbol": "applyAsync",
+        "toSymbol": "materializeStoredSecret",
+        "callExpression": "materializeStoredSecret",
+        "sourcePath": "src/kubernetesApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesApi.test.ts",
+        "toSymbol": "referencesEqual",
+        "callExpression": "referencesEqual",
+        "sourcePath": "src/kubernetesApi.test.ts"
       },
       {
         "fromSymbol": "src/kubernetesDriver.test.ts",
         "toSymbol": "it",
         "callExpression": "it",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "createKubernetesDriver",
+        "callExpression": "createKubernetesDriver",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "projectAsync",
+        "callExpression": "driver.projectAsync",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "createRequest",
+        "callExpression": "createRequest",
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
@@ -223,14 +2100,62 @@
       },
       {
         "fromSymbol": "src/kubernetesDriver.test.ts",
-        "toSymbol": "createKubernetesDriver",
-        "callExpression": "packageApi.createKubernetesDriver",
+        "toSymbol": "isInfraAdapterDescriptor",
+        "callExpression": "isInfraAdapterDescriptor",
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
         "fromSymbol": "src/kubernetesDriver.test.ts",
-        "toSymbol": "isInfraAdapterDescriptor",
-        "callExpression": "isInfraAdapterDescriptor",
+        "toSymbol": "planAsync",
+        "callExpression": "driver.planAsync",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "reconcileAsync",
+        "callExpression": "driver.reconcileAsync",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "waitUntilReadyAsync",
+        "callExpression": "driver.waitUntilReadyAsync",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "statusAsync",
+        "callExpression": "driver.statusAsync",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "outputsAsync",
+        "callExpression": "driver.outputsAsync",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "removeAsync",
+        "callExpression": "driver.removeAsync",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "createRetainedDestroyRequest",
+        "callExpression": "createRetainedDestroyRequest",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "createRequest",
+        "toSymbol": "createSecretReference",
+        "callExpression": "createSecretReference",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "createRequest",
+        "toSymbol": "createExecutionContext",
+        "callExpression": "createExecutionContext",
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
@@ -238,6 +2163,576 @@
         "toSymbol": "createKubernetesDriver",
         "callExpression": "createKubernetesDriver",
         "sourcePath": "examples/basic-usage/index.ts"
+      },
+      {
+        "fromSymbol": "planAsync",
+        "toSymbol": "planKubernetesResourcesAsync",
+        "callExpression": "planKubernetesResourcesAsync",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "reconcileAsync",
+        "toSymbol": "reconcileKubernetesResourcesAsync",
+        "callExpression": "reconcileKubernetesResourcesAsync",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "removeAsync",
+        "toSymbol": "removeKubernetesResourcesAsync",
+        "callExpression": "removeKubernetesResourcesAsync",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "statusAsync",
+        "toSymbol": "getKubernetesStatusAsync",
+        "callExpression": "getKubernetesStatusAsync",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "waitUntilReadyAsync",
+        "toSymbol": "waitForKubernetesReadinessAsync",
+        "callExpression": "waitForKubernetesReadinessAsync",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "outputsAsync",
+        "toSymbol": "getKubernetesOutputsAsync",
+        "callExpression": "getKubernetesOutputsAsync",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "areKubernetesResourcesEquivalent",
+        "toSymbol": "stableSerialize",
+        "callExpression": "stableSerialize",
+        "sourcePath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts"
+      },
+      {
+        "fromSymbol": "areKubernetesResourcesEquivalent",
+        "toSymbol": "normalize",
+        "callExpression": "normalize",
+        "sourcePath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
+        "toSymbol": "stableSerialize",
+        "callExpression": "stableSerialize",
+        "sourcePath": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesDesiredResource",
+        "toSymbol": "toKubernetesName",
+        "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesDesiredResource",
+        "toSymbol": "getKubernetesResourceKey",
+        "callExpression": "getKubernetesResourceKey",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesDesiredResource",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/utils/createKubernetesDesiredResource.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesOwnershipQuery",
+        "toSymbol": "toKubernetesName",
+        "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts"
+      },
+      {
+        "fromSymbol": "readKubernetesOwnedResource",
+        "toSymbol": "readDependencies",
+        "callExpression": "readDependencies",
+        "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
+      },
+      {
+        "fromSymbol": "readKubernetesOwnedResource",
+        "toSymbol": "getKubernetesResourceKey",
+        "callExpression": "getKubernetesResourceKey",
+        "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
+      },
+      {
+        "fromSymbol": "readKubernetesOwnedResource",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
+      },
+      {
+        "fromSymbol": "toKubernetesName",
+        "toSymbol": "hash",
+        "callExpression": "hash",
+        "sourcePath": "src/features/workload-reconciliation/utils/toKubernetesName.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesController",
+        "toSymbol": "createKubernetesDesiredResource",
+        "callExpression": "createKubernetesDesiredResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesController",
+        "toSymbol": "createContainer",
+        "callExpression": "createContainer",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesController",
+        "toSymbol": "createVolumes",
+        "callExpression": "createVolumes",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createContainer",
+        "toSymbol": "createEnvironment",
+        "callExpression": "createEnvironment",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "toSymbol": "toKubernetesName",
+        "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createContainer",
+        "toSymbol": "createVolumeMounts",
+        "callExpression": "createVolumeMounts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createContainer",
+        "toSymbol": "createResources",
+        "callExpression": "createResources",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createContainer",
+        "toSymbol": "createProbe",
+        "callExpression": "createProbe",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesExposure",
+        "toSymbol": "createService",
+        "callExpression": "createService",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesExposure",
+        "toSymbol": "createIngress",
+        "callExpression": "createIngress",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromSymbol": "createService",
+        "toSymbol": "createKubernetesDesiredResource",
+        "callExpression": "createKubernetesDesiredResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromSymbol": "createServicePort",
+        "toSymbol": "toKubernetesName",
+        "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromSymbol": "createIngress",
+        "toSymbol": "createKubernetesDesiredResource",
+        "callExpression": "createKubernetesDesiredResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromSymbol": "createIngress",
+        "toSymbol": "toKubernetesName",
+        "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesPrerequisites",
+        "toSymbol": "createConfigMap",
+        "callExpression": "createConfigMap",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesPrerequisites",
+        "toSymbol": "createSecret",
+        "callExpression": "createSecret",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesPrerequisites",
+        "toSymbol": "createPersistentVolumeClaim",
+        "callExpression": "createPersistentVolumeClaim",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromSymbol": "createConfigMap",
+        "toSymbol": "createKubernetesDesiredResource",
+        "callExpression": "createKubernetesDesiredResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromSymbol": "createSecret",
+        "toSymbol": "createKubernetesDesiredResource",
+        "callExpression": "createKubernetesDesiredResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromSymbol": "createSecret",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromSymbol": "createPersistentVolumeClaim",
+        "toSymbol": "toKubernetesName",
+        "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromSymbol": "createPersistentVolumeClaim",
+        "toSymbol": "createKubernetesDesiredResource",
+        "callExpression": "createKubernetesDesiredResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesOutputsAsync",
+        "toSymbol": "listOwnedAsync",
+        "callExpression": "options.api.listOwnedAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesOutputsAsync",
+        "toSymbol": "getKubernetesOwnershipQuery",
+        "callExpression": "getKubernetesOwnershipQuery",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesOutputsAsync",
+        "toSymbol": "readKubernetesOwnedResource",
+        "callExpression": "readKubernetesOwnedResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesOutputsAsync",
+        "toSymbol": "observeAsync",
+        "callExpression": "options.api.observeAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesOutputsAsync",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesStatusAsync",
+        "toSymbol": "listOwnedAsync",
+        "callExpression": "options.api.listOwnedAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesStatusAsync",
+        "toSymbol": "getKubernetesOwnershipQuery",
+        "callExpression": "getKubernetesOwnershipQuery",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesStatusAsync",
+        "toSymbol": "readKubernetesOwnedResource",
+        "callExpression": "readKubernetesOwnedResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesStatusAsync",
+        "toSymbol": "observeAsync",
+        "callExpression": "options.api.observeAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromSymbol": "getKubernetesStatusAsync",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/getKubernetesStatusAsync.ts"
+      },
+      {
+        "fromSymbol": "materializeKubernetesSecretsAsync",
+        "toSymbol": "getKubernetesResourceKey",
+        "callExpression": "getKubernetesResourceKey",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts"
+      },
+      {
+        "fromSymbol": "planKubernetesResourcesAsync",
+        "toSymbol": "prepareKubernetesChangesAsync",
+        "callExpression": "prepareKubernetesChangesAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/planKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "prepareKubernetesChangesAsync",
+        "toSymbol": "projectKubernetesResourcesAsync",
+        "callExpression": "projectKubernetesResourcesAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "prepareKubernetesChangesAsync",
+        "toSymbol": "materializeKubernetesSecretsAsync",
+        "callExpression": "materializeKubernetesSecretsAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "prepareKubernetesChangesAsync",
+        "toSymbol": "listOwnedAsync",
+        "callExpression": "options.api.listOwnedAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "prepareKubernetesChangesAsync",
+        "toSymbol": "getKubernetesOwnershipQuery",
+        "callExpression": "getKubernetesOwnershipQuery",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "prepareKubernetesChangesAsync",
+        "toSymbol": "createDesiredChanges",
+        "callExpression": "createDesiredChanges",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "prepareKubernetesChangesAsync",
+        "toSymbol": "createStaleChanges",
+        "callExpression": "createStaleChanges",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toSymbol": "getKubernetesResourceKey",
+        "callExpression": "getKubernetesResourceKey",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toSymbol": "areKubernetesResourcesEquivalent",
+        "callExpression": "areKubernetesResourcesEquivalent",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toSymbol": "createAction",
+        "callExpression": "createAction",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toSymbol": "readKubernetesOwnedResource",
+        "callExpression": "readKubernetesOwnedResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "createStaleChanges",
+        "toSymbol": "sortForRemoval",
+        "callExpression": "sortForRemoval",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesResourcesAsync",
+        "toSymbol": "validateKubernetesWorkloads",
+        "callExpression": "validateKubernetesWorkloads",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesResourcesAsync",
+        "toSymbol": "getKubernetesOwnershipQuery",
+        "callExpression": "getKubernetesOwnershipQuery",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesResourcesAsync",
+        "toSymbol": "createNamespace",
+        "callExpression": "createNamespace",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "toSymbol": "createKubernetesIdentity",
+        "callExpression": "createKubernetesIdentity",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesResourcesAsync",
+        "toSymbol": "projectKubernetesWorkload",
+        "callExpression": "projectKubernetesWorkload",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "createNamespace",
+        "toSymbol": "createKubernetesDesiredResource",
+        "callExpression": "createKubernetesDesiredResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesWorkload",
+        "toSymbol": "toKubernetesName",
+        "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesWorkload",
+        "toSymbol": "resolveKubernetesWorkloadValues",
+        "callExpression": "resolveKubernetesWorkloadValues",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesWorkload",
+        "toSymbol": "createKubernetesPrerequisites",
+        "callExpression": "createKubernetesPrerequisites",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesWorkload",
+        "toSymbol": "createKubernetesController",
+        "callExpression": "createKubernetesController",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesWorkload",
+        "toSymbol": "createKubernetesExposure",
+        "callExpression": "createKubernetesExposure",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesWorkload.ts"
+      },
+      {
+        "fromSymbol": "reconcileKubernetesResourcesAsync",
+        "toSymbol": "prepareKubernetesChangesAsync",
+        "callExpression": "prepareKubernetesChangesAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "reconcileKubernetesResourcesAsync",
+        "toSymbol": "applyAsync",
+        "callExpression": "options.api.applyAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "reconcileKubernetesResourcesAsync",
+        "toSymbol": "deleteAsync",
+        "callExpression": "options.api.deleteAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "reconcileKubernetesResourcesAsync",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "reconcileKubernetesResourcesAsync",
+        "toSymbol": "readKubernetesOwnedResource",
+        "callExpression": "readKubernetesOwnedResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "reconcileKubernetesResourcesAsync",
+        "toSymbol": "getKubernetesOutputsAsync",
+        "callExpression": "getKubernetesOutputsAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "removeKubernetesResourcesAsync",
+        "toSymbol": "isConfirmed",
+        "callExpression": "isConfirmed",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "removeKubernetesResourcesAsync",
+        "toSymbol": "performRemovalAsync",
+        "callExpression": "performRemovalAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "performRemovalAsync",
+        "toSymbol": "listOwnedAsync",
+        "callExpression": "options.api.listOwnedAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "performRemovalAsync",
+        "toSymbol": "getKubernetesOwnershipQuery",
+        "callExpression": "getKubernetesOwnershipQuery",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toSymbol": "readKubernetesOwnedResource",
+        "callExpression": "readKubernetesOwnedResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toSymbol": "canDelete",
+        "callExpression": "canDelete",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "performRemovalAsync",
+        "toSymbol": "canDelete",
+        "callExpression": "canDelete",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "performRemovalAsync",
+        "toSymbol": "deleteAsync",
+        "callExpression": "options.api.deleteAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "performRemovalAsync",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toSymbol": "identitiesEqual",
+        "callExpression": "identitiesEqual",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "resolveKubernetesWorkloadValues",
+        "toSymbol": "assignValue",
+        "callExpression": "assignValue",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts"
+      },
+      {
+        "fromSymbol": "assignValue",
+        "toSymbol": "toKubernetesName",
+        "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts"
+      },
+      {
+        "fromSymbol": "waitForKubernetesReadinessAsync",
+        "toSymbol": "projectKubernetesResourcesAsync",
+        "callExpression": "projectKubernetesResourcesAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForKubernetesReadinessAsync",
+        "toSymbol": "waitUntilReadyAsync",
+        "callExpression": "options.api.waitUntilReadyAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForKubernetesReadinessAsync",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
       }
     ],
     "typeReferences": [
@@ -245,6 +2740,156 @@
         "fromSymbol": "createKubernetesDriver",
         "toType": "KubernetesDriver",
         "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesDriver",
+        "toType": "KubernetesDriverOptions",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriver",
+        "toType": "InfraDestroyRequest",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriver",
+        "toType": "InfraOutput",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriver",
+        "toType": "InfraPlanAction",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriver",
+        "toType": "InfraReconcileResult",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriver",
+        "toType": "InfraResourceStatus",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriver",
+        "toType": "InfraResult",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriver",
+        "toType": "KubernetesDriverRequest",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriver",
+        "toType": "KubernetesProjection",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriverOptions",
+        "toType": "KubernetesApi",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriverRequest",
+        "toType": "InfraExecutionContext",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriverRequest",
+        "toType": "InfraOutput",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDriverRequest",
+        "toType": "InfraWorkloadSpec",
+        "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubernetesApi",
+        "toType": "AbortSignal",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesApi",
+        "toType": "KubernetesOwnershipQuery",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesApi",
+        "toType": "KubernetesResource",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesApi",
+        "toType": "KubernetesResourceObservation",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesApi",
+        "toType": "KubernetesResourceReference",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDesiredResource",
+        "toType": "InfraOwnedResource",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesDesiredResource",
+        "toType": "KubernetesResource",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesOwnershipQuery",
+        "toType": "AbortSignal",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesOwnershipQuery",
+        "toType": "Readonly",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesProjection",
+        "toType": "KubernetesDesiredResource",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesProjection",
+        "toType": "KubernetesSecretBinding",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesResource",
+        "toType": "KubernetesResourceMetadata",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesResource",
+        "toType": "Readonly",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesResourceMetadata",
+        "toType": "Readonly",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesResourceObservation",
+        "toType": "Readonly",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesSecretBinding",
+        "toType": "InfraSecretReference",
+        "sourcePath": "src/types/kubernetesResources.ts"
+      },
+      {
+        "fromSymbol": "KubernetesSecretBinding",
+        "toType": "KubernetesResourceReference",
+        "sourcePath": "src/types/kubernetesResources.ts"
       }
     ],
     "componentComposition": []
