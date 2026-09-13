@@ -25,4 +25,5 @@ export type {
   KubernetesResourceObservation,
   KubernetesResourceReference,
   KubernetesSecretBinding,
+  KubernetesSecretValueSegment,
 } from './types/kubernetesResources';

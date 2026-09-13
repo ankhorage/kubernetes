@@ -174,6 +174,10 @@ graph TD
   package__ankhorage_kubernetes -.-> module_src_kubernetesDriver_test_ts
   module_src_kubernetesDriver_test_ts --> module_src_index_ts
   module_src_kubernetesDriver_test_ts --> module_src_kubernetesApi_test_ts
+  module_src_kubernetesTemplates_test_ts["src/kubernetesTemplates.test.ts"]
+  package__ankhorage_kubernetes -.-> module_src_kubernetesTemplates_test_ts
+  module_src_kubernetesTemplates_test_ts --> module_src_index_ts
+  module_src_kubernetesTemplates_test_ts --> module_src_kubernetesApi_test_ts
   module_src_types_kubectl_ts["src/types/kubectl.ts"]
   package__ankhorage_kubernetes -.-> module_src_types_kubectl_ts
   module_src_types_kubectl_ts --> module_src_types_kubernetesResources_ts

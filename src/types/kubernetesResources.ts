@@ -9,6 +9,10 @@ import type {
 export type KubernetesPrivilegedReference =
   InfraSecretReference | (InfraControlPlaneCredentialRef & { readonly key: string });
 
+export type KubernetesSecretValueSegment =
+  | { readonly kind: 'literal'; readonly value: string }
+  | { readonly kind: 'reference'; readonly reference: KubernetesPrivilegedReference };
+
 export interface KubernetesResourceMetadata {
   readonly name: string;
   readonly namespace?: string;
@@ -63,7 +67,7 @@ export interface KubernetesApi {
 export interface KubernetesSecretBinding {
   readonly resource: KubernetesResourceReference;
   readonly key: string;
-  readonly reference: KubernetesPrivilegedReference;
+  readonly segments: readonly KubernetesSecretValueSegment[];
 }
 
 export interface KubernetesDesiredResource {
@@ -91,7 +95,7 @@ export interface KubernetesResolvedWorkloadValues {
 
 export interface KubernetesSecretTarget {
   readonly key: string;
-  readonly reference: KubernetesPrivilegedReference;
+  readonly segments: readonly KubernetesSecretValueSegment[];
   readonly target:
     | { readonly kind: 'environment'; readonly name: string }
     | { readonly kind: 'file'; readonly path: string };

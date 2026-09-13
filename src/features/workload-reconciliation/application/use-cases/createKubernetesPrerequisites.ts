@@ -106,7 +106,7 @@ function createSecret(
     bindings: input.values.secrets.map((secret) => ({
       resource: reference,
       key: secret.key,
-      reference: secret.reference,
+      segments: secret.segments,
     })),
   };
 }
