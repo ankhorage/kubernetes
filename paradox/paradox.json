@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.3.0",
+      "value": "v0.4.0",
       "color": "cb3837"
     },
     {
@@ -387,6 +387,7 @@
         "KubernetesDriverOptions",
         "KubernetesDriverRequest",
         "KubernetesOwnershipQuery",
+        "KubernetesPrivilegedReference",
         "KubernetesProjection",
         "KubernetesResource",
         "KubernetesResourceMetadata",
@@ -445,6 +446,7 @@
         "KubernetesOwnershipQuery",
         "KubernetesPreparedChange",
         "KubernetesPreparedChanges",
+        "KubernetesPrivilegedReference",
         "KubernetesProjection",
         "KubernetesResolvedWorkloadValues",
         "KubernetesResource",
@@ -596,7 +598,7 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 45,
+        "line": 49,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -768,7 +770,7 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 65,
+        "line": 69,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -963,7 +965,7 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 31,
+        "line": 35,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -995,6 +997,24 @@
       "structuredRows": []
     },
     {
+      "name": "KubernetesPrivilegedReference",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "unknown",
+      "modulePath": "src/types/kubernetesResources.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesResources.ts",
+        "line": 9,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
       "name": "KubernetesProjection",
       "description": null,
       "isReadme": false,
@@ -1003,7 +1023,7 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 71,
+        "line": 75,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1036,7 +1056,7 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 15,
+        "line": 19,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1097,7 +1117,7 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 8,
+        "line": 12,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1144,7 +1164,7 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 37,
+        "line": 41,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1184,7 +1204,7 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 24,
+        "line": 28,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1231,11 +1251,11 @@
       "modulePath": "src/types/kubernetesResources.ts",
       "sourceLocation": {
         "filePath": "src/types/kubernetesResources.ts",
-        "line": 59,
+        "line": 63,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
-      "relatedSymbols": ["KubernetesResourceReference"],
+      "relatedSymbols": ["KubernetesPrivilegedReference", "KubernetesResourceReference"],
       "signatures": [],
       "members": [
         {
@@ -1248,7 +1268,7 @@
         {
           "name": "reference",
           "kind": "property",
-          "type": "InfraSecretReference",
+          "type": "KubernetesPrivilegedReference",
           "required": true,
           "description": null
         },
@@ -1329,7 +1349,7 @@
       "description": "Apply one exact resource through standard input so values never enter argv.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 123,
+        "line": 122,
         "column": 1
       }
     },
@@ -1338,7 +1358,7 @@
       "description": "Delete one exact resource identity and tolerate an already absent resource.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 136,
+        "line": 135,
         "column": 1
       }
     },
@@ -1347,7 +1367,7 @@
       "description": "Read one live resource and map its standard readiness and public endpoint state.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 154,
+        "line": 153,
         "column": 1
       }
     },
@@ -1356,7 +1376,7 @@
       "description": "Poll live resource state until ready, terminal failure or timeout.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 176,
+        "line": 175,
         "column": 1
       }
     },
@@ -1365,7 +1385,7 @@
       "description": "Throw a sanitized failure that never includes stdin, stdout or stderr content.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 197,
+        "line": 196,
         "column": 1
       }
     },
@@ -1374,7 +1394,7 @@
       "description": "Build an optional signal bag without assigning undefined.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 202,
+        "line": 201,
         "column": 1
       }
     },
@@ -1383,7 +1403,7 @@
       "description": "Wait between API observations and abort promptly when requested.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 207,
+        "line": 206,
         "column": 1
       }
     },
@@ -1392,7 +1412,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 214,
+        "line": 213,
         "column": 11
       }
     },
@@ -1401,7 +1421,7 @@
       "description": "Normalize an AbortSignal reason to an Error for predictable rejection handling.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 227,
+        "line": 226,
         "column": 1
       }
     },
@@ -1793,6 +1813,15 @@
       }
     },
     {
+      "name": "resolveCredentialValueAsync",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
+        "line": 48,
+        "column": 1
+      }
+    },
+    {
       "name": "planKubernetesResourcesAsync",
       "description": "Produce a side-effect-free Kubernetes reconciliation plan.",
       "sourceLocation": {
@@ -2094,7 +2123,7 @@
       "description": "Create a successful command fixture with JSON output.",
       "sourceLocation": {
         "filePath": "src/kubectlApi.test.ts",
-        "line": 191,
+        "line": 202,
         "column": 1
       }
     },
@@ -2103,7 +2132,7 @@
       "description": "Create one live Kubernetes API fixture with optional server-owned fields.",
       "sourceLocation": {
         "filePath": "src/kubectlApi.test.ts",
-        "line": 200,
+        "line": 211,
         "column": 1
       }
     },
@@ -2112,7 +2141,7 @@
       "description": "Remove server-owned status fields from a resource fixture.",
       "sourceLocation": {
         "filePath": "src/kubectlApi.test.ts",
-        "line": 232,
+        "line": 243,
         "column": 1
       }
     },
@@ -2148,7 +2177,7 @@
       "description": "Create a complete generic workload request used by the API-boundary fixture.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 182,
+        "line": 221,
         "column": 1
       }
     },
@@ -2157,7 +2186,16 @@
       "description": "Create the execution context without a technology-specific runtime fixture.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 211,
+        "line": 250,
+        "column": 1
+      }
+    },
+    {
+      "name": "createCredentialRequest",
+      "description": "Create a workload that consumes one keyed control-plane credential.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesDriver.test.ts",
+        "line": 276,
         "column": 1
       }
     },
@@ -2166,7 +2204,7 @@
       "description": "Create one canonical secret reference.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 237,
+        "line": 311,
         "column": 1
       }
     },
@@ -2175,7 +2213,7 @@
       "description": "Create a confirmed destruction request with retained persistence.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 248,
+        "line": 322,
         "column": 1
       }
     }
@@ -2956,6 +2994,12 @@
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "createCredentialRequest",
+        "callExpression": "createCredentialRequest",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
         "fromSymbol": "createRequest",
         "toSymbol": "createSecretReference",
         "callExpression": "createSecretReference",
@@ -2965,6 +3009,12 @@
         "fromSymbol": "createRequest",
         "toSymbol": "createExecutionContext",
         "callExpression": "createExecutionContext",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "createCredentialRequest",
+        "toSymbol": "createRequest",
+        "callExpression": "createRequest",
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
@@ -3701,6 +3751,12 @@
       },
       {
         "fromSymbol": "materializeKubernetesSecretsAsync",
+        "toSymbol": "resolveCredentialValueAsync",
+        "callExpression": "resolveCredentialValueAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts"
+      },
+      {
+        "fromSymbol": "materializeKubernetesSecretsAsync",
         "toSymbol": "getKubernetesResourceKey",
         "callExpression": "getKubernetesResourceKey",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts"
@@ -4175,7 +4231,7 @@
       },
       {
         "fromSymbol": "KubernetesSecretBinding",
-        "toType": "InfraSecretReference",
+        "toType": "KubernetesPrivilegedReference",
         "sourcePath": "src/types/kubernetesResources.ts"
       },
       {
