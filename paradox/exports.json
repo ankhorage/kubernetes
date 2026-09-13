@@ -1,5 +1,37 @@
 [
   {
+    "name": "createKubectlKubernetesApi",
+    "description": "Create a concrete Kubernetes API backed by an authenticated kubectl context.\n\nCommands are executed as argv arrays without a shell. Secret manifests are supplied only on\nstandard input and are never included in errors or observations.",
+    "isReadme": true,
+    "examples": [],
+    "kind": "function",
+    "modulePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+    "sourceLocation": {
+      "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+      "line": 39,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubectlKubernetesApiOptions", "KubernetesApi"],
+    "signatures": [
+      {
+        "label": "(options: KubectlKubernetesApiOptions) => KubernetesApi",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "KubectlKubernetesApiOptions",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "KubernetesApi",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "createKubernetesDriver",
     "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. The supplied API port is already authenticated cluster access; the driver adds only\nstandard Kubernetes workload projection and lifecycle semantics.",
     "isReadme": true,
@@ -29,6 +61,71 @@
       }
     ],
     "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "KubectlKubernetesApi",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "unknown",
+    "modulePath": "src/types/kubectl.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubectl.ts",
+      "line": 29,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "KubectlKubernetesApiOptions",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubectl.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubectl.ts",
+      "line": 21,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesCommandRunner"],
+    "signatures": [],
+    "members": [
+      {
+        "name": "context",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "executable",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "pollIntervalMs",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "runner",
+        "kind": "property",
+        "type": "KubernetesCommandRunner | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
     "structuredRows": []
   },
   {
@@ -84,6 +181,119 @@
         "name": "waitUntilReadyAsync",
         "kind": "method",
         "type": "(resource: KubernetesResourceReference, options: { readonly timeoutSeconds: number; readonly signal?: AbortSignal; }) => Promise<KubernetesResourceObservation>",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesCommandRequest",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubectl.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubectl.ts",
+      "line": 3,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "arguments",
+        "kind": "property",
+        "type": "readonly string[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "executable",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "signal",
+        "kind": "property",
+        "type": "AbortSignal | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "stdin",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesCommandResult",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubectl.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubectl.ts",
+      "line": 10,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "exitCode",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "stderr",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "stdout",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesCommandRunner",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubectl.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubectl.ts",
+      "line": 17,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesCommandRequest", "KubernetesCommandResult"],
+    "signatures": [],
+    "members": [
+      {
+        "name": "runAsync",
+        "kind": "method",
+        "type": "(request: KubernetesCommandRequest) => Promise<KubernetesCommandResult>",
         "required": true,
         "description": null
       }

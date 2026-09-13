@@ -3,7 +3,7 @@
 
 # @ankhorage/kubernetes
 
-![license: MIT](././paradox/badges/license.svg) ![npm: v0.2.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
+![license: MIT](././paradox/badges/license.svg) ![npm: v0.3.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
 
 Shared Kubernetes workload driver for provider-neutral Ankhorage infrastructure.
 
@@ -15,10 +15,29 @@ Shared Kubernetes workload driver for provider-neutral Ankhorage infrastructure.
 - [Architecture overview](././paradox/diagrams/architecture-overview.mmd)
 - [Module relationships](././paradox/diagrams/module-relationships.mmd)
 - [Export graph](././paradox/diagrams/export-graph.mmd)
+- [createKubectlKubernetesApi sequence](././paradox/diagrams/sequences/create-kubectl-kubernetes-api.mmd)
 
 ## Public API
 
 ### Utilities
+
+<details>
+<summary>createKubectlKubernetesApi</summary>
+
+```ts
+createKubectlKubernetesApi(options: KubectlKubernetesApiOptions) => KubernetesApi
+```
+
+Create a concrete Kubernetes API backed by an authenticated kubectl context.
+
+Commands are executed as argv arrays without a shell. Secret manifests are supplied only on
+standard input and are never included in errors or observations.
+
+Module: `src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts`
+Source: `src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:39:1`
+Related symbols: `KubectlKubernetesApiOptions`, `KubernetesApi`
+
+</details>
 
 <details>
 <summary>createKubernetesDriver</summary>

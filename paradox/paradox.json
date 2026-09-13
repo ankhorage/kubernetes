@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.2.0",
+      "value": "v0.3.0",
       "color": "cb3837"
     },
     {
@@ -73,6 +73,35 @@
       "isEntrypoint": false,
       "dependencies": ["dist/index.d.ts"],
       "exports": []
+    },
+    {
+      "path": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "src/types/kubectl.ts",
+        "src/types/kubernetesResources.ts"
+      ],
+      "exports": ["createKubectlKubernetesApi"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubectl.ts"],
+      "exports": ["createSubprocessKubernetesCommandRunner"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesResources.ts"],
+      "exports": [
+        "labelsInclude",
+        "observeKubectlResource",
+        "parseKubectlJsonRecord",
+        "parseKubectlResourceList",
+        "parseOptionalKubectlResource"
+      ]
     },
     {
       "path": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
@@ -345,8 +374,14 @@
       "isEntrypoint": true,
       "dependencies": [],
       "exports": [
+        "createKubectlKubernetesApi",
         "createKubernetesDriver",
+        "KubectlKubernetesApi",
+        "KubectlKubernetesApiOptions",
         "KubernetesApi",
+        "KubernetesCommandRequest",
+        "KubernetesCommandResult",
+        "KubernetesCommandRunner",
         "KubernetesDesiredResource",
         "KubernetesDriver",
         "KubernetesDriverOptions",
@@ -362,6 +397,15 @@
       ]
     },
     {
+      "path": "src/kubectlApi.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "src/index.ts"
+      ],
+      "exports": []
+    },
+    {
       "path": "src/kubernetesApi.test.ts",
       "isEntrypoint": false,
       "dependencies": ["src/index.ts"],
@@ -372,6 +416,18 @@
       "isEntrypoint": false,
       "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
       "exports": []
+    },
+    {
+      "path": "src/types/kubectl.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesResources.ts"],
+      "exports": [
+        "KubectlKubernetesApi",
+        "KubectlKubernetesApiOptions",
+        "KubernetesCommandRequest",
+        "KubernetesCommandResult",
+        "KubernetesCommandRunner"
+      ]
     },
     {
       "path": "src/types/kubernetesDriver.ts",
@@ -403,6 +459,38 @@
   ],
   "exports": [
     {
+      "name": "createKubectlKubernetesApi",
+      "description": "Create a concrete Kubernetes API backed by an authenticated kubectl context.\n\nCommands are executed as argv arrays without a shell. Secret manifests are supplied only on\nstandard input and are never included in errors or observations.",
+      "isReadme": true,
+      "examples": [],
+      "kind": "function",
+      "modulePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 39,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubectlKubernetesApiOptions", "KubernetesApi"],
+      "signatures": [
+        {
+          "label": "(options: KubectlKubernetesApiOptions) => KubernetesApi",
+          "parameters": [
+            {
+              "name": "options",
+              "type": "KubectlKubernetesApiOptions",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "KubernetesApi",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
       "name": "createKubernetesDriver",
       "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. The supplied API port is already authenticated cluster access; the driver adds only\nstandard Kubernetes workload projection and lifecycle semantics.",
       "isReadme": true,
@@ -432,6 +520,71 @@
         }
       ],
       "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "KubectlKubernetesApi",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "unknown",
+      "modulePath": "src/types/kubectl.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubectl.ts",
+        "line": 29,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "KubectlKubernetesApiOptions",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubectl.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubectl.ts",
+        "line": 21,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesCommandRunner"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "context",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "executable",
+          "kind": "property",
+          "type": "string | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "pollIntervalMs",
+          "kind": "property",
+          "type": "number | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "runner",
+          "kind": "property",
+          "type": "KubernetesCommandRunner | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
       "structuredRows": []
     },
     {
@@ -487,6 +640,119 @@
           "name": "waitUntilReadyAsync",
           "kind": "method",
           "type": "(resource: KubernetesResourceReference, options: { readonly timeoutSeconds: number; readonly signal?: AbortSignal; }) => Promise<KubernetesResourceObservation>",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesCommandRequest",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubectl.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubectl.ts",
+        "line": 3,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "arguments",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "executable",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "signal",
+          "kind": "property",
+          "type": "AbortSignal | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "stdin",
+          "kind": "property",
+          "type": "string | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesCommandResult",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubectl.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubectl.ts",
+        "line": 10,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "exitCode",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "stderr",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "stdout",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesCommandRunner",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubectl.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubectl.ts",
+        "line": 17,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesCommandRequest", "KubernetesCommandResult"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "runAsync",
+          "kind": "method",
+          "type": "(request: KubernetesCommandRequest) => Promise<KubernetesCommandResult>",
           "required": true,
           "description": null
         }
@@ -1032,6 +1298,321 @@
   "components": [],
   "sourceFunctions": [
     {
+      "name": "createKubectlKubernetesApi",
+      "description": "Create a concrete Kubernetes API backed by an authenticated kubectl context.\n\nCommands are executed as argv arrays without a shell. Secret manifests are supplied only on\nstandard input and are never included in errors or observations.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 39,
+        "column": 1
+      }
+    },
+    {
+      "name": "createCommand",
+      "description": "Bind an executable and exact kubeconfig context to every kubectl invocation.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 68,
+        "column": 1
+      }
+    },
+    {
+      "name": "listOwnedAsync",
+      "description": "List only resources selected by the driver's namespace and ownership labels.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 85,
+        "column": 1
+      }
+    },
+    {
+      "name": "applyAsync",
+      "description": "Apply one exact resource through standard input so values never enter argv.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 123,
+        "column": 1
+      }
+    },
+    {
+      "name": "deleteAsync",
+      "description": "Delete one exact resource identity and tolerate an already absent resource.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 136,
+        "column": 1
+      }
+    },
+    {
+      "name": "observeAsync",
+      "description": "Read one live resource and map its standard readiness and public endpoint state.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 154,
+        "column": 1
+      }
+    },
+    {
+      "name": "waitUntilReadyAsync",
+      "description": "Poll live resource state until ready, terminal failure or timeout.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 176,
+        "column": 1
+      }
+    },
+    {
+      "name": "ensureSuccess",
+      "description": "Throw a sanitized failure that never includes stdin, stdout or stderr content.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 197,
+        "column": 1
+      }
+    },
+    {
+      "name": "signalOption",
+      "description": "Build an optional signal bag without assigning undefined.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 202,
+        "column": 1
+      }
+    },
+    {
+      "name": "delayAsync",
+      "description": "Wait between API observations and abort promptly when requested.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 207,
+        "column": 1
+      }
+    },
+    {
+      "name": "onAbort",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 214,
+        "column": 11
+      }
+    },
+    {
+      "name": "abortError",
+      "description": "Normalize an AbortSignal reason to an Error for predictable rejection handling.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 227,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSubprocessKubernetesCommandRunner",
+      "description": "Create the concrete shell-free subprocess boundary used by kubectl operations.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "line": 10,
+        "column": 1
+      }
+    },
+    {
+      "name": "runAsync",
+      "description": "Execute one argv-safe command while keeping standard input out of diagnostics.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "line": 15,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseKubectlResourceList",
+      "description": "Parse a kubectl list response into comparison-safe desired resource shapes.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseOptionalKubectlResource",
+      "description": "Parse an optional single-resource response.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 17,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseKubectlJsonRecord",
+      "description": "Parse one JSON object returned by kubectl.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 22,
+        "column": 1
+      }
+    },
+    {
+      "name": "observeKubectlResource",
+      "description": "Map standard Kubernetes status fields without exposing Secret data.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 33,
+        "column": 1
+      }
+    },
+    {
+      "name": "labelsInclude",
+      "description": "Match a required subset of labels without dynamic object-property access.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 65,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseComparisonResource",
+      "description": "Prefer kubectl's exact last-applied shape to avoid server-default drift during planning.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 77,
+        "column": 1
+      }
+    },
+    {
+      "name": "readLastApplied",
+      "description": "Read kubectl's comparison annotation before stripping bookkeeping metadata.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 88,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseResource",
+      "description": "Parse the generic resource fields owned by the shared Kubernetes driver.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 98,
+        "column": 1
+      }
+    },
+    {
+      "name": "readPublicOutputs",
+      "description": "Read only endpoint values that Kubernetes explicitly exposes as public routing state.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 121,
+        "column": 1
+      }
+    },
+    {
+      "name": "withOutputs",
+      "description": "Add optional public outputs to a resource observation.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 142,
+        "column": 1
+      }
+    },
+    {
+      "name": "withoutLastApplied",
+      "description": "Remove kubectl's bookkeeping annotation from driver-owned comparison metadata.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 150,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRecord",
+      "description": "Narrow an unknown value to a plain record.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 159,
+        "column": 1
+      }
+    },
+    {
+      "name": "isUnknownArray",
+      "description": "Narrow an unknown value to an array whose entries remain unknown.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 164,
+        "column": 1
+      }
+    },
+    {
+      "name": "getValue",
+      "description": "Read a property through entry iteration to avoid trusting dynamic object prototypes.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 169,
+        "column": 1
+      }
+    },
+    {
+      "name": "readString",
+      "description": "Read one required string field.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 176,
+        "column": 1
+      }
+    },
+    {
+      "name": "optionalString",
+      "description": "Read one optional string field.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 185,
+        "column": 1
+      }
+    },
+    {
+      "name": "readRecord",
+      "description": "Read one required record field.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 196,
+        "column": 1
+      }
+    },
+    {
+      "name": "optionalRecord",
+      "description": "Read one optional record field.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 206,
+        "column": 1
+      }
+    },
+    {
+      "name": "readNumber",
+      "description": "Read one optional finite number field.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 217,
+        "column": 1
+      }
+    },
+    {
+      "name": "optionalStringRecord",
+      "description": "Read one optional string record field.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 226,
+        "column": 1
+      }
+    },
+    {
+      "name": "getStringValue",
+      "description": "Read a string value from a validated string record.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 244,
+        "column": 1
+      }
+    },
+    {
       "name": "createKubernetesController",
       "description": "Create the standard Kubernetes workload controller and pod template.",
       "sourceLocation": {
@@ -1509,6 +2090,33 @@
       }
     },
     {
+      "name": "success",
+      "description": "Create a successful command fixture with JSON output.",
+      "sourceLocation": {
+        "filePath": "src/kubectlApi.test.ts",
+        "line": 191,
+        "column": 1
+      }
+    },
+    {
+      "name": "createResource",
+      "description": "Create one live Kubernetes API fixture with optional server-owned fields.",
+      "sourceLocation": {
+        "filePath": "src/kubectlApi.test.ts",
+        "line": 200,
+        "column": 1
+      }
+    },
+    {
+      "name": "withoutStatus",
+      "description": "Remove server-owned status fields from a resource fixture.",
+      "sourceLocation": {
+        "filePath": "src/kubectlApi.test.ts",
+        "line": 232,
+        "column": 1
+      }
+    },
+    {
       "name": "labelsInclude",
       "description": "Match label records without dynamic object-property access.",
       "sourceLocation": {
@@ -1575,6 +2183,14 @@
   "sequenceScenarios": [
     {
       "kind": "export",
+      "name": "createKubectlKubernetesApi",
+      "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+      "symbolName": "createKubectlKubernetesApi",
+      "description": "Create a concrete Kubernetes API backed by an authenticated kubectl context.\n\nCommands are executed as argv arrays without a shell. Secret manifests are supplied only on\nstandard input and are never included in errors or observations.",
+      "isReadme": true
+    },
+    {
+      "kind": "export",
       "name": "createKubernetesDriver",
       "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
       "symbolName": "createKubernetesDriver",
@@ -1594,12 +2210,22 @@
     "imports": [
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
         "toPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/kubectl.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -1611,6 +2237,16 @@
         "fromPath": "src/index.ts",
         "toPath": "src/types/kubernetesResources.ts",
         "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/kubectlApi.test.ts",
+        "toPath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromPath": "src/kubectlApi.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/kubectlApi.test.ts"
       },
       {
         "fromPath": "src/kubernetesApi.test.ts",
@@ -1633,9 +2269,44 @@
         "sourcePath": "examples/basic-usage/index.ts"
       },
       {
+        "fromPath": "src/types/kubectl.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/types/kubectl.ts"
+      },
+      {
         "fromPath": "src/types/kubernetesDriver.ts",
         "toPath": "src/types/kubernetesResources.ts",
         "sourcePath": "src/types/kubernetesDriver.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toPath": "src/types/kubectl.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toPath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toPath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "toPath": "src/types/kubectl.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
       },
       {
         "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
@@ -2105,6 +2776,84 @@
     ],
     "calls": [
       {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "createResource",
+        "callExpression": "createResource",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "success",
+        "callExpression": "success",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "createKubectlKubernetesApi",
+        "callExpression": "createKubectlKubernetesApi",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "listOwnedAsync",
+        "callExpression": "api.listOwnedAsync",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "withoutStatus",
+        "callExpression": "withoutStatus",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "applyAsync",
+        "callExpression": "api.applyAsync",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "deleteAsync",
+        "callExpression": "api.deleteAsync",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "waitUntilReadyAsync",
+        "callExpression": "api.waitUntilReadyAsync",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "observeAsync",
+        "callExpression": "api.observeAsync",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "createSubprocessKubernetesCommandRunner",
+        "callExpression": "createSubprocessKubernetesCommandRunner",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubectlApi.test.ts",
+        "toSymbol": "runAsync",
+        "callExpression": "runner.runAsync",
+        "sourcePath": "src/kubectlApi.test.ts"
+      },
+      {
         "fromSymbol": "src/kubernetesApi.test.ts",
         "toSymbol": "labelsInclude",
         "callExpression": "labelsInclude",
@@ -2223,6 +2972,438 @@
         "toSymbol": "createKubernetesDriver",
         "callExpression": "createKubernetesDriver",
         "sourcePath": "examples/basic-usage/index.ts"
+      },
+      {
+        "fromSymbol": "createKubectlKubernetesApi",
+        "toSymbol": "createSubprocessKubernetesCommandRunner",
+        "callExpression": "createSubprocessKubernetesCommandRunner",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "createKubectlKubernetesApi",
+        "toSymbol": "createCommand",
+        "callExpression": "createCommand",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "listOwnedAsync",
+        "toSymbol": "listOwnedAsync",
+        "callExpression": "listOwnedAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "applyAsync",
+        "toSymbol": "applyAsync",
+        "callExpression": "applyAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "deleteAsync",
+        "toSymbol": "deleteAsync",
+        "callExpression": "deleteAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "observeAsync",
+        "toSymbol": "observeAsync",
+        "callExpression": "observeAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "waitUntilReadyAsync",
+        "toSymbol": "waitUntilReadyAsync",
+        "callExpression": "waitUntilReadyAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "runAsync",
+        "toSymbol": "runAsync",
+        "callExpression": "runner.runAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "listOwnedAsync",
+        "toSymbol": "runAsync",
+        "callExpression": "command.runAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "listOwnedAsync",
+        "toSymbol": "signalOption",
+        "callExpression": "signalOption",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "listOwnedAsync",
+        "toSymbol": "ensureSuccess",
+        "callExpression": "ensureSuccess",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "listOwnedAsync",
+        "toSymbol": "parseOptionalKubectlResource",
+        "callExpression": "parseOptionalKubectlResource",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toSymbol": "labelsInclude",
+        "callExpression": "labelsInclude",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "listOwnedAsync",
+        "toSymbol": "parseKubectlResourceList",
+        "callExpression": "parseKubectlResourceList",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "applyAsync",
+        "toSymbol": "runAsync",
+        "callExpression": "command.runAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "applyAsync",
+        "toSymbol": "ensureSuccess",
+        "callExpression": "ensureSuccess",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "deleteAsync",
+        "toSymbol": "runAsync",
+        "callExpression": "command.runAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "deleteAsync",
+        "toSymbol": "signalOption",
+        "callExpression": "signalOption",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "deleteAsync",
+        "toSymbol": "ensureSuccess",
+        "callExpression": "ensureSuccess",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "observeAsync",
+        "toSymbol": "runAsync",
+        "callExpression": "command.runAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "observeAsync",
+        "toSymbol": "signalOption",
+        "callExpression": "signalOption",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "observeAsync",
+        "toSymbol": "ensureSuccess",
+        "callExpression": "ensureSuccess",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "observeAsync",
+        "toSymbol": "observeKubectlResource",
+        "callExpression": "observeKubectlResource",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "observeAsync",
+        "toSymbol": "parseKubectlJsonRecord",
+        "callExpression": "parseKubectlJsonRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "waitUntilReadyAsync",
+        "toSymbol": "observeAsync",
+        "callExpression": "observeAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "waitUntilReadyAsync",
+        "toSymbol": "delayAsync",
+        "callExpression": "delayAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toSymbol": "reject",
+        "callExpression": "reject",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toSymbol": "abortError",
+        "callExpression": "abortError",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "onAbort",
+        "toSymbol": "reject",
+        "callExpression": "reject",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "onAbort",
+        "toSymbol": "abortError",
+        "callExpression": "abortError",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toSymbol": "resolve",
+        "callExpression": "resolve",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "toSymbol": "spawn",
+        "callExpression": "spawn",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
+        "toSymbol": "resolve",
+        "callExpression": "resolve",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts"
+      },
+      {
+        "fromSymbol": "parseKubectlResourceList",
+        "toSymbol": "parseKubectlJsonRecord",
+        "callExpression": "parseKubectlJsonRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseKubectlResourceList",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseOptionalKubectlResource",
+        "toSymbol": "parseComparisonResource",
+        "callExpression": "parseComparisonResource",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseOptionalKubectlResource",
+        "toSymbol": "parseKubectlJsonRecord",
+        "callExpression": "parseKubectlJsonRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseKubectlJsonRecord",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlResource",
+        "toSymbol": "readString",
+        "callExpression": "readString",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlResource",
+        "toSymbol": "readRecord",
+        "callExpression": "readRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlResource",
+        "toSymbol": "optionalRecord",
+        "callExpression": "optionalRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlResource",
+        "toSymbol": "readPublicOutputs",
+        "callExpression": "readPublicOutputs",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlResource",
+        "toSymbol": "readNumber",
+        "callExpression": "readNumber",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlResource",
+        "toSymbol": "withOutputs",
+        "callExpression": "withOutputs",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlResource",
+        "toSymbol": "optionalString",
+        "callExpression": "optionalString",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseComparisonResource",
+        "toSymbol": "readLastApplied",
+        "callExpression": "readLastApplied",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseComparisonResource",
+        "toSymbol": "parseResource",
+        "callExpression": "parseResource",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readLastApplied",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readLastApplied",
+        "toSymbol": "optionalRecord",
+        "callExpression": "optionalRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readLastApplied",
+        "toSymbol": "optionalStringRecord",
+        "callExpression": "optionalStringRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readLastApplied",
+        "toSymbol": "getStringValue",
+        "callExpression": "getStringValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseResource",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseResource",
+        "toSymbol": "readRecord",
+        "callExpression": "readRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseResource",
+        "toSymbol": "optionalString",
+        "callExpression": "optionalString",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseResource",
+        "toSymbol": "optionalStringRecord",
+        "callExpression": "optionalStringRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseResource",
+        "toSymbol": "optionalRecord",
+        "callExpression": "optionalRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseResource",
+        "toSymbol": "readString",
+        "callExpression": "readString",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "parseResource",
+        "toSymbol": "withoutLastApplied",
+        "callExpression": "withoutLastApplied",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readPublicOutputs",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readPublicOutputs",
+        "toSymbol": "isUnknownArray",
+        "callExpression": "isUnknownArray",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readPublicOutputs",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readPublicOutputs",
+        "toSymbol": "optionalString",
+        "callExpression": "optionalString",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readPublicOutputs",
+        "toSymbol": "optionalRecord",
+        "callExpression": "optionalRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readString",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "optionalString",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readRecord",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readRecord",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "optionalRecord",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "optionalRecord",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readNumber",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "optionalStringRecord",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "optionalStringRecord",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
       },
       {
         "fromSymbol": "planAsync",
@@ -2803,14 +3984,14 @@
     ],
     "typeReferences": [
       {
-        "fromSymbol": "createKubernetesDriver",
-        "toType": "KubernetesDriver",
-        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+        "fromSymbol": "createKubectlKubernetesApi",
+        "toType": "KubectlKubernetesApiOptions",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
       },
       {
-        "fromSymbol": "createKubernetesDriver",
-        "toType": "KubernetesDriverOptions",
-        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+        "fromSymbol": "createKubectlKubernetesApi",
+        "toType": "KubernetesApi",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
       },
       {
         "fromSymbol": "projectKubernetesResourcesAsync",
@@ -2826,6 +4007,36 @@
         "fromSymbol": "projectKubernetesResourcesAsync",
         "toType": "KubernetesProjection",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesDriver",
+        "toType": "KubernetesDriver",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesDriver",
+        "toType": "KubernetesDriverOptions",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "KubectlKubernetesApiOptions",
+        "toType": "KubernetesCommandRunner",
+        "sourcePath": "src/types/kubectl.ts"
+      },
+      {
+        "fromSymbol": "KubernetesCommandRequest",
+        "toType": "AbortSignal",
+        "sourcePath": "src/types/kubectl.ts"
+      },
+      {
+        "fromSymbol": "KubernetesCommandRunner",
+        "toType": "KubernetesCommandRequest",
+        "sourcePath": "src/types/kubectl.ts"
+      },
+      {
+        "fromSymbol": "KubernetesCommandRunner",
+        "toType": "KubernetesCommandResult",
+        "sourcePath": "src/types/kubectl.ts"
       },
       {
         "fromSymbol": "KubernetesDriver",

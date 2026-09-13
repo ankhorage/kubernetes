@@ -1,5 +1,22 @@
 # Public API
 
+## createKubectlKubernetesApi
+
+Kind: `function`
+Module: `src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts`
+Source: `src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:39:1`
+
+Create a concrete Kubernetes API backed by an authenticated kubectl context.
+
+Commands are executed as argv arrays without a shell. Secret manifests are supplied only on
+standard input and are never included in errors or observations.
+
+### Signatures
+
+- `(options: KubectlKubernetesApiOptions) => KubernetesApi`
+  - options: `KubectlKubernetesApiOptions`
+  - returns: `KubernetesApi`
+
 ## createKubernetesDriver
 
 Kind: `function`
@@ -18,6 +35,27 @@ standard Kubernetes workload projection and lifecycle semantics.
   - options: `KubernetesDriverOptions`
   - returns: `KubernetesDriver`
 
+## KubectlKubernetesApi
+
+Kind: `unknown`
+Module: `src/types/kubectl.ts`
+Source: `src/types/kubectl.ts:29:1`
+
+## KubectlKubernetesApiOptions
+
+Kind: `type`
+Module: `src/types/kubectl.ts`
+Source: `src/types/kubectl.ts:21:1`
+
+### Members
+
+| Name           | Kind     | Type                                   | Required | Description |
+| -------------- | -------- | -------------------------------------- | -------- | ----------- |
+| context        | property | `string`                               | yes      |             |
+| executable     | property | `string \| undefined`                  | no       |             |
+| pollIntervalMs | property | `number \| undefined`                  | no       |             |
+| runner         | property | `KubernetesCommandRunner \| undefined` | no       |             |
+
 ## KubernetesApi
 
 Kind: `type`
@@ -33,6 +71,47 @@ Source: `src/types/kubernetesResources.ts:45:1`
 | listOwnedAsync      | method | `(query: KubernetesOwnershipQuery) => Promise<readonly KubernetesResource[]>`                                                                                     | yes      |             |
 | observeAsync        | method | `(resource: KubernetesResourceReference, signal?: AbortSignal) => Promise<KubernetesResourceObservation>`                                                         | yes      |             |
 | waitUntilReadyAsync | method | `(resource: KubernetesResourceReference, options: { readonly timeoutSeconds: number; readonly signal?: AbortSignal; }) => Promise<KubernetesResourceObservation>` | yes      |             |
+
+## KubernetesCommandRequest
+
+Kind: `type`
+Module: `src/types/kubectl.ts`
+Source: `src/types/kubectl.ts:3:1`
+
+### Members
+
+| Name       | Kind     | Type                       | Required | Description |
+| ---------- | -------- | -------------------------- | -------- | ----------- |
+| arguments  | property | `readonly string[]`        | yes      |             |
+| executable | property | `string`                   | yes      |             |
+| signal     | property | `AbortSignal \| undefined` | no       |             |
+| stdin      | property | `string \| undefined`      | no       |             |
+
+## KubernetesCommandResult
+
+Kind: `type`
+Module: `src/types/kubectl.ts`
+Source: `src/types/kubectl.ts:10:1`
+
+### Members
+
+| Name     | Kind     | Type     | Required | Description |
+| -------- | -------- | -------- | -------- | ----------- |
+| exitCode | property | `number` | yes      |             |
+| stderr   | property | `string` | yes      |             |
+| stdout   | property | `string` | yes      |             |
+
+## KubernetesCommandRunner
+
+Kind: `type`
+Module: `src/types/kubectl.ts`
+Source: `src/types/kubectl.ts:17:1`
+
+### Members
+
+| Name     | Kind   | Type                                                                      | Required | Description |
+| -------- | ------ | ------------------------------------------------------------------------- | -------- | ----------- |
+| runAsync | method | `(request: KubernetesCommandRequest) => Promise<KubernetesCommandResult>` | yes      |             |
 
 ## KubernetesDesiredResource
 
