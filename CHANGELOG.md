@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.5.0
+
+### Minor Changes
+
+- dc009b7: Materialize keyed control-plane credentials only at the Kubernetes API apply boundary.
+
 ## 0.4.0
 
 ### Minor Changes
