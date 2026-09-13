@@ -1,5 +1,7 @@
+import type { KubernetesApi } from '@ankhorage/kubernetes';
 import { createKubernetesDriver } from '@ankhorage/kubernetes';
 
-const driver = createKubernetesDriver();
+declare const authenticatedClusterApi: KubernetesApi;
+const driver = createKubernetesDriver({ api: authenticatedClusterApi });
 
 console.log(driver.kind);

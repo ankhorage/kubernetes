@@ -3,7 +3,7 @@
 
 # @ankhorage/kubernetes
 
-![license: MIT](././paradox/badges/license.svg) ![npm: v0.0.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
+![license: MIT](././paradox/badges/license.svg) ![npm: v0.1.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![docs: paradox](././paradox/badges/docs.svg)
 
 Shared Kubernetes workload driver for provider-neutral Ankhorage infrastructure.
 
@@ -24,17 +24,17 @@ Shared Kubernetes workload driver for provider-neutral Ankhorage infrastructure.
 <summary>createKubernetesDriver</summary>
 
 ```ts
-createKubernetesDriver() => KubernetesDriver
+createKubernetesDriver(options: KubernetesDriverOptions) => KubernetesDriver
 ```
 
 Create the shared Kubernetes workload driver entrypoint.
 
 Kubernetes is an implementation dependency for runtime adapters, not a selectable Infra
-provider. Workload projection and reconciliation operations are added at this boundary in the
-driver implementation phase.
+provider. The supplied API port is already authenticated cluster access; the driver adds only
+standard Kubernetes workload projection and lifecycle semantics.
 
 Module: `src/features/workload-reconciliation/composition/createKubernetesDriver.ts`
-Source: `src/features/workload-reconciliation/composition/createKubernetesDriver.ts:12:1`
-Related symbols: `KubernetesDriver`
+Source: `src/features/workload-reconciliation/composition/createKubernetesDriver.ts:19:1`
+Related symbols: `KubernetesDriver`, `KubernetesDriverOptions`
 
 </details>

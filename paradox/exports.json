@@ -1,27 +1,126 @@
 [
   {
     "name": "createKubernetesDriver",
-    "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. Workload projection and reconciliation operations are added at this boundary in the\ndriver implementation phase.",
+    "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. The supplied API port is already authenticated cluster access; the driver adds only\nstandard Kubernetes workload projection and lifecycle semantics.",
     "isReadme": true,
     "examples": [],
     "kind": "function",
     "modulePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
     "sourceLocation": {
       "filePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
-      "line": 12,
+      "line": 19,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["KubernetesDriver"],
+    "relatedSymbols": ["KubernetesDriver", "KubernetesDriverOptions"],
     "signatures": [
       {
-        "label": "() => KubernetesDriver",
-        "parameters": [],
+        "label": "(options: KubernetesDriverOptions) => KubernetesDriver",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "KubernetesDriverOptions",
+            "required": true,
+            "description": null
+          }
+        ],
         "returnType": "KubernetesDriver",
         "returnDescription": null
       }
     ],
     "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesApi",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 45,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [
+      "KubernetesOwnershipQuery",
+      "KubernetesResource",
+      "KubernetesResourceObservation",
+      "KubernetesResourceReference"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "applyAsync",
+        "kind": "method",
+        "type": "(resource: KubernetesResource, signal?: AbortSignal) => Promise<void>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "deleteAsync",
+        "kind": "method",
+        "type": "(resource: KubernetesResourceReference, signal?: AbortSignal) => Promise<void>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "listOwnedAsync",
+        "kind": "method",
+        "type": "(query: KubernetesOwnershipQuery) => Promise<readonly KubernetesResource[]>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "observeAsync",
+        "kind": "method",
+        "type": "(resource: KubernetesResourceReference, signal?: AbortSignal) => Promise<KubernetesResourceObservation>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "waitUntilReadyAsync",
+        "kind": "method",
+        "type": "(resource: KubernetesResourceReference, options: { readonly timeoutSeconds: number; readonly signal?: AbortSignal; }) => Promise<KubernetesResourceObservation>",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesDesiredResource",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 65,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesResource"],
+    "signatures": [],
+    "members": [
+      {
+        "name": "owner",
+        "kind": "property",
+        "type": "InfraOwnedResource",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "resource",
+        "kind": "property",
+        "type": "KubernetesResource",
+        "required": true,
+        "description": null
+      }
+    ],
     "structuredRows": []
   },
   {
@@ -33,7 +132,115 @@
     "modulePath": "src/types/kubernetesDriver.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesDriver.ts",
-      "line": 2,
+      "line": 29,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesDriverRequest", "KubernetesProjection"],
+    "signatures": [],
+    "members": [
+      {
+        "name": "kind",
+        "kind": "property",
+        "type": "\"kubernetes\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "outputsAsync",
+        "kind": "method",
+        "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<readonly InfraOutput[]>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "planAsync",
+        "kind": "method",
+        "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<readonly InfraPlanAction[]>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "projectAsync",
+        "kind": "method",
+        "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<KubernetesProjection>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "reconcileAsync",
+        "kind": "method",
+        "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<InfraReconcileResult>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "removeAsync",
+        "kind": "method",
+        "type": "(request: KubernetesDriverRequest, destroy: InfraDestroyRequest) => Promise<InfraResult<InfraReconcileResult>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "statusAsync",
+        "kind": "method",
+        "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<readonly InfraResourceStatus[]>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "waitUntilReadyAsync",
+        "kind": "method",
+        "type": "(request: KubernetesDriverRequest) => Promise<InfraResult<readonly InfraResourceStatus[]>>",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesDriverOptions",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesDriver.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesDriver.ts",
+      "line": 15,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesApi"],
+    "signatures": [],
+    "members": [
+      {
+        "name": "api",
+        "kind": "property",
+        "type": "KubernetesApi",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "defaultReadinessTimeoutSeconds",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesDriverRequest",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesDriver.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesDriver.ts",
+      "line": 20,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -41,9 +248,345 @@
     "signatures": [],
     "members": [
       {
+        "name": "availableOutputs",
+        "kind": "property",
+        "type": "readonly InfraOutput[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "context",
+        "kind": "property",
+        "type": "InfraExecutionContext",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "namespace",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "ownerAdapter",
+        "kind": "property",
+        "type": "\"local\" | \"hetzner\" | \"minikube\" | \"k3s\" | \"docker-compose\" | \"supabase\" | \"cerbos\" | \"r2\" | \"supabase-vault\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "workloads",
+        "kind": "property",
+        "type": "readonly InfraWorkloadSpec[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesOwnershipQuery",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 31,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "labels",
+        "kind": "property",
+        "type": "Readonly<Record<string, string>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "namespace",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "signal",
+        "kind": "property",
+        "type": "AbortSignal | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesProjection",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 71,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesDesiredResource", "KubernetesSecretBinding"],
+    "signatures": [],
+    "members": [
+      {
+        "name": "resources",
+        "kind": "property",
+        "type": "readonly KubernetesDesiredResource[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "secretBindings",
+        "kind": "property",
+        "type": "readonly KubernetesSecretBinding[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesResource",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 15,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesResourceMetadata"],
+    "signatures": [],
+    "members": [
+      {
+        "name": "apiVersion",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "data",
+        "kind": "property",
+        "type": "Readonly<Record<string, string>> | undefined",
+        "required": false,
+        "description": null
+      },
+      {
         "name": "kind",
         "kind": "property",
-        "type": "\"kubernetes\"",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "metadata",
+        "kind": "property",
+        "type": "KubernetesResourceMetadata",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "spec",
+        "kind": "property",
+        "type": "Readonly<Record<string, unknown>> | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "stringData",
+        "kind": "property",
+        "type": "Readonly<Record<string, string>> | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesResourceMetadata",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 8,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "annotations",
+        "kind": "property",
+        "type": "Readonly<Record<string, string>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "labels",
+        "kind": "property",
+        "type": "Readonly<Record<string, string>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "name",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "namespace",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesResourceObservation",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 37,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "detail",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "publicOutputs",
+        "kind": "property",
+        "type": "Readonly<Record<string, string | number | boolean>> | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "state",
+        "kind": "property",
+        "type": "\"absent\" | \"pending\" | \"ready\" | \"degraded\" | \"stopped\" | \"retained\" | \"failed\" | \"unknown\"",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesResourceReference",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 24,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "apiVersion",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "kind",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "name",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "namespace",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesSecretBinding",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 59,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesResourceReference"],
+    "signatures": [],
+    "members": [
+      {
+        "name": "key",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "reference",
+        "kind": "property",
+        "type": "InfraSecretReference",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "resource",
+        "kind": "property",
+        "type": "KubernetesResourceReference",
         "required": true,
         "description": null
       }
