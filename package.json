@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/kubernetes",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Shared Kubernetes workload driver for provider-neutral Ankhorage infrastructure.",
   "type": "module",
   "main": "./dist/index.js",

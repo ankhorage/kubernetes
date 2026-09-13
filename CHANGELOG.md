@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.6.0
+
+### Minor Changes
+
+- ad29e61: Materialize workload templates containing privileged segments only at the Kubernetes apply boundary.
+
 ## 0.5.0
 
 ### Minor Changes
