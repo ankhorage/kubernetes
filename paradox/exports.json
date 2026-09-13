@@ -1,0 +1,53 @@
+[
+  {
+    "name": "createKubernetesDriver",
+    "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. Workload projection and reconciliation operations are added at this boundary in the\ndriver implementation phase.",
+    "isReadme": true,
+    "examples": [],
+    "kind": "function",
+    "modulePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+    "sourceLocation": {
+      "filePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+      "line": 12,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["KubernetesDriver"],
+    "signatures": [
+      {
+        "label": "() => KubernetesDriver",
+        "parameters": [],
+        "returnType": "KubernetesDriver",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesDriver",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/types/kubernetesDriver.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesDriver.ts",
+      "line": 2,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "kind",
+        "kind": "property",
+        "type": "\"kubernetes\"",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  }
+]

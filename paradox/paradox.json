@@ -1,0 +1,252 @@
+{
+  "packageName": "@ankhorage/kubernetes",
+  "packageId": "@ankhorage/kubernetes",
+  "description": "Shared Kubernetes workload driver for provider-neutral Ankhorage infrastructure.",
+  "collaborators": null,
+  "donation": null,
+  "badges": [
+    {
+      "id": "license",
+      "label": "license",
+      "value": "MIT",
+      "color": "2563eb"
+    },
+    {
+      "id": "npm",
+      "label": "npm",
+      "value": "v0.0.0",
+      "color": "cb3837"
+    },
+    {
+      "id": "runtime",
+      "label": "runtime",
+      "value": "bun",
+      "color": "f59e0b"
+    },
+    {
+      "id": "typescript",
+      "label": "typescript",
+      "value": "strict",
+      "color": "2563eb"
+    },
+    {
+      "id": "eslint",
+      "label": "eslint",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "prettier",
+      "label": "prettier",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "build",
+      "label": "build",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "tests",
+      "label": "tests",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "docs",
+      "label": "docs",
+      "value": "paradox",
+      "color": "0f766e"
+    }
+  ],
+  "usage": null,
+  "readmeUsageDescription": null,
+  "readmeUsage": [],
+  "readmeCli": null,
+  "readmeConfig": null,
+  "config": null,
+  "entrypoints": ["src/index.ts"],
+  "modules": [
+    {
+      "path": "examples/basic-usage/index.ts",
+      "isEntrypoint": false,
+      "dependencies": ["dist/index.d.ts"],
+      "exports": []
+    },
+    {
+      "path": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesDriver.ts"],
+      "exports": ["createKubernetesDriver"]
+    },
+    {
+      "path": "src/index.ts",
+      "isEntrypoint": true,
+      "dependencies": [],
+      "exports": ["createKubernetesDriver", "KubernetesDriver"]
+    },
+    {
+      "path": "src/kubernetesDriver.test.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/index.ts"],
+      "exports": []
+    },
+    {
+      "path": "src/types/kubernetesDriver.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": ["KubernetesDriver"]
+    }
+  ],
+  "exports": [
+    {
+      "name": "createKubernetesDriver",
+      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. Workload projection and reconciliation operations are added at this boundary in the\ndriver implementation phase.",
+      "isReadme": true,
+      "examples": [],
+      "kind": "function",
+      "modulePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "line": 12,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesDriver"],
+      "signatures": [
+        {
+          "label": "() => KubernetesDriver",
+          "parameters": [],
+          "returnType": "KubernetesDriver",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "KubernetesDriver",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/types/kubernetesDriver.ts",
+      "sourceLocation": {
+        "filePath": "src/types/kubernetesDriver.ts",
+        "line": 2,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "kind",
+          "kind": "property",
+          "type": "\"kubernetes\"",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    }
+  ],
+  "components": [],
+  "sourceFunctions": [
+    {
+      "name": "createKubernetesDriver",
+      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. Workload projection and reconciliation operations are added at this boundary in the\ndriver implementation phase.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "line": 12,
+        "column": 1
+      }
+    }
+  ],
+  "sequenceScenarios": [
+    {
+      "kind": "export",
+      "name": "createKubernetesDriver",
+      "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+      "symbolName": "createKubernetesDriver",
+      "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. Workload projection and reconciliation operations are added at this boundary in the\ndriver implementation phase.",
+      "isReadme": true
+    }
+  ],
+  "graphs": {
+    "imports": [
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/kubernetesDriver.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromPath": "examples/basic-usage/index.ts",
+        "toPath": "dist/index.d.ts",
+        "sourcePath": "examples/basic-usage/index.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      }
+    ],
+    "calls": [
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "describe",
+        "callExpression": "describe",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "createKubernetesDriver",
+        "callExpression": "packageApi.createKubernetesDriver",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "isInfraAdapterDescriptor",
+        "callExpression": "isInfraAdapterDescriptor",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "examples/basic-usage/index.ts",
+        "toSymbol": "createKubernetesDriver",
+        "callExpression": "createKubernetesDriver",
+        "sourcePath": "examples/basic-usage/index.ts"
+      }
+    ],
+    "typeReferences": [
+      {
+        "fromSymbol": "createKubernetesDriver",
+        "toType": "KubernetesDriver",
+        "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      }
+    ],
+    "componentComposition": []
+  }
+}

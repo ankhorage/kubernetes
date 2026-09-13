@@ -1,0 +1,16 @@
+graph TD
+  package__ankhorage_kubernetes["@ankhorage/kubernetes"]
+  entrypoint_src_index_ts["src/index.ts"]
+  package__ankhorage_kubernetes --> entrypoint_src_index_ts
+  module_examples_basic_usage_index_ts["examples/basic-usage/index.ts"]
+  package__ankhorage_kubernetes -.-> module_examples_basic_usage_index_ts
+  module_examples_basic_usage_index_ts --> module_dist_index_d_ts
+  module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts["src/features/workload-reconciliation/composition/createKubernetesDriver.ts"]
+  package__ankhorage_kubernetes -.-> module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts
+  module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts --> module_src_types_kubernetesDriver_ts
+  module_src_index_ts["src/index.ts"]
+  module_src_kubernetesDriver_test_ts["src/kubernetesDriver.test.ts"]
+  package__ankhorage_kubernetes -.-> module_src_kubernetesDriver_test_ts
+  module_src_kubernetesDriver_test_ts --> module_src_index_ts
+  module_src_types_kubernetesDriver_ts["src/types/kubernetesDriver.ts"]
+  package__ankhorage_kubernetes -.-> module_src_types_kubernetesDriver_ts
