@@ -81,8 +81,9 @@ it('reconciles deterministically and prunes only non-persistent owned resources'
   expect(stalePlan.value.some(({ operation }) => operation === 'delete')).toBe(true);
   expect(stalePlan.value.some(({ operation }) => operation === 'retain')).toBe(true);
   await driver.reconcileAsync({ ...request, workloads: [] });
-  expect(api.deleted.some(({ kind }) => kind === 'Deployment')).toBe(true);
-  expect(api.deleted.some(({ kind }) => kind === 'PersistentVolumeClaim')).toBe(false);
+  expect(api.deleted.map(({ kind }) => kind).join(',')).toBe(
+    'Ingress,Service,Deployment,ConfigMap,Secret',
+  );
   expect(api.resources.some((resource) => resource.metadata.name === 'unrelated')).toBe(true);
 });
 

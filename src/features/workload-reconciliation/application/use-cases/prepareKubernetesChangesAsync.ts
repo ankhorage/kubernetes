@@ -15,6 +15,7 @@ import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQ
 import { getKubernetesResourceKey } from '../../utils/getKubernetesResourceKey';
 import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
 import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource';
+import { sortKubernetesResourcesForRemoval } from '../../utils/sortKubernetesResourcesForRemoval';
 import { materializeKubernetesSecretsAsync } from './materializeKubernetesSecretsAsync';
 import { projectKubernetesResourcesAsync } from './projectKubernetesResourcesAsync';
 
@@ -88,46 +89,10 @@ function createStaleChanges(
     if (owner === undefined) return [];
     return [{ resource, owner }];
   });
-  return sortForRemoval(stale).map(({ resource, owner }) => ({
+  return sortKubernetesResourcesForRemoval(stale).map(({ resource, owner }) => ({
     action: createAction(owner.identity, owner.dependsOn, owner.persistent ? 'retain' : 'delete'),
     actual: resource,
   }));
-}
-
-interface StaleKubernetesResource {
-  readonly resource: KubernetesResource;
-  readonly owner: KubernetesDesiredResource['owner'];
-}
-
-/*** Sort stale resources deterministically with dependents before their dependencies. */
-function sortForRemoval(
-  resources: readonly StaleKubernetesResource[],
-): readonly StaleKubernetesResource[] {
-  const remaining = new Map(resources.map((item) => [item.owner.identity.resourceId, item]));
-  const ordered: StaleKubernetesResource[] = [];
-  while (remaining.size > 0) {
-    const leaves = [...remaining.values()]
-      .filter(
-        ({ owner }) =>
-          ![...remaining.values()].some(({ owner: candidate }) =>
-            candidate.dependsOn.some(({ resourceId }) => resourceId === owner.identity.resourceId),
-          ),
-      )
-      .sort(compareStaleResourceKeys);
-    const selected = leaves.at(0) ?? [...remaining.values()].sort(compareStaleResourceKeys).at(0);
-    if (selected === undefined) break;
-    ordered.push(selected);
-    remaining.delete(selected.owner.identity.resourceId);
-  }
-  return ordered;
-}
-
-/*** Compare stale resources by stable external resource identity. */
-function compareStaleResourceKeys(
-  left: StaleKubernetesResource,
-  right: StaleKubernetesResource,
-): number {
-  return (left.owner.externalId ?? '').localeCompare(right.owner.externalId ?? '');
 }
 
 /*** Create one non-secret plan action. */

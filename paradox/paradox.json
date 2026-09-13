@@ -164,6 +164,7 @@
         "src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts",
         "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
         "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts",
         "src/types/kubernetesDriver.ts",
         "src/types/kubernetesResources.ts"
       ],
@@ -216,8 +217,8 @@
         "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
         "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
         "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
-        "src/types/kubernetesDriver.ts",
-        "src/types/kubernetesResources.ts"
+        "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts",
+        "src/types/kubernetesDriver.ts"
       ],
       "exports": ["removeKubernetesResourcesAsync"]
     },
@@ -326,6 +327,12 @@
         "src/types/kubernetesResources.ts"
       ],
       "exports": ["readKubernetesOwnedResource"]
+    },
+    {
+      "path": "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubernetesResources.ts"],
+      "exports": ["OwnedKubernetesResource", "sortKubernetesResourcesForRemoval"]
     },
     {
       "path": "src/features/workload-reconciliation/utils/toKubernetesName.ts",
@@ -1185,7 +1192,7 @@
       "description": "Prepare deterministic create, update, no-op, retain and stale-delete changes.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
-        "line": 22,
+        "line": 23,
         "column": 1
       }
     },
@@ -1194,7 +1201,7 @@
       "description": "Compare desired resources against the observed resource map.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
-        "line": 52,
+        "line": 53,
         "column": 1
       }
     },
@@ -1203,25 +1210,7 @@
       "description": "Identify obsolete owned resources without admitting malformed ownership metadata.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
-        "line": 79,
-        "column": 1
-      }
-    },
-    {
-      "name": "sortForRemoval",
-      "description": "Sort stale resources deterministically with dependents before their dependencies.",
-      "sourceLocation": {
-        "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
-        "line": 103,
-        "column": 1
-      }
-    },
-    {
-      "name": "compareStaleResourceKeys",
-      "description": "Compare stale resources by stable external resource identity.",
-      "sourceLocation": {
-        "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
-        "line": 126,
+        "line": 80,
         "column": 1
       }
     },
@@ -1230,7 +1219,7 @@
       "description": "Create one non-secret plan action.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
-        "line": 134,
+        "line": 99,
         "column": 1
       }
     },
@@ -1293,7 +1282,7 @@
       "description": "Confirm request identity at both destroy boundaries.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
-        "line": 83,
+        "line": 78,
         "column": 1
       }
     },
@@ -1302,7 +1291,7 @@
       "description": "Decide whether explicit persistence policy authorizes this exact owner.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
-        "line": 93,
+        "line": 88,
         "column": 1
       }
     },
@@ -1311,16 +1300,7 @@
       "description": "Compare canonical resource identities without object-reference assumptions.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
-        "line": 105,
-        "column": 1
-      }
-    },
-    {
-      "name": "compareRemovalOrder",
-      "description": "Delete dependents before dependencies and namespaces last.",
-      "sourceLocation": {
-        "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
-        "line": 115,
+        "line": 100,
         "column": 1
       }
     },
@@ -1460,6 +1440,24 @@
       }
     },
     {
+      "name": "sortKubernetesResourcesForRemoval",
+      "description": "Sort owned resources deterministically with dependents before their dependencies.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts",
+        "line": 11,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareResourceKeys",
+      "description": "Compare owned resources by stable external resource identity.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts",
+        "line": 34,
+        "column": 1
+      }
+    },
+    {
       "name": "toKubernetesName",
       "description": "Convert an arbitrary stable identifier into a deterministic Kubernetes DNS label.",
       "sourceLocation": {
@@ -1509,7 +1507,7 @@
       "description": "Create a complete generic workload request used by the API-boundary fixture.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 179,
+        "line": 180,
         "column": 1
       }
     },
@@ -1518,7 +1516,7 @@
       "description": "Create the execution context without a technology-specific runtime fixture.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 208,
+        "line": 209,
         "column": 1
       }
     },
@@ -1527,7 +1525,7 @@
       "description": "Create one canonical secret reference.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 234,
+        "line": 235,
         "column": 1
       }
     },
@@ -1536,7 +1534,7 @@
       "description": "Create a confirmed destruction request with retained persistence.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 245,
+        "line": 246,
         "column": 1
       }
     }
@@ -1729,6 +1727,11 @@
         "sourcePath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts"
       },
       {
+        "fromPath": "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts"
+      },
+      {
         "fromPath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
         "toPath": "src/types/kubernetesDriver.ts",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
@@ -1895,6 +1898,11 @@
       },
       {
         "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
         "toPath": "src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
       },
@@ -2005,11 +2013,6 @@
       },
       {
         "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
-        "toPath": "src/types/kubernetesResources.ts",
-        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
-      },
-      {
-        "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
         "toPath": "src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
       },
@@ -2021,6 +2024,11 @@
       {
         "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
         "toPath": "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
       },
       {
@@ -2538,8 +2546,8 @@
       },
       {
         "fromSymbol": "createStaleChanges",
-        "toSymbol": "sortForRemoval",
-        "callExpression": "sortForRemoval",
+        "toSymbol": "sortKubernetesResourcesForRemoval",
+        "callExpression": "sortKubernetesResourcesForRemoval",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
       },
       {
@@ -2678,6 +2686,12 @@
         "fromSymbol": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
         "toSymbol": "canDelete",
         "callExpression": "canDelete",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "performRemovalAsync",
+        "toSymbol": "sortKubernetesResourcesForRemoval",
+        "callExpression": "sortKubernetesResourcesForRemoval",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
       },
       {

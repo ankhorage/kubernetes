@@ -10,10 +10,10 @@ import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
 } from '../../../../types/kubernetesDriver';
-import type { KubernetesResource } from '../../../../types/kubernetesResources';
 import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery';
 import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
 import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource';
+import { sortKubernetesResourcesForRemoval } from '../../utils/sortKubernetesResourcesForRemoval';
 
 /*** Remove owned resources in reverse dependency order while enforcing persistence authorization. */
 export async function removeKubernetesResourcesAsync(
@@ -64,7 +64,7 @@ async function performRemovalAsync(
   });
   const retained: InfraOwnedResource[] = [];
   const retainNamespace = owned.some(({ owner }) => owner.persistent && !canDelete(owner, destroy));
-  for (const { resource, owner } of [...owned].sort(compareRemovalOrder)) {
+  for (const { resource, owner } of sortKubernetesResourcesForRemoval(owned)) {
     if ((resource.kind === 'Namespace' && retainNamespace) || !canDelete(owner, destroy)) {
       retained.push(owner);
       continue;
@@ -72,11 +72,6 @@ async function performRemovalAsync(
     await options.api.deleteAsync(getKubernetesResourceReference(resource), request.context.signal);
   }
   return { ok: true, value: { resources: retained, outputs: [] }, diagnostics: [] };
-}
-
-interface OwnedKubernetesResource {
-  readonly resource: KubernetesResource;
-  readonly owner: InfraOwnedResource;
 }
 
 /*** Confirm request identity at both destroy boundaries. */
@@ -109,14 +104,4 @@ function identitiesEqual(left: InfraResourceIdentity, right: InfraResourceIdenti
     left.adapter === right.adapter &&
     left.resourceId === right.resourceId
   );
-}
-
-/*** Delete dependents before dependencies and namespaces last. */
-function compareRemovalOrder(
-  left: OwnedKubernetesResource,
-  right: OwnedKubernetesResource,
-): number {
-  const leftRank = left.resource.kind === 'Namespace' ? 1 : 0;
-  const rightRank = right.resource.kind === 'Namespace' ? 1 : 0;
-  return leftRank - rightRank || right.owner.dependsOn.length - left.owner.dependsOn.length;
 }

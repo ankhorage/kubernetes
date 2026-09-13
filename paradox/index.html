@@ -272,7 +272,7 @@
                 data-target="src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts"
               >
                 src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts
-                <small>6 functions</small>
+                <small>4 functions</small>
               </button>
             </li>
             <li>
@@ -312,7 +312,7 @@
                 data-target="src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts"
               >
                 src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts
-                <small>6 functions</small>
+                <small>5 functions</small>
               </button>
             </li>
             <li>
@@ -429,6 +429,16 @@
               <button
                 class="nav-button"
                 type="button"
+                data-target="src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts"
+              >
+                src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts
+                <small>2 functions</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
                 data-target="src/features/workload-reconciliation/utils/toKubernetesName.ts"
               >
                 src/features/workload-reconciliation/utils/toKubernetesName.ts
@@ -457,7 +467,7 @@
             <div class="summary">
               <div><strong>13</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>31</strong><span class="muted">modules</span></div>
+              <div><strong>32</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -619,7 +629,7 @@
             </article>
             <article
               class="item"
-              data-search="src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts src/types/kubernetesDriver.ts src/types/kubernetesResources.ts prepareKubernetesChangesAsync"
+              data-search="src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts src/features/workload-reconciliation/application/use-cases/materializeKubernetesSecretsAsync.ts src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts src/types/kubernetesDriver.ts src/types/kubernetesResources.ts prepareKubernetesChangesAsync"
             >
               <h3>
                 src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts
@@ -645,6 +655,9 @@
                 >,
                 <code
                   >src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts</code
+                >,
+                <code
+                  >src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts</code
                 >, <code>src/types/kubernetesDriver.ts</code>,
                 <code>src/types/kubernetesResources.ts</code>
               </p>
@@ -734,7 +747,7 @@
             </article>
             <article
               class="item"
-              data-search="src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts src/types/kubernetesDriver.ts src/types/kubernetesResources.ts removeKubernetesResourcesAsync"
+              data-search="src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts src/features/workload-reconciliation/utils/getKubernetesOwnershipQuery.ts src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts src/types/kubernetesDriver.ts removeKubernetesResourcesAsync"
             >
               <h3>
                 src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts
@@ -750,8 +763,10 @@
                 >,
                 <code
                   >src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts</code
-                >, <code>src/types/kubernetesDriver.ts</code>,
-                <code>src/types/kubernetesResources.ts</code>
+                >,
+                <code
+                  >src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts</code
+                >, <code>src/types/kubernetesDriver.ts</code>
               </p>
               <p><strong>Exports:</strong> <code>removeKubernetesResourcesAsync</code></p>
             </article>
@@ -928,6 +943,20 @@
                 <code>src/types/kubernetesResources.ts</code>
               </p>
               <p><strong>Exports:</strong> <code>readKubernetesOwnedResource</code></p>
+            </article>
+            <article
+              class="item"
+              data-search="src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts src/types/kubernetesResources.ts OwnedKubernetesResource sortKubernetesResourcesForRemoval"
+            >
+              <h3>
+                src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts
+              </h3>
+              <p class="muted">Referenced module</p>
+              <p><strong>Dependencies:</strong> <code>src/types/kubernetesResources.ts</code></p>
+              <p>
+                <strong>Exports:</strong> <code>OwnedKubernetesResource</code>,
+                <code>sortKubernetesResourcesForRemoval</code>
+              </p>
             </article>
             <article
               class="item"
@@ -1946,6 +1975,9 @@
                 --&gt;
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
                 module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
+                --&gt;
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
+                module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
                 --&gt; module_src_types_kubernetesDriver_ts
                 module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
                 --&gt; module_src_types_kubernetesResources_ts
@@ -2021,9 +2053,10 @@
                 --&gt;
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
                 module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts
-                --&gt; module_src_types_kubernetesDriver_ts
+                --&gt;
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
                 module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts
-                --&gt; module_src_types_kubernetesResources_ts
+                --&gt; module_src_types_kubernetesDriver_ts
                 module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts[&quot;src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt;
                 module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts
@@ -2135,6 +2168,11 @@
                 --&gt; module_src_types_kubernetesDriver_ts
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
                 --&gt; module_src_types_kubernetesResources_ts
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
+                package__ankhorage_kubernetes -.-&gt;
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
+                --&gt; module_src_types_kubernetesResources_ts
                 module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt;
                 module_src_features_workload_reconciliation_utils_toKubernetesName_ts
@@ -2211,6 +2249,7 @@ graph TD
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceKey_ts
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
+  module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_types_kubernetesDriver_ts
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts[&quot;src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts&quot;]
@@ -2243,8 +2282,8 @@ graph TD
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesOwnershipQuery_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
+  module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_types_kubernetesDriver_ts
-  module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts[&quot;src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts
   module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts --&gt; module_src_features_workload_reconciliation_utils_toKubernetesName_ts
@@ -2301,6 +2340,9 @@ graph TD
   module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts --&gt; module_src_types_kubernetesDriver_ts
   module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts --&gt; module_src_types_kubernetesResources_ts
+  module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
+  package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
+  module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_utils_toKubernetesName_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
@@ -2352,6 +2394,7 @@ graph TD
                 module_src_features_workload_reconciliation_utils_getKubernetesResourceKey_ts[&quot;src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts&quot;]
                 module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts[&quot;src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts&quot;]
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts[&quot;src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts&quot;]
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
                 module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
@@ -2443,6 +2486,9 @@ graph TD
                 --&gt;
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
                 module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
+                --&gt;
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
+                module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
                 --&gt; module_src_types_kubernetesDriver_ts
                 module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
                 --&gt; module_src_types_kubernetesResources_ts
@@ -2506,9 +2552,10 @@ graph TD
                 --&gt;
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
                 module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts
-                --&gt; module_src_types_kubernetesDriver_ts
+                --&gt;
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
                 module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts
-                --&gt; module_src_types_kubernetesResources_ts
+                --&gt; module_src_types_kubernetesDriver_ts
                 module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts
                 --&gt; module_src_features_workload_reconciliation_utils_toKubernetesName_ts
                 module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts
@@ -2583,6 +2630,8 @@ graph TD
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
                 --&gt; module_src_types_kubernetesDriver_ts
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
+                --&gt; module_src_types_kubernetesResources_ts
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
                 --&gt; module_src_types_kubernetesResources_ts module_src_kubernetesApi_test_ts
                 --&gt; module_src_index_ts module_src_kubernetesDriver_test_ts --&gt;
                 module_src_index_ts module_src_kubernetesDriver_test_ts --&gt;
@@ -2618,6 +2667,7 @@ graph LR
   module_src_features_workload_reconciliation_utils_getKubernetesResourceKey_ts[&quot;src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts&quot;]
   module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts[&quot;src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts&quot;]
   module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts[&quot;src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts&quot;]
+  module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
   module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
@@ -2658,6 +2708,7 @@ graph LR
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceKey_ts
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
+  module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_types_kubernetesDriver_ts
   module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_projectKubernetesWorkload_ts
@@ -2682,8 +2733,8 @@ graph LR
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesOwnershipQuery_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
+  module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_types_kubernetesDriver_ts
-  module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts --&gt; module_src_features_workload_reconciliation_utils_toKubernetesName_ts
   module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts
@@ -2716,6 +2767,7 @@ graph LR
   module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts --&gt; module_src_types_kubernetesDriver_ts
   module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts --&gt; module_src_types_kubernetesResources_ts
+  module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_kubernetesApi_test_ts --&gt; module_src_index_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_index_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_kubernetesApi_test_ts
@@ -2753,6 +2805,7 @@ graph LR
                 module_src_features_workload_reconciliation_utils_getKubernetesResourceKey_ts[&quot;src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts&quot;]
                 module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts[&quot;src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts&quot;]
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts[&quot;src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts&quot;]
+                module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
                 module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
@@ -2829,6 +2882,7 @@ graph LR
   module_src_features_workload_reconciliation_utils_getKubernetesResourceKey_ts[&quot;src/features/workload-reconciliation/utils/getKubernetesResourceKey.ts&quot;]
   module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts[&quot;src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts&quot;]
   module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts[&quot;src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts&quot;]
+  module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
   module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
@@ -3233,7 +3287,7 @@ graph LR
               <h3>prepareKubernetesChangesAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:22:1</code
+                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:23:1</code
                 >
               </p>
               <p>Prepare deterministic create, update, no-op, retain and stale-delete changes.</p>
@@ -3245,7 +3299,7 @@ graph LR
               <h3>createDesiredChanges</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:52:1</code
+                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:53:1</code
                 >
               </p>
               <p>Compare desired resources against the observed resource map.</p>
@@ -3257,7 +3311,7 @@ graph LR
               <h3>createStaleChanges</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:79:1</code
+                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:80:1</code
                 >
               </p>
               <p>
@@ -3266,38 +3320,12 @@ graph LR
             </article>
             <article
               class="item"
-              data-search="sortForRemoval src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts Sort stale resources deterministically with dependents before their dependencies."
-            >
-              <h3>sortForRemoval</h3>
-              <p class="muted">
-                <code
-                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:103:1</code
-                >
-              </p>
-              <p>
-                Sort stale resources deterministically with dependents before their dependencies.
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="compareStaleResourceKeys src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts Compare stale resources by stable external resource identity."
-            >
-              <h3>compareStaleResourceKeys</h3>
-              <p class="muted">
-                <code
-                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:126:1</code
-                >
-              </p>
-              <p>Compare stale resources by stable external resource identity.</p>
-            </article>
-            <article
-              class="item"
               data-search="createAction src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts Create one non-secret plan action."
             >
               <h3>createAction</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:134:1</code
+                  >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts:99:1</code
                 >
               </p>
               <p>Create one non-secret plan action.</p>
@@ -3440,7 +3468,7 @@ graph LR
               <h3>isConfirmed</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:83:1</code
+                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:78:1</code
                 >
               </p>
               <p>Confirm request identity at both destroy boundaries.</p>
@@ -3452,7 +3480,7 @@ graph LR
               <h3>canDelete</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:93:1</code
+                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:88:1</code
                 >
               </p>
               <p>Decide whether explicit persistence policy authorizes this exact owner.</p>
@@ -3464,22 +3492,10 @@ graph LR
               <h3>identitiesEqual</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:105:1</code
+                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:100:1</code
                 >
               </p>
               <p>Compare canonical resource identities without object-reference assumptions.</p>
-            </article>
-            <article
-              class="item"
-              data-search="compareRemovalOrder src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts Delete dependents before dependencies and namespaces last."
-            >
-              <h3>compareRemovalOrder</h3>
-              <p class="muted">
-                <code
-                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:115:1</code
-                >
-              </p>
-              <p>Delete dependents before dependencies and namespaces last.</p>
             </article>
           </section>
         </section>
@@ -3794,6 +3810,42 @@ graph LR
           </section>
         </section>
         <section
+          id="view-src-features-workload-reconciliation-utils-sortkubernetesresourcesforremoval-ts"
+          class="view"
+          data-view="src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts</h2>
+            <article
+              class="item"
+              data-search="sortKubernetesResourcesForRemoval src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts Sort owned resources deterministically with dependents before their dependencies."
+            >
+              <h3>sortKubernetesResourcesForRemoval</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts:11:1</code
+                >
+              </p>
+              <p>
+                Sort owned resources deterministically with dependents before their dependencies.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="compareResourceKeys src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts Compare owned resources by stable external resource identity."
+            >
+              <h3>compareResourceKeys</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts:34:1</code
+                >
+              </p>
+              <p>Compare owned resources by stable external resource identity.</p>
+            </article>
+          </section>
+        </section>
+        <section
           id="view-src-features-workload-reconciliation-utils-tokubernetesname-ts"
           class="view"
           data-view="src/features/workload-reconciliation/utils/toKubernetesName.ts"
@@ -3874,7 +3926,7 @@ graph LR
               data-search="createRequest src/kubernetesDriver.test.ts Create a complete generic workload request used by the API-boundary fixture."
             >
               <h3>createRequest</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:179:1</code></p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:180:1</code></p>
               <p>Create a complete generic workload request used by the API-boundary fixture.</p>
             </article>
             <article
@@ -3882,7 +3934,7 @@ graph LR
               data-search="createExecutionContext src/kubernetesDriver.test.ts Create the execution context without a technology-specific runtime fixture."
             >
               <h3>createExecutionContext</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:208:1</code></p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:209:1</code></p>
               <p>Create the execution context without a technology-specific runtime fixture.</p>
             </article>
             <article
@@ -3890,7 +3942,7 @@ graph LR
               data-search="createSecretReference src/kubernetesDriver.test.ts Create one canonical secret reference."
             >
               <h3>createSecretReference</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:234:1</code></p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:235:1</code></p>
               <p>Create one canonical secret reference.</p>
             </article>
             <article
@@ -3898,7 +3950,7 @@ graph LR
               data-search="createRetainedDestroyRequest src/kubernetesDriver.test.ts Create a confirmed destruction request with retained persistence."
             >
               <h3>createRetainedDestroyRequest</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:245:1</code></p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:246:1</code></p>
               <p>Create a confirmed destruction request with retained persistence.</p>
             </article>
           </section>
