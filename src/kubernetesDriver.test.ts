@@ -184,15 +184,17 @@ it('materializes one keyed bootstrap credential only at the Kubernetes apply bou
   const request = createCredentialRequest('bootstrap-token');
   const projection = await driver.projectAsync(request);
 
-  expect(projection.ok).toBe(true);
   expect(JSON.stringify(projection)).not.toContain('bootstrap-token');
   expect(
     projection.ok &&
-      projection.value.secretBindings.some(
-        ({ reference }) =>
-          reference.source === 'control-plane' &&
-          reference.name === 'DEPLOYMENT' &&
-          reference.key === 'token',
+      projection.value.secretBindings.some(({ segments }) =>
+        segments.some(
+          (segment) =>
+            segment.kind === 'reference' &&
+            segment.reference.source === 'control-plane' &&
+            segment.reference.name === 'DEPLOYMENT' &&
+            segment.reference.key === 'token',
+        ),
       ),
   ).toBe(true);
 

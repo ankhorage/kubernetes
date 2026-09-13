@@ -33,6 +33,7 @@ graph LR
   module_src_kubectlApi_test_ts["src/kubectlApi.test.ts"]
   module_src_kubernetesApi_test_ts["src/kubernetesApi.test.ts"]
   module_src_kubernetesDriver_test_ts["src/kubernetesDriver.test.ts"]
+  module_src_kubernetesTemplates_test_ts["src/kubernetesTemplates.test.ts"]
   module_src_types_kubectl_ts["src/types/kubectl.ts"]
   module_src_types_kubernetesDriver_ts["src/types/kubernetesDriver.ts"]
   module_src_types_kubernetesResources_ts["src/types/kubernetesResources.ts"]
@@ -141,5 +142,7 @@ graph LR
   module_src_kubernetesApi_test_ts --> module_src_index_ts
   module_src_kubernetesDriver_test_ts --> module_src_index_ts
   module_src_kubernetesDriver_test_ts --> module_src_kubernetesApi_test_ts
+  module_src_kubernetesTemplates_test_ts --> module_src_index_ts
+  module_src_kubernetesTemplates_test_ts --> module_src_kubernetesApi_test_ts
   module_src_types_kubectl_ts --> module_src_types_kubernetesResources_ts
   module_src_types_kubernetesDriver_ts --> module_src_types_kubernetesResources_ts

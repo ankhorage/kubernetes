@@ -2,6 +2,7 @@ import type {
   InfraDiagnostic,
   InfraOutput,
   InfraResult,
+  InfraWorkloadScalarValue,
   InfraWorkloadSpec,
   InfraWorkloadValue,
 } from '@ankhorage/contracts/infra';
@@ -9,6 +10,7 @@ import type {
 import type {
   KubernetesResolvedWorkloadValues,
   KubernetesSecretTarget,
+  KubernetesSecretValueSegment,
 } from '../../../../types/kubernetesResources';
 import { toKubernetesName } from '../../utils/toKubernetesName';
 
@@ -63,21 +65,31 @@ function assignValue(
   key: string,
 ): void {
   const publicKey = target.kind === 'environment' ? target.name : target.path;
-  if (value.kind === 'literal') {
-    Object.assign(publicValues, { [publicKey]: value.value });
-    return;
-  }
-  if (value.kind === 'secret') {
-    secrets.push({ key: toKubernetesName(key), reference: value.reference, target });
-    return;
-  }
-  if (value.kind === 'credential') {
-    secrets.push({
-      key: toKubernetesName(key),
-      reference: { ...value.reference, key: value.key },
-      target,
+  const segments = value.kind === 'template' ? value.segments : [value];
+  const resolved = segments.map((segment) => resolveSegment(outputs, segment, diagnostics));
+  if (resolved.some((segment) => segment === undefined)) return;
+  const complete = resolved.filter(
+    (segment): segment is KubernetesSecretValueSegment => segment !== undefined,
+  );
+  if (complete.every((segment) => segment.kind === 'literal')) {
+    Object.assign(publicValues, {
+      [publicKey]: complete.map(({ value }) => value).join(''),
     });
     return;
+  }
+  secrets.push({ key: toKubernetesName(key), segments: complete, target });
+}
+
+/*** Resolve one scalar segment without materializing privileged content. */
+function resolveSegment(
+  outputs: readonly InfraOutput[],
+  value: InfraWorkloadScalarValue,
+  diagnostics: InfraDiagnostic[],
+): KubernetesSecretValueSegment | undefined {
+  if (value.kind === 'literal') return value;
+  if (value.kind === 'secret') return { kind: 'reference', reference: value.reference };
+  if (value.kind === 'credential') {
+    return { kind: 'reference', reference: { ...value.reference, key: value.key } };
   }
 
   const matches = outputs.filter(
@@ -90,11 +102,9 @@ function assignValue(
       code: 'kubernetes-output-unresolved',
       message: `Workload output ${value.resourceId}.${value.output} did not resolve uniquely.`,
     });
-    return;
+    return undefined;
   }
-  if (output.visibility === 'secret') {
-    secrets.push({ key: toKubernetesName(key), reference: output.reference, target });
-    return;
-  }
-  Object.assign(publicValues, { [publicKey]: String(output.value) });
+  return output.visibility === 'secret'
+    ? { kind: 'reference', reference: output.reference }
+    : { kind: 'literal', value: String(output.value) };
 }

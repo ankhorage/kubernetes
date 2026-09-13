@@ -137,7 +137,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 49,
+      "line": 53,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -309,7 +309,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 69,
+      "line": 73,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -504,7 +504,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 35,
+      "line": 39,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -562,7 +562,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 75,
+      "line": 79,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -595,7 +595,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 19,
+      "line": 23,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -656,7 +656,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 12,
+      "line": 16,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -703,7 +703,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 41,
+      "line": 45,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -743,7 +743,7 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 28,
+      "line": 32,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -790,11 +790,11 @@
     "modulePath": "src/types/kubernetesResources.ts",
     "sourceLocation": {
       "filePath": "src/types/kubernetesResources.ts",
-      "line": 63,
+      "line": 67,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["KubernetesPrivilegedReference", "KubernetesResourceReference"],
+    "relatedSymbols": ["KubernetesResourceReference", "KubernetesSecretValueSegment"],
     "signatures": [],
     "members": [
       {
@@ -805,20 +805,38 @@
         "description": null
       },
       {
-        "name": "reference",
-        "kind": "property",
-        "type": "KubernetesPrivilegedReference",
-        "required": true,
-        "description": null
-      },
-      {
         "name": "resource",
         "kind": "property",
         "type": "KubernetesResourceReference",
         "required": true,
         "description": null
+      },
+      {
+        "name": "segments",
+        "kind": "property",
+        "type": "readonly KubernetesSecretValueSegment[]",
+        "required": true,
+        "description": null
       }
     ],
+    "structuredRows": []
+  },
+  {
+    "name": "KubernetesSecretValueSegment",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "unknown",
+    "modulePath": "src/types/kubernetesResources.ts",
+    "sourceLocation": {
+      "filePath": "src/types/kubernetesResources.ts",
+      "line": 12,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
     "structuredRows": []
   },
   {

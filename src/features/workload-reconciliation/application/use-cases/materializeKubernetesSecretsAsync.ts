@@ -4,6 +4,7 @@ import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver
 import type {
   KubernetesDesiredResource,
   KubernetesProjection,
+  KubernetesSecretValueSegment,
 } from '../../../../types/kubernetesResources';
 import { getKubernetesResourceKey } from '../../utils/getKubernetesResourceKey';
 
@@ -16,10 +17,7 @@ export async function materializeKubernetesSecretsAsync(
   const diagnostics: InfraDiagnostic[] = [];
 
   for (const binding of projection.secretBindings) {
-    const resolved =
-      binding.reference.source === 'secret-store'
-        ? await request.context.secrets.resolveAsync(binding.reference)
-        : await resolveCredentialValueAsync(request, binding.reference);
+    const resolved = await materializeSegmentsAsync(request, binding.segments);
     if (!resolved.ok) {
       diagnostics.push(...resolved.diagnostics);
       continue;
@@ -45,10 +43,31 @@ export async function materializeKubernetesSecretsAsync(
   };
 }
 
+/*** Materialize and concatenate one ordered secret-backed value. */
+async function materializeSegmentsAsync(
+  request: KubernetesDriverRequest,
+  segments: KubernetesProjection['secretBindings'][number]['segments'],
+): Promise<InfraResult<string>> {
+  const values: string[] = [];
+  for (const segment of segments) {
+    if (segment.kind === 'literal') {
+      values.push(segment.value);
+      continue;
+    }
+    const resolved =
+      segment.reference.source === 'secret-store'
+        ? await request.context.secrets.resolveAsync(segment.reference)
+        : await resolveCredentialValueAsync(request, segment.reference);
+    if (!resolved.ok) return resolved;
+    values.push(resolved.value);
+  }
+  return { ok: true, value: values.join(''), diagnostics: [] };
+}
+
 async function resolveCredentialValueAsync(
   request: KubernetesDriverRequest,
   reference: Extract<
-    KubernetesProjection['secretBindings'][number]['reference'],
+    Extract<KubernetesSecretValueSegment, { readonly kind: 'reference' }>['reference'],
     { source: 'control-plane' }
   >,
 ): Promise<InfraResult<string>> {
