@@ -196,3 +196,20 @@ Source: `src/types/kubernetesResources.ts:59:1`
 | key       | property | `string`                      | yes      |             |
 | reference | property | `InfraSecretReference`        | yes      |             |
 | resource  | property | `KubernetesResourceReference` | yes      |             |
+
+## projectKubernetesResourcesAsync
+
+Kind: `function`
+Module: `src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts`
+Source: `src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts:23:1`
+
+Project portable workload desired state into deterministic standard Kubernetes resources.
+
+Resolved secret values are deliberately absent. The projection carries only references for
+runtime materialization immediately before apply.
+
+### Signatures
+
+- `(request: KubernetesDriverRequest) => Promise<InfraResult<KubernetesProjection>>`
+  - request: `KubernetesDriverRequest`
+  - returns: `Promise<InfraResult<KubernetesProjection>>`

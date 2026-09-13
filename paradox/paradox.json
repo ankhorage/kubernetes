@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.1.0",
+      "value": "v0.2.0",
       "color": "cb3837"
     },
     {
@@ -357,7 +357,8 @@
         "KubernetesResourceMetadata",
         "KubernetesResourceObservation",
         "KubernetesResourceReference",
-        "KubernetesSecretBinding"
+        "KubernetesSecretBinding",
+        "projectKubernetesResourcesAsync"
       ]
     },
     {
@@ -994,6 +995,38 @@
         }
       ],
       "structuredRows": []
+    },
+    {
+      "name": "projectKubernetesResourcesAsync",
+      "description": "Project portable workload desired state into deterministic standard Kubernetes resources.\n\nResolved secret values are deliberately absent. The projection carries only references for\nruntime materialization immediately before apply.",
+      "isReadme": true,
+      "examples": [],
+      "kind": "function",
+      "modulePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "line": 23,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["KubernetesDriverRequest", "KubernetesProjection"],
+      "signatures": [
+        {
+          "label": "(request: KubernetesDriverRequest) => Promise<InfraResult<KubernetesProjection>>",
+          "parameters": [
+            {
+              "name": "request",
+              "type": "KubernetesDriverRequest",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "Promise<InfraResult<KubernetesProjection>>",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
     }
   ],
   "components": [],
@@ -1228,7 +1261,7 @@
       "description": "Project portable workload desired state into deterministic standard Kubernetes resources.\n\nResolved secret values are deliberately absent. The projection carries only references for\nruntime materialization immediately before apply.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
-        "line": 21,
+        "line": 23,
         "column": 1
       }
     },
@@ -1237,7 +1270,7 @@
       "description": "Create the environment namespace before all namespaced resources.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
-        "line": 56,
+        "line": 58,
         "column": 1
       }
     },
@@ -1507,7 +1540,7 @@
       "description": "Create a complete generic workload request used by the API-boundary fixture.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 180,
+        "line": 182,
         "column": 1
       }
     },
@@ -1516,7 +1549,7 @@
       "description": "Create the execution context without a technology-specific runtime fixture.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 209,
+        "line": 211,
         "column": 1
       }
     },
@@ -1525,7 +1558,7 @@
       "description": "Create one canonical secret reference.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 235,
+        "line": 237,
         "column": 1
       }
     },
@@ -1534,7 +1567,7 @@
       "description": "Create a confirmed destruction request with retained persistence.",
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 246,
+        "line": 248,
         "column": 1
       }
     }
@@ -1547,6 +1580,14 @@
       "symbolName": "createKubernetesDriver",
       "description": "Create the shared Kubernetes workload driver entrypoint.\n\nKubernetes is an implementation dependency for runtime adapters, not a selectable Infra\nprovider. The supplied API port is already authenticated cluster access; the driver adds only\nstandard Kubernetes workload projection and lifecycle semantics.",
       "isReadme": true
+    },
+    {
+      "kind": "export",
+      "name": "projectKubernetesResourcesAsync",
+      "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+      "symbolName": "projectKubernetesResourcesAsync",
+      "description": "Project portable workload desired state into deterministic standard Kubernetes resources.\n\nResolved secret values are deliberately absent. The projection carries only references for\nruntime materialization immediately before apply.",
+      "isReadme": true
     }
   ],
   "graphs": {
@@ -1554,6 +1595,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -2098,6 +2144,12 @@
         "fromSymbol": "src/kubernetesDriver.test.ts",
         "toSymbol": "createRequest",
         "callExpression": "createRequest",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDriver.test.ts",
+        "toSymbol": "projectKubernetesResourcesAsync",
+        "callExpression": "projectKubernetesResourcesAsync",
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
@@ -2759,6 +2811,21 @@
         "fromSymbol": "createKubernetesDriver",
         "toType": "KubernetesDriverOptions",
         "sourcePath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesResourcesAsync",
+        "toType": "InfraResult",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesResourcesAsync",
+        "toType": "KubernetesDriverRequest",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "projectKubernetesResourcesAsync",
+        "toType": "KubernetesProjection",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts"
       },
       {
         "fromSymbol": "KubernetesDriver",

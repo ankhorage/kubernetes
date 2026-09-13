@@ -465,7 +465,7 @@
           <section class="panel">
             <h2>Package overview</h2>
             <div class="summary">
-              <div><strong>13</strong><span class="muted">public exports</span></div>
+              <div><strong>14</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
               <div><strong>32</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
@@ -969,7 +969,7 @@
             </article>
             <article
               class="item"
-              data-search="src/index.ts createKubernetesDriver KubernetesApi KubernetesDesiredResource KubernetesDriver KubernetesDriverOptions KubernetesDriverRequest KubernetesOwnershipQuery KubernetesProjection KubernetesResource KubernetesResourceMetadata KubernetesResourceObservation KubernetesResourceReference KubernetesSecretBinding"
+              data-search="src/index.ts createKubernetesDriver KubernetesApi KubernetesDesiredResource KubernetesDriver KubernetesDriverOptions KubernetesDriverRequest KubernetesOwnershipQuery KubernetesProjection KubernetesResource KubernetesResourceMetadata KubernetesResourceObservation KubernetesResourceReference KubernetesSecretBinding projectKubernetesResourcesAsync"
             >
               <h3>src/index.ts</h3>
               <p class="muted">Configured entrypoint</p>
@@ -981,7 +981,8 @@
                 <code>KubernetesDriverRequest</code>, <code>KubernetesOwnershipQuery</code>,
                 <code>KubernetesProjection</code>, <code>KubernetesResource</code>,
                 <code>KubernetesResourceMetadata</code>, <code>KubernetesResourceObservation</code>,
-                <code>KubernetesResourceReference</code>, <code>KubernetesSecretBinding</code>
+                <code>KubernetesResourceReference</code>, <code>KubernetesSecretBinding</code>,
+                <code>projectKubernetesResourcesAsync</code>
               </p>
             </article>
             <article
@@ -1039,6 +1040,64 @@
           <section class="panel">
             <h2>Public API</h2>
 
+            <section>
+              <h3>
+                src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts
+              </h3>
+              <article
+                class="item"
+                id="symbol-projectkubernetesresourcesasync"
+                data-search="projectKubernetesResourcesAsync function src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts Project portable workload desired state into deterministic standard Kubernetes resources.&#10;&#10;Resolved secret values are deliberately absent. The projection carries only references for&#10;runtime materialization immediately before apply. KubernetesDriverRequest KubernetesProjection (request: KubernetesDriverRequest) =&gt; Promise&lt;InfraResult&lt;KubernetesProjection&gt;&gt;"
+              >
+                <h4>projectKubernetesResourcesAsync</h4>
+                <p class="muted">
+                  function •
+                  <code
+                    >src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts:23:1</code
+                  >
+                </p>
+                <p>
+                  Project portable workload desired state into deterministic standard Kubernetes
+                  resources. Resolved secret values are deliberately absent. The projection carries
+                  only references for runtime materialization immediately before apply.
+                </p>
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">KubernetesDriverRequest</li>
+                    <li class="chip">KubernetesProjection</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Signature</h5>
+                  <pre>
+(request: KubernetesDriverRequest) =&gt; Promise&lt;InfraResult&lt;KubernetesProjection&gt;&gt;</pre>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>request</code></td>
+                        <td><code>KubernetesDriverRequest</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p>
+                    <strong>Returns:</strong>
+                    <code>Promise&lt;InfraResult&lt;KubernetesProjection&gt;&gt;</code>
+                  </p>
+                </div>
+              </article>
+            </section>
             <section>
               <h3>src/features/workload-reconciliation/composition/createKubernetesDriver.ts</h3>
               <article
@@ -2852,6 +2911,11 @@ graph LR
                 export_KubernetesSecretBinding[&quot;KubernetesSecretBinding&quot;]
                 module_src_types_kubernetesResources_ts --&gt; export_KubernetesSecretBinding
                 export_KubernetesSecretBinding -.-&gt; export_KubernetesResourceReference
+                export_projectKubernetesResourcesAsync[&quot;projectKubernetesResourcesAsync&quot;]
+                module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts
+                --&gt; export_projectKubernetesResourcesAsync export_projectKubernetesResourcesAsync
+                -.-&gt; export_KubernetesDriverRequest export_projectKubernetesResourcesAsync
+                -.-&gt; export_KubernetesProjection
               </div>
               <details>
                 <summary>View Mermaid source</summary>
@@ -2929,6 +2993,10 @@ graph LR
   export_KubernetesSecretBinding[&quot;KubernetesSecretBinding&quot;]
   module_src_types_kubernetesResources_ts --&gt; export_KubernetesSecretBinding
   export_KubernetesSecretBinding -.-&gt; export_KubernetesResourceReference
+  export_projectKubernetesResourcesAsync[&quot;projectKubernetesResourcesAsync&quot;]
+  module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts --&gt; export_projectKubernetesResourcesAsync
+  export_projectKubernetesResourcesAsync -.-&gt; export_KubernetesDriverRequest
+  export_projectKubernetesResourcesAsync -.-&gt; export_KubernetesProjection
 </pre>
               </details>
             </article>
@@ -3349,7 +3417,7 @@ graph LR
               <h3>projectKubernetesResourcesAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts:21:1</code
+                  >src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts:23:1</code
                 >
               </p>
               <p>
@@ -3365,7 +3433,7 @@ graph LR
               <h3>createNamespace</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts:56:1</code
+                  >src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts:58:1</code
                 >
               </p>
               <p>Create the environment namespace before all namespaced resources.</p>
@@ -3926,7 +3994,7 @@ graph LR
               data-search="createRequest src/kubernetesDriver.test.ts Create a complete generic workload request used by the API-boundary fixture."
             >
               <h3>createRequest</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:180:1</code></p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:182:1</code></p>
               <p>Create a complete generic workload request used by the API-boundary fixture.</p>
             </article>
             <article
@@ -3934,7 +4002,7 @@ graph LR
               data-search="createExecutionContext src/kubernetesDriver.test.ts Create the execution context without a technology-specific runtime fixture."
             >
               <h3>createExecutionContext</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:209:1</code></p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:211:1</code></p>
               <p>Create the execution context without a technology-specific runtime fixture.</p>
             </article>
             <article
@@ -3942,7 +4010,7 @@ graph LR
               data-search="createSecretReference src/kubernetesDriver.test.ts Create one canonical secret reference."
             >
               <h3>createSecretReference</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:235:1</code></p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:237:1</code></p>
               <p>Create one canonical secret reference.</p>
             </article>
             <article
@@ -3950,7 +4018,7 @@ graph LR
               data-search="createRetainedDestroyRequest src/kubernetesDriver.test.ts Create a confirmed destruction request with retained persistence."
             >
               <h3>createRetainedDestroyRequest</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:246:1</code></p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:248:1</code></p>
               <p>Create a confirmed destruction request with retained persistence.</p>
             </article>
           </section>
