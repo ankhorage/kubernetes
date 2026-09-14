@@ -70,6 +70,7 @@ function createContainer(
     ports: (workload.ports ?? []).map((port) => ({
       name: toKubernetesName(port.name),
       containerPort: port.port,
+      ...(port.publishedPort === undefined ? {} : { hostPort: port.publishedPort }),
       protocol: (port.protocol ?? 'tcp').toUpperCase(),
     })),
     volumeMounts: createVolumeMounts(workload, values),
