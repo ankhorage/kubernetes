@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.7.0
+
+### Minor Changes
+
+- 2d8c1c9: Project an optional published workload port as an exact Kubernetes host port.
+
 ## 0.6.0
 
 ### Minor Changes
