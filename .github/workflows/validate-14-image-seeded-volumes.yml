@@ -32,10 +32,7 @@ jobs:
       - run: bun run check-types
       - run: bun run lint
       - run: bun run knip:check
-      - name: Check changeset
-        run: |
-          git branch main origin/main
-          bun run changeset
+      - run: bun run changeset:status
       - run: bun run format
       - run: bun run test
       - run: bun run docs
