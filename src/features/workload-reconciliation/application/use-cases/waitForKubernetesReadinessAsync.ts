@@ -4,6 +4,10 @@ import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
 } from '../../../../types/kubernetesDriver';
+import type {
+  KubernetesDesiredResource,
+  KubernetesResourceObservation,
+} from '../../../../types/kubernetesResources';
 import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
 import { projectKubernetesResourcesAsync } from './projectKubernetesResourcesAsync';
 
@@ -31,36 +35,10 @@ export async function waitForKubernetesReadinessAsync(
     const statuses: InfraResourceStatus[] = [];
     for (const desired of projection.value.resources) {
       if (!READINESS_KINDS.has(desired.resource.kind)) continue;
-      const remainingSeconds = Math.max(0, Math.ceil((deadline - Date.now()) / 1_000));
-      const observation =
-        remainingSeconds === 0
-          ? {
-              state: 'degraded' as const,
-              detail: 'The shared Kubernetes readiness deadline expired.',
-            }
-          : await options.api.waitUntilReadyAsync(
-              getKubernetesResourceReference(desired.resource),
-              {
-                timeoutSeconds: remainingSeconds,
-                ...(request.context.signal === undefined
-                  ? {}
-                  : { signal: request.context.signal }),
-              },
-            );
-      statuses.push({
-        owner: desired.owner.identity,
-        state: observation.state,
-        ...(observation.detail === undefined ? {} : { detail: observation.detail }),
-      });
+      const observation = await waitForDesiredResourceAsync(options, request, desired, deadline);
+      statuses.push(createReadinessStatus(desired, observation));
       if (observation.state !== 'ready') {
-        const detail = observation.detail === undefined ? '' : ` ${observation.detail}`;
-        const diagnostic: InfraDiagnostic = {
-          severity: 'error',
-          code: 'kubernetes-readiness-failed',
-          message: `Kubernetes resource ${desired.owner.identity.resourceId} is ${observation.state}.${detail}`,
-          owner: desired.owner.identity,
-        };
-        return { ok: false, diagnostics: [diagnostic] };
+        return { ok: false, diagnostics: [createReadinessDiagnostic(desired, observation)] };
       }
     }
     return { ok: true, value: statuses, diagnostics: [] };
@@ -76,4 +54,50 @@ export async function waitForKubernetesReadinessAsync(
       ],
     };
   }
+}
+
+/*** Wait for one resource within the remaining shared readiness deadline. */
+async function waitForDesiredResourceAsync(
+  options: KubernetesDriverOptions,
+  request: KubernetesDriverRequest,
+  desired: KubernetesDesiredResource,
+  deadline: number,
+): Promise<KubernetesResourceObservation> {
+  const remainingSeconds = Math.max(0, Math.ceil((deadline - Date.now()) / 1_000));
+  if (remainingSeconds === 0) {
+    return {
+      state: 'degraded',
+      detail: 'The shared Kubernetes readiness deadline expired.',
+    };
+  }
+  return options.api.waitUntilReadyAsync(getKubernetesResourceReference(desired.resource), {
+    timeoutSeconds: remainingSeconds,
+    ...(request.context.signal === undefined ? {} : { signal: request.context.signal }),
+  });
+}
+
+/*** Map one observation to the resource status returned by the driver. */
+function createReadinessStatus(
+  desired: KubernetesDesiredResource,
+  observation: KubernetesResourceObservation,
+): InfraResourceStatus {
+  return {
+    owner: desired.owner.identity,
+    state: observation.state,
+    ...(observation.detail === undefined ? {} : { detail: observation.detail }),
+  };
+}
+
+/*** Create the first actionable readiness diagnostic for dependency-first failure. */
+function createReadinessDiagnostic(
+  desired: KubernetesDesiredResource,
+  observation: KubernetesResourceObservation,
+): InfraDiagnostic {
+  const detail = observation.detail === undefined ? '' : ` ${observation.detail}`;
+  return {
+    severity: 'error',
+    code: 'kubernetes-readiness-failed',
+    message: `Kubernetes resource ${desired.owner.identity.resourceId} is ${observation.state}.${detail}`,
+    owner: desired.owner.identity,
+  };
 }
