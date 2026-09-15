@@ -12,7 +12,9 @@ it('projects an idempotent fail-closed init container for image-seeded persisten
 
   expect(projected.ok).toBe(true);
   if (!projected.ok) return;
-  const deployment = projected.value.resources.find(({ resource }) => resource.kind === 'Deployment');
+  const deployment = projected.value.resources.find(
+    ({ resource }) => resource.kind === 'Deployment',
+  );
   expect(deployment?.resource).toMatchObject({
     spec: {
       template: {
@@ -27,9 +29,7 @@ it('projects an idempotent fail-closed init container for image-seeded persisten
                 { name: 'ANKHORAGE_SEED_TARGET', value: '/ankhorage/image-seed-target' },
                 { name: 'ANKHORAGE_SEED_MARKER', value: '.ankhorage-image-seeded' },
               ],
-              volumeMounts: [
-                { name: 'volume-config', mountPath: '/ankhorage/image-seed-target' },
-              ],
+              volumeMounts: [{ name: 'volume-config', mountPath: '/ankhorage/image-seed-target' }],
             },
           ],
         },
@@ -50,7 +50,9 @@ it('does not add init containers for ordinary persistent volumes', async () => {
 
   expect(projected.ok).toBe(true);
   if (!projected.ok) return;
-  const deployment = projected.value.resources.find(({ resource }) => resource.kind === 'Deployment');
+  const deployment = projected.value.resources.find(
+    ({ resource }) => resource.kind === 'Deployment',
+  );
   expect(JSON.stringify(deployment?.resource)).not.toContain('initContainers');
 });
 
