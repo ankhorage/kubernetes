@@ -248,9 +248,7 @@ function parseDeploymentPodFailure(value: string): KubernetesResourceObservation
   return value
     .split('\n')
     .map(parsePodFailureLine)
-    .find(
-      (observation): observation is KubernetesResourceObservation => observation !== undefined,
-    );
+    .find((observation): observation is KubernetesResourceObservation => observation !== undefined);
 }
 
 /*** Map one sanitized Pod status line to a terminal readiness observation when applicable. */
