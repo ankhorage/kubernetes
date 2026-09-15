@@ -19,6 +19,7 @@ export function createKubernetesController(
   input: CreateKubernetesControllerInput,
 ): KubernetesDesiredResource {
   const labels = { 'app.kubernetes.io/name': input.workloadName };
+  const initContainers = createInitContainers(input.workload);
   return createKubernetesDesiredResource(request, {
     resourceId: `workload:${input.workload.id}`,
     dependsOn: input.dependsOn,
@@ -37,6 +38,7 @@ export function createKubernetesController(
         template: {
           metadata: { labels },
           spec: {
+            ...(initContainers.length === 0 ? {} : { initContainers }),
             containers: [createContainer(input.workloadName, input.workload, input.values)],
             volumes: createVolumes(input.workloadName, input.workload, input.values),
           },
@@ -52,6 +54,46 @@ export interface CreateKubernetesControllerInput {
   readonly workload: InfraWorkloadSpec;
   readonly values: KubernetesResolvedWorkloadValues;
   readonly dependsOn: readonly InfraResourceIdentity[];
+}
+
+const IMAGE_SEED_TARGET = '/ankhorage/image-seed-target';
+const IMAGE_SEED_MARKER = '.ankhorage-image-seeded';
+const IMAGE_SEED_SCRIPT = [
+  'set -eu',
+  'target="$ANKHORAGE_SEED_TARGET"',
+  'source="$ANKHORAGE_SEED_SOURCE"',
+  'marker="$target/$ANKHORAGE_SEED_MARKER"',
+  'test -d "$source"',
+  'if [ -e "$marker" ]; then exit 0; fi',
+  'existing="$(find "$target" -mindepth 1 -maxdepth 1 ! -name lost+found -print -quit)"',
+  'if [ -n "$existing" ]; then echo "Refusing to seed non-empty persistent volume without ownership marker." >&2; exit 1; fi',
+  'cp -a -- "$source"/. "$target"/',
+  'touch "$marker"',
+].join('\n');
+
+/*** Seed explicitly opted-in persistent volumes from the workload image before startup. */
+function createInitContainers(
+  workload: InfraWorkloadSpec,
+): readonly Readonly<Record<string, unknown>>[] {
+  return (workload.persistence ?? [])
+    .filter(({ seed }) => seed === 'image')
+    .map((volume) => ({
+      name: `seed-${toKubernetesName(volume.id)}`,
+      image: workload.artifact.image,
+      command: ['/bin/sh', '-c'],
+      args: [IMAGE_SEED_SCRIPT],
+      env: [
+        { name: 'ANKHORAGE_SEED_SOURCE', value: volume.mountPath },
+        { name: 'ANKHORAGE_SEED_TARGET', value: IMAGE_SEED_TARGET },
+        { name: 'ANKHORAGE_SEED_MARKER', value: IMAGE_SEED_MARKER },
+      ],
+      volumeMounts: [
+        {
+          name: `volume-${toKubernetesName(volume.id)}`,
+          mountPath: IMAGE_SEED_TARGET,
+        },
+      ],
+    }));
 }
 
 /*** Create the portable container projection. */
