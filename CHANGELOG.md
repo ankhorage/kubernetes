@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.8.1
+
+### Patch Changes
+
+- 307bb2a: Honor explicit resource-scoped deletion confirmation for persistent Kubernetes resources whose safe default retention is `retain`.
+
 ## 0.8.0
 
 ### Minor Changes
