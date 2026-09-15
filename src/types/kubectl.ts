@@ -13,7 +13,7 @@ export interface KubernetesCommandResult {
   readonly stderr: string;
 }
 
-/** Process boundary used by the concrete kubectl adapter without invoking a shell. */
+/** Shell-free process boundary for kubectl-specific CLI commands. */
 export interface KubernetesCommandRunner {
   runAsync(request: KubernetesCommandRequest): Promise<KubernetesCommandResult>;
 }
@@ -24,6 +24,8 @@ export interface KubectlKubernetesApiOptions {
   readonly executable?: string;
   readonly runner?: KubernetesCommandRunner;
   readonly pollIntervalMs?: number;
+  /** Grace period for transient Deployment CrashLoopBackOff recovery before readiness fails. */
+  readonly crashLoopRecoveryGraceSeconds?: number;
 }
 
 export type KubectlKubernetesApi = KubernetesApi;
