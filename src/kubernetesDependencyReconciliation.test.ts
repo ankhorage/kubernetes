@@ -50,9 +50,9 @@ class DependencyRecordingApi extends FakeKubernetesApi {
     super();
   }
 
-  override applyAsync(resource: KubernetesResource, signal?: AbortSignal): Promise<void> {
+  override applyAsync(resource: KubernetesResource, _signal?: AbortSignal): Promise<void> {
     this.events.push(`apply:${resource.kind}:${resource.metadata.name}`);
-    return super.applyAsync(resource, signal);
+    return super.applyAsync(resource);
   }
 
   override waitUntilReadyAsync(
