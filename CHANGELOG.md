@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.7.2
+
+### Patch Changes
+
+- 37db3df: Gate Kubernetes reconciliation on readiness-relevant workload dependencies so dependent resources are not applied before their dependencies are ready.
+
 ## 0.7.1
 
 ### Patch Changes
