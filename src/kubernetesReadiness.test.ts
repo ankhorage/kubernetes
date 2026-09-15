@@ -32,7 +32,7 @@ it('shares one readiness deadline and stops at the first failed dependency', asy
   ).toBe(true);
 });
 
-it('detects a crash-looping Deployment Pod before the readiness timeout', async () => {
+it('detects a persistent crash-looping Deployment Pod before the readiness timeout', async () => {
   const runner = new RecordingRunner([
     success(createPendingDeployment()),
     success('api-7d9\tRunning\tapi=CrashLoopBackOff;\n'),
@@ -41,6 +41,7 @@ it('detects a crash-looping Deployment Pod before the readiness timeout', async 
     context: 'sample-local',
     runner,
     pollIntervalMs: 0,
+    crashLoopRecoveryGraceSeconds: 0,
   });
 
   const observation = await api.waitUntilReadyAsync(createDeploymentReference(), {
@@ -53,6 +54,52 @@ it('detects a crash-looping Deployment Pod before the readiness timeout', async 
   });
   expect(runner.requests).toHaveLength(2);
   expect(runner.requests[1]?.arguments).toContain('app.kubernetes.io/name=api');
+});
+
+it('allows a transient crash-looping Deployment Pod to recover within the grace period', async () => {
+  const runner = new RecordingRunner([
+    success(createPendingDeployment()),
+    success('api-7d9\tRunning\tapi=CrashLoopBackOff;\n'),
+    success(createPendingDeployment()),
+    success(''),
+    success(createReadyDeployment()),
+  ]);
+  const api = createKubectlKubernetesApi({
+    context: 'sample-local',
+    runner,
+    pollIntervalMs: 0,
+    crashLoopRecoveryGraceSeconds: 1,
+  });
+
+  const observation = await api.waitUntilReadyAsync(createDeploymentReference(), {
+    timeoutSeconds: 1,
+  });
+
+  expect(observation).toEqual({ state: 'ready' });
+  expect(runner.requests).toHaveLength(5);
+});
+
+it('keeps non-recoverable startup failures immediately fatal', async () => {
+  const runner = new RecordingRunner([
+    success(createPendingDeployment()),
+    success('api-7d9\tRunning\tapi=ImagePullBackOff;\n'),
+  ]);
+  const api = createKubectlKubernetesApi({
+    context: 'sample-local',
+    runner,
+    pollIntervalMs: 0,
+    crashLoopRecoveryGraceSeconds: 30,
+  });
+
+  const observation = await api.waitUntilReadyAsync(createDeploymentReference(), {
+    timeoutSeconds: 300,
+  });
+
+  expect(observation).toEqual({
+    state: 'failed',
+    detail: 'Pod api-7d9 container api is ImagePullBackOff.',
+  });
+  expect(runner.requests).toHaveLength(2);
 });
 
 it('maps terminal Deployment conditions to sanitized failure detail', async () => {
@@ -181,6 +228,14 @@ function createPendingDeployment() {
     },
     spec: { replicas: 1 },
     status: { availableReplicas: 0, observedGeneration: 1 },
+  };
+}
+
+/*** Create one ready live Deployment fixture. */
+function createReadyDeployment() {
+  return {
+    ...createPendingDeployment(),
+    status: { availableReplicas: 1, observedGeneration: 1 },
   };
 }
 
