@@ -8,17 +8,12 @@ import type {
   KubernetesDesiredResource,
   KubernetesResourceObservation,
 } from '../../../../types/kubernetesResources';
+import {
+  KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS,
+  KUBERNETES_READINESS_KINDS,
+} from '../../constants';
 import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
 import { projectKubernetesResourcesAsync } from './projectKubernetesResourcesAsync';
-
-const READINESS_KINDS = new Set([
-  'Namespace',
-  'PersistentVolumeClaim',
-  'Deployment',
-  'Service',
-  'Ingress',
-]);
-const DEFAULT_READINESS_TIMEOUT_SECONDS = 300;
 
 /*** Wait dependency-first for required Kubernetes resources to report ready. */
 export async function waitForKubernetesReadinessAsync(
@@ -29,12 +24,12 @@ export async function waitForKubernetesReadinessAsync(
   if (!projection.ok) return projection;
 
   const timeoutSeconds =
-    options.defaultReadinessTimeoutSeconds ?? DEFAULT_READINESS_TIMEOUT_SECONDS;
+    options.defaultReadinessTimeoutSeconds ?? KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS;
   const deadline = Date.now() + timeoutSeconds * 1_000;
   try {
     const statuses: InfraResourceStatus[] = [];
     for (const desired of projection.value.resources) {
-      if (!READINESS_KINDS.has(desired.resource.kind)) continue;
+      if (!KUBERNETES_READINESS_KINDS.has(desired.resource.kind)) continue;
       const observation = await waitForDesiredResourceAsync(options, request, desired, deadline);
       statuses.push(createReadinessStatus(desired, observation));
       if (observation.state !== 'ready') {
