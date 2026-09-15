@@ -116,6 +116,7 @@ it('maps standard readiness, timeout and public ingress output', async () => {
         status: { availableReplicas: 0, observedGeneration: 1 },
       }),
     ),
+    success(''),
     success(
       createResource('Deployment', 'api', 'sample-local', {
         generation: 2,
