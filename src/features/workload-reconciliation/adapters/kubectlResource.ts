@@ -39,17 +39,7 @@ export function observeKubectlResource(
   const status = optionalRecord(resource, 'status');
   const publicOutputs = readPublicOutputs(kind, spec, status);
   if (kind === 'Deployment') {
-    const desired = readNumber(spec, 'replicas') ?? 1;
-    const available = readNumber(status, 'availableReplicas') ?? 0;
-    const generation = readNumber(metadata, 'generation') ?? 0;
-    const observedGeneration = readNumber(status, 'observedGeneration') ?? 0;
-    const ready = available >= desired && observedGeneration >= generation;
-    const failure = ready ? undefined : readDeploymentFailure(status);
-    return withOutputs(
-      ready ? 'ready' : failure === undefined ? 'pending' : 'failed',
-      publicOutputs,
-      failure,
-    );
+    return observeDeployment(metadata, spec, status, publicOutputs);
   }
   if (kind === 'PersistentVolumeClaim') {
     const phase = optionalString(status, 'phase');
@@ -73,6 +63,26 @@ export function labelsInclude(
     Object.entries(actual).some(
       ([actualKey, actualValue]) => actualKey === expectedKey && actualValue === expectedValue,
     ),
+  );
+}
+
+/*** Map Deployment replicas, generation and terminal rollout conditions to readiness. */
+function observeDeployment(
+  metadata: Readonly<Record<string, unknown>>,
+  spec: Readonly<Record<string, unknown>> | undefined,
+  status: Readonly<Record<string, unknown>> | undefined,
+  publicOutputs: Readonly<Record<string, string>> | undefined,
+): KubernetesResourceObservation {
+  const desired = readNumber(spec, 'replicas') ?? 1;
+  const available = readNumber(status, 'availableReplicas') ?? 0;
+  const generation = readNumber(metadata, 'generation') ?? 0;
+  const observedGeneration = readNumber(status, 'observedGeneration') ?? 0;
+  const ready = available >= desired && observedGeneration >= generation;
+  const failure = ready ? undefined : readDeploymentFailure(status);
+  return withOutputs(
+    ready ? 'ready' : failure === undefined ? 'pending' : 'failed',
+    publicOutputs,
+    failure,
   );
 }
 
