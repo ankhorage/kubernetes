@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.7.1
+
+### Patch Changes
+
+- c334787: Fail fast on terminal Kubernetes workload readiness failures and share one timeout budget across the readiness run.
+
 ## 0.7.0
 
 ### Minor Changes
