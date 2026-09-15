@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.8.0
+
+### Minor Changes
+
+- fa62391: Seed explicitly opted-in persistent volumes from workload image contents before Kubernetes workload startup.
+
 ## 0.7.3
 
 ### Patch Changes
