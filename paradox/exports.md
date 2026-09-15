@@ -4,7 +4,7 @@
 
 Kind: `function`
 Module: `src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts`
-Source: `src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:39:1`
+Source: `src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:41:1`
 
 Create a concrete Kubernetes API backed by an authenticated kubectl context.
 
@@ -39,7 +39,7 @@ standard Kubernetes workload projection and lifecycle semantics.
 
 Kind: `unknown`
 Module: `src/types/kubectl.ts`
-Source: `src/types/kubectl.ts:29:1`
+Source: `src/types/kubectl.ts:31:1`
 
 ## KubectlKubernetesApiOptions
 
@@ -49,12 +49,13 @@ Source: `src/types/kubectl.ts:21:1`
 
 ### Members
 
-| Name           | Kind     | Type                                   | Required | Description |
-| -------------- | -------- | -------------------------------------- | -------- | ----------- |
-| context        | property | `string`                               | yes      |             |
-| executable     | property | `string \| undefined`                  | no       |             |
-| pollIntervalMs | property | `number \| undefined`                  | no       |             |
-| runner         | property | `KubernetesCommandRunner \| undefined` | no       |             |
+| Name                          | Kind     | Type                                   | Required | Description |
+| ----------------------------- | -------- | -------------------------------------- | -------- | ----------- |
+| context                       | property | `string`                               | yes      |             |
+| crashLoopRecoveryGraceSeconds | property | `number \| undefined`                  | no       |             |
+| executable                    | property | `string \| undefined`                  | no       |             |
+| pollIntervalMs                | property | `number \| undefined`                  | no       |             |
+| runner                        | property | `KubernetesCommandRunner \| undefined` | no       |             |
 
 ## KubernetesApi
 

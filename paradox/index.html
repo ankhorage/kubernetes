@@ -202,7 +202,7 @@
                 data-target="src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
               >
                 src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts
-                <small>12 functions</small>
+                <small>13 functions</small>
               </button>
             </li>
             <li>
@@ -222,7 +222,17 @@
                 data-target="src/features/workload-reconciliation/adapters/kubectlResource.ts"
               >
                 src/features/workload-reconciliation/adapters/kubectlResource.ts
-                <small>21 functions</small>
+                <small>23 functions</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
+                data-target="src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts"
+              >
+                src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts
+                <small>3 functions</small>
               </button>
             </li>
             <li>
@@ -232,7 +242,7 @@
                 data-target="src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
               >
                 src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts
-                <small>9 functions</small>
+                <small>10 functions</small>
               </button>
             </li>
             <li>
@@ -332,7 +342,7 @@
                 data-target="src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
               >
                 src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts
-                <small>1 function</small>
+                <small>6 functions</small>
               </button>
             </li>
             <li>
@@ -372,7 +382,7 @@
                 data-target="src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
               >
                 src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts
-                <small>1 function</small>
+                <small>4 functions</small>
               </button>
             </li>
             <li>
@@ -488,9 +498,39 @@
               </button>
             </li>
             <li>
+              <button
+                class="nav-button"
+                type="button"
+                data-target="src/kubernetesDependencyReconciliation.test.ts"
+              >
+                src/kubernetesDependencyReconciliation.test.ts
+                <small>2 functions</small>
+              </button>
+            </li>
+            <li>
               <button class="nav-button" type="button" data-target="src/kubernetesDriver.test.ts">
                 src/kubernetesDriver.test.ts
                 <small>5 functions</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
+                data-target="src/kubernetesPublishedPorts.test.ts"
+              >
+                src/kubernetesPublishedPorts.test.ts
+                <small>1 function</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
+                data-target="src/kubernetesReadiness.test.ts"
+              >
+                src/kubernetesReadiness.test.ts
+                <small>6 functions</small>
               </button>
             </li>
             <li>
@@ -503,6 +543,16 @@
                 <small>3 functions</small>
               </button>
             </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
+                data-target="src/kubernetesVolumeSeeding.test.ts"
+              >
+                src/kubernetesVolumeSeeding.test.ts
+                <small>2 functions</small>
+              </button>
+            </li>
           </ul>
         </nav>
       </aside>
@@ -513,7 +563,7 @@
             <div class="summary">
               <div><strong>22</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>38</strong><span class="muted">modules</span></div>
+              <div><strong>43</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -532,7 +582,7 @@
             </article>
             <article
               class="item"
-              data-search="src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts src/features/workload-reconciliation/adapters/kubectlResource.ts src/types/kubectl.ts src/types/kubernetesResources.ts createKubectlKubernetesApi"
+              data-search="src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts src/features/workload-reconciliation/adapters/kubectlResource.ts src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts src/types/kubectl.ts src/types/kubernetesResources.ts createKubectlKubernetesApi"
             >
               <h3>src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts</h3>
               <p class="muted">Referenced module</p>
@@ -541,7 +591,9 @@
                 <code
                   >src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts</code
                 >, <code>src/features/workload-reconciliation/adapters/kubectlResource.ts</code>,
-                <code>src/types/kubectl.ts</code>, <code>src/types/kubernetesResources.ts</code>
+                <code
+                  >src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts</code
+                >, <code>src/types/kubectl.ts</code>, <code>src/types/kubernetesResources.ts</code>
               </p>
               <p><strong>Exports:</strong> <code>createKubectlKubernetesApi</code></p>
             </article>
@@ -568,6 +620,20 @@
                 <code>observeKubectlResource</code>, <code>parseKubectlJsonRecord</code>,
                 <code>parseKubectlResourceList</code>, <code>parseOptionalKubectlResource</code>
               </p>
+            </article>
+            <article
+              class="item"
+              data-search="src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts src/types/kubectl.ts src/types/kubernetesResources.ts observeKubectlDeploymentPodFailureAsync"
+            >
+              <h3>
+                src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts
+              </h3>
+              <p class="muted">Referenced module</p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/types/kubectl.ts</code>,
+                <code>src/types/kubernetesResources.ts</code>
+              </p>
+              <p><strong>Exports:</strong> <code>observeKubectlDeploymentPodFailureAsync</code></p>
             </article>
             <article
               class="item"
@@ -807,7 +873,7 @@
             </article>
             <article
               class="item"
-              data-search="src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts src/types/kubernetesDriver.ts reconcileKubernetesResourcesAsync"
+              data-search="src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts src/features/workload-reconciliation/constants.ts src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts src/types/kubernetesDriver.ts src/types/kubernetesResources.ts reconcileKubernetesResourcesAsync"
             >
               <h3>
                 src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts
@@ -820,13 +886,14 @@
                 >,
                 <code
                   >src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts</code
-                >,
+                >, <code>src/features/workload-reconciliation/constants.ts</code>,
                 <code
                   >src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts</code
                 >,
                 <code
                   >src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts</code
-                >, <code>src/types/kubernetesDriver.ts</code>
+                >, <code>src/types/kubernetesDriver.ts</code>,
+                <code>src/types/kubernetesResources.ts</code>
               </p>
               <p><strong>Exports:</strong> <code>reconcileKubernetesResourcesAsync</code></p>
             </article>
@@ -883,7 +950,7 @@
             </article>
             <article
               class="item"
-              data-search="src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts src/types/kubernetesDriver.ts waitForKubernetesReadinessAsync"
+              data-search="src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts src/features/workload-reconciliation/constants.ts src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts src/types/kubernetesDriver.ts src/types/kubernetesResources.ts waitForKubernetesReadinessAsync"
             >
               <h3>
                 src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts
@@ -893,10 +960,11 @@
                 <strong>Dependencies:</strong>
                 <code
                   >src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts</code
-                >,
+                >, <code>src/features/workload-reconciliation/constants.ts</code>,
                 <code
                   >src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts</code
-                >, <code>src/types/kubernetesDriver.ts</code>
+                >, <code>src/types/kubernetesDriver.ts</code>,
+                <code>src/types/kubernetesResources.ts</code>
               </p>
               <p><strong>Exports:</strong> <code>waitForKubernetesReadinessAsync</code></p>
             </article>
@@ -934,12 +1002,15 @@
             </article>
             <article
               class="item"
-              data-search="src/features/workload-reconciliation/constants.ts KUBERNETES_OWNERSHIP"
+              data-search="src/features/workload-reconciliation/constants.ts KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS KUBERNETES_OWNERSHIP KUBERNETES_READINESS_KINDS"
             >
               <h3>src/features/workload-reconciliation/constants.ts</h3>
               <p class="muted">Referenced module</p>
               <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-              <p><strong>Exports:</strong> <code>KUBERNETES_OWNERSHIP</code></p>
+              <p>
+                <strong>Exports:</strong> <code>KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS</code>,
+                <code>KUBERNETES_OWNERSHIP</code>, <code>KUBERNETES_READINESS_KINDS</code>
+              </p>
             </article>
             <article
               class="item"
@@ -1100,6 +1171,18 @@
             </article>
             <article
               class="item"
+              data-search="src/kubernetesDependencyReconciliation.test.ts src/index.ts src/kubernetesApi.test.ts"
+            >
+              <h3>src/kubernetesDependencyReconciliation.test.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/kubernetesApi.test.ts</code>
+              </p>
+              <p><strong>Exports:</strong> <span class="empty">None</span></p>
+            </article>
+            <article
+              class="item"
               data-search="src/kubernetesDriver.test.ts src/index.ts src/kubernetesApi.test.ts"
             >
               <h3>src/kubernetesDriver.test.ts</h3>
@@ -1112,6 +1195,24 @@
             </article>
             <article
               class="item"
+              data-search="src/kubernetesPublishedPorts.test.ts src/index.ts src/kubernetesApi.test.ts"
+            >
+              <h3>src/kubernetesPublishedPorts.test.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/kubernetesApi.test.ts</code>
+              </p>
+              <p><strong>Exports:</strong> <span class="empty">None</span></p>
+            </article>
+            <article class="item" data-search="src/kubernetesReadiness.test.ts src/index.ts">
+              <h3>src/kubernetesReadiness.test.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p><strong>Dependencies:</strong> <code>src/index.ts</code></p>
+              <p><strong>Exports:</strong> <span class="empty">None</span></p>
+            </article>
+            <article
+              class="item"
               data-search="src/kubernetesTemplates.test.ts src/index.ts src/kubernetesApi.test.ts"
             >
               <h3>src/kubernetesTemplates.test.ts</h3>
@@ -1120,6 +1221,12 @@
                 <strong>Dependencies:</strong> <code>src/index.ts</code>,
                 <code>src/kubernetesApi.test.ts</code>
               </p>
+              <p><strong>Exports:</strong> <span class="empty">None</span></p>
+            </article>
+            <article class="item" data-search="src/kubernetesVolumeSeeding.test.ts src/index.ts">
+              <h3>src/kubernetesVolumeSeeding.test.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p><strong>Dependencies:</strong> <code>src/index.ts</code></p>
               <p><strong>Exports:</strong> <span class="empty">None</span></p>
             </article>
             <article
@@ -1181,7 +1288,7 @@
                 <p class="muted">
                   function •
                   <code
-                    >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:39:1</code
+                    >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:41:1</code
                   >
                 </p>
                 <p>
@@ -1341,7 +1448,7 @@
                 data-search="KubectlKubernetesApi unknown src/types/kubectl.ts "
               >
                 <h4>KubectlKubernetesApi</h4>
-                <p class="muted">unknown • <code>src/types/kubectl.ts:29:1</code></p>
+                <p class="muted">unknown • <code>src/types/kubectl.ts:31:1</code></p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
                 <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
@@ -1378,6 +1485,13 @@
                       <td>property</td>
                       <td><code>string</code></td>
                       <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>crashLoopRecoveryGraceSeconds</code></td>
+                      <td>property</td>
+                      <td><code>number | undefined</code></td>
+                      <td>no</td>
                       <td></td>
                     </tr>
                     <tr>
@@ -2354,6 +2468,9 @@
                 module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
                 --&gt; module_src_features_workload_reconciliation_adapters_kubectlResource_ts
                 module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
+                --&gt;
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
+                module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
                 --&gt; module_src_types_kubectl_ts
                 module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
                 --&gt; module_src_types_kubernetesResources_ts
@@ -2367,6 +2484,13 @@
                 module_src_features_workload_reconciliation_adapters_kubectlResource_ts
                 module_src_features_workload_reconciliation_adapters_kubectlResource_ts --&gt;
                 module_src_types_kubernetesResources_ts
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts[&quot;src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts&quot;]
+                package__ankhorage_kubernetes -.-&gt;
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
+                --&gt; module_src_types_kubectl_ts
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
+                --&gt; module_src_types_kubernetesResources_ts
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt;
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts
@@ -2533,6 +2657,8 @@
                 --&gt;
                 module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
                 module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
+                --&gt; module_src_features_workload_reconciliation_constants_ts
+                module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
                 --&gt;
                 module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
                 module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
@@ -2540,6 +2666,8 @@
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
                 module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
                 --&gt; module_src_types_kubernetesDriver_ts
+                module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
+                --&gt; module_src_types_kubernetesResources_ts
                 module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts[&quot;src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt;
                 module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts
@@ -2574,10 +2702,14 @@
                 --&gt;
                 module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts
                 module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
+                --&gt; module_src_features_workload_reconciliation_constants_ts
+                module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
                 --&gt;
                 module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
                 module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
                 --&gt; module_src_types_kubernetesDriver_ts
+                module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
+                --&gt; module_src_types_kubernetesResources_ts
                 module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts[&quot;src/features/workload-reconciliation/composition/createKubernetesDriver.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt;
                 module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts
@@ -2685,14 +2817,30 @@
                 module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubernetesApi_test_ts
                 module_src_kubernetesApi_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
+                package__ankhorage_kubernetes -.-&gt;
+                module_src_kubernetesDependencyReconciliation_test_ts
+                module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesDependencyReconciliation_test_ts --&gt;
+                module_src_kubernetesApi_test_ts
                 module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubernetesDriver_test_ts
                 module_src_kubernetesDriver_test_ts --&gt; module_src_index_ts
                 module_src_kubernetesDriver_test_ts --&gt; module_src_kubernetesApi_test_ts
+                module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
+                package__ankhorage_kubernetes -.-&gt; module_src_kubernetesPublishedPorts_test_ts
+                module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_kubernetesApi_test_ts
+                module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
+                package__ankhorage_kubernetes -.-&gt; module_src_kubernetesReadiness_test_ts
+                module_src_kubernetesReadiness_test_ts --&gt; module_src_index_ts
                 module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubernetesTemplates_test_ts
                 module_src_kubernetesTemplates_test_ts --&gt; module_src_index_ts
                 module_src_kubernetesTemplates_test_ts --&gt; module_src_kubernetesApi_test_ts
+                module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
+                package__ankhorage_kubernetes -.-&gt; module_src_kubernetesVolumeSeeding_test_ts
+                module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_index_ts
                 module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_types_kubectl_ts
                 module_src_types_kubectl_ts --&gt; module_src_types_kubernetesResources_ts
@@ -2716,6 +2864,7 @@ graph TD
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_features_workload_reconciliation_adapters_kubectlResource_ts
+  module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_types_kubectl_ts
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts[&quot;src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts&quot;]
@@ -2724,6 +2873,10 @@ graph TD
   module_src_features_workload_reconciliation_adapters_kubectlResource_ts[&quot;src/features/workload-reconciliation/adapters/kubectlResource.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_adapters_kubectlResource_ts
   module_src_features_workload_reconciliation_adapters_kubectlResource_ts --&gt; module_src_types_kubernetesResources_ts
+  module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts[&quot;src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts&quot;]
+  package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
+  module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts --&gt; module_src_types_kubectl_ts
+  module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts --&gt; module_src_features_workload_reconciliation_utils_createKubernetesDesiredResource_ts
@@ -2798,9 +2951,11 @@ graph TD
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_getKubernetesOutputsAsync_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
+  module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_constants_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_types_kubernetesDriver_ts
+  module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts[&quot;src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesOwnershipQuery_ts
@@ -2817,8 +2972,10 @@ graph TD
   module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts[&quot;src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
   module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts
+  module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_features_workload_reconciliation_constants_ts
   module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_types_kubernetesDriver_ts
+  module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts[&quot;src/features/workload-reconciliation/composition/createKubernetesDriver.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts
   module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_getKubernetesOutputsAsync_ts
@@ -2877,14 +3034,28 @@ graph TD
   module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesApi_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
+  package__ankhorage_kubernetes -.-&gt; module_src_kubernetesDependencyReconciliation_test_ts
+  module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesDriver_test_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_index_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_kubernetesApi_test_ts
+  module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
+  package__ankhorage_kubernetes -.-&gt; module_src_kubernetesPublishedPorts_test_ts
+  module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_kubernetesApi_test_ts
+  module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
+  package__ankhorage_kubernetes -.-&gt; module_src_kubernetesReadiness_test_ts
+  module_src_kubernetesReadiness_test_ts --&gt; module_src_index_ts
   module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesTemplates_test_ts
   module_src_kubernetesTemplates_test_ts --&gt; module_src_index_ts
   module_src_kubernetesTemplates_test_ts --&gt; module_src_kubernetesApi_test_ts
+  module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
+  package__ankhorage_kubernetes -.-&gt; module_src_kubernetesVolumeSeeding_test_ts
+  module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_index_ts
   module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_types_kubectl_ts
   module_src_types_kubectl_ts --&gt; module_src_types_kubernetesResources_ts
@@ -2908,6 +3079,7 @@ graph TD
                 module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts[&quot;src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts&quot;]
                 module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts[&quot;src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts&quot;]
                 module_src_features_workload_reconciliation_adapters_kubectlResource_ts[&quot;src/features/workload-reconciliation/adapters/kubectlResource.ts&quot;]
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts[&quot;src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts&quot;]
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts&quot;]
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesExposure_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts&quot;]
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesPrerequisites_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts&quot;]
@@ -2937,8 +3109,12 @@ graph TD
                 module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
                 module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
+                module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
                 module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
+                module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
+                module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
                 module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
+                module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
                 module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
                 module_src_types_kubernetesDriver_ts[&quot;src/types/kubernetesDriver.ts&quot;]
                 module_src_types_kubernetesResources_ts[&quot;src/types/kubernetesResources.ts&quot;]
@@ -2949,6 +3125,9 @@ graph TD
                 module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
                 --&gt; module_src_features_workload_reconciliation_adapters_kubectlResource_ts
                 module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
+                --&gt;
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
+                module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
                 --&gt; module_src_types_kubectl_ts
                 module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts
                 --&gt; module_src_types_kubernetesResources_ts
@@ -2956,6 +3135,10 @@ graph TD
                 --&gt; module_src_types_kubectl_ts
                 module_src_features_workload_reconciliation_adapters_kubectlResource_ts --&gt;
                 module_src_types_kubernetesResources_ts
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
+                --&gt; module_src_types_kubectl_ts
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
+                --&gt; module_src_types_kubernetesResources_ts
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts
                 --&gt;
                 module_src_features_workload_reconciliation_utils_createKubernetesDesiredResource_ts
@@ -3089,6 +3272,8 @@ graph TD
                 --&gt;
                 module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
                 module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
+                --&gt; module_src_features_workload_reconciliation_constants_ts
+                module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
                 --&gt;
                 module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
                 module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
@@ -3096,6 +3281,8 @@ graph TD
                 module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
                 module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
                 --&gt; module_src_types_kubernetesDriver_ts
+                module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts
+                --&gt; module_src_types_kubernetesResources_ts
                 module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts
                 --&gt;
                 module_src_features_workload_reconciliation_utils_getKubernetesOwnershipQuery_ts
@@ -3118,10 +3305,14 @@ graph TD
                 --&gt;
                 module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts
                 module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
+                --&gt; module_src_features_workload_reconciliation_constants_ts
+                module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
                 --&gt;
                 module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
                 module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
                 --&gt; module_src_types_kubernetesDriver_ts
+                module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts
+                --&gt; module_src_types_kubernetesResources_ts
                 module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts
                 --&gt;
                 module_src_features_workload_reconciliation_application_use_cases_getKubernetesOutputsAsync_ts
@@ -3190,12 +3381,19 @@ graph TD
                 module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts
                 module_src_kubectlApi_test_ts --&gt; module_src_index_ts
                 module_src_kubernetesApi_test_ts --&gt; module_src_index_ts
-                module_src_kubernetesDriver_test_ts --&gt; module_src_index_ts
-                module_src_kubernetesDriver_test_ts --&gt; module_src_kubernetesApi_test_ts
-                module_src_kubernetesTemplates_test_ts --&gt; module_src_index_ts
-                module_src_kubernetesTemplates_test_ts --&gt; module_src_kubernetesApi_test_ts
-                module_src_types_kubectl_ts --&gt; module_src_types_kubernetesResources_ts
-                module_src_types_kubernetesDriver_ts --&gt; module_src_types_kubernetesResources_ts
+                module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesDependencyReconciliation_test_ts --&gt;
+                module_src_kubernetesApi_test_ts module_src_kubernetesDriver_test_ts --&gt;
+                module_src_index_ts module_src_kubernetesDriver_test_ts --&gt;
+                module_src_kubernetesApi_test_ts module_src_kubernetesPublishedPorts_test_ts --&gt;
+                module_src_index_ts module_src_kubernetesPublishedPorts_test_ts --&gt;
+                module_src_kubernetesApi_test_ts module_src_kubernetesReadiness_test_ts --&gt;
+                module_src_index_ts module_src_kubernetesTemplates_test_ts --&gt;
+                module_src_index_ts module_src_kubernetesTemplates_test_ts --&gt;
+                module_src_kubernetesApi_test_ts module_src_kubernetesVolumeSeeding_test_ts --&gt;
+                module_src_index_ts module_src_types_kubectl_ts --&gt;
+                module_src_types_kubernetesResources_ts module_src_types_kubernetesDriver_ts --&gt;
+                module_src_types_kubernetesResources_ts
               </div>
               <details>
                 <summary>View Mermaid source</summary>
@@ -3205,6 +3403,7 @@ graph LR
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts[&quot;src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts&quot;]
   module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts[&quot;src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts&quot;]
   module_src_features_workload_reconciliation_adapters_kubectlResource_ts[&quot;src/features/workload-reconciliation/adapters/kubectlResource.ts&quot;]
+  module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts[&quot;src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts&quot;]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts&quot;]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesExposure_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts&quot;]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesPrerequisites_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts&quot;]
@@ -3234,18 +3433,25 @@ graph LR
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
   module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
+  module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
   module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
+  module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
+  module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
   module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
+  module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
   module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
   module_src_types_kubernetesDriver_ts[&quot;src/types/kubernetesDriver.ts&quot;]
   module_src_types_kubernetesResources_ts[&quot;src/types/kubernetesResources.ts&quot;]
   module_examples_basic_usage_index_ts --&gt; module_dist_index_d_ts
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_features_workload_reconciliation_adapters_kubectlResource_ts
+  module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_types_kubectl_ts
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts --&gt; module_src_types_kubectl_ts
   module_src_features_workload_reconciliation_adapters_kubectlResource_ts --&gt; module_src_types_kubernetesResources_ts
+  module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts --&gt; module_src_types_kubectl_ts
+  module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts --&gt; module_src_features_workload_reconciliation_utils_createKubernetesDesiredResource_ts
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts --&gt; module_src_features_workload_reconciliation_utils_toKubernetesName_ts
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts --&gt; module_src_types_kubernetesDriver_ts
@@ -3298,9 +3504,11 @@ graph LR
   module_src_features_workload_reconciliation_application_use_cases_projectKubernetesWorkload_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_getKubernetesOutputsAsync_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_prepareKubernetesChangesAsync_ts
+  module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_constants_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
   module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_types_kubernetesDriver_ts
+  module_src_features_workload_reconciliation_application_use_cases_reconcileKubernetesResourcesAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesOwnershipQuery_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_removeKubernetesResourcesAsync_ts --&gt; module_src_features_workload_reconciliation_utils_readKubernetesOwnedResource_ts
@@ -3309,8 +3517,10 @@ graph LR
   module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts --&gt; module_src_features_workload_reconciliation_utils_toKubernetesName_ts
   module_src_features_workload_reconciliation_application_use_cases_resolveKubernetesWorkloadValues_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_projectKubernetesResourcesAsync_ts
+  module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_features_workload_reconciliation_constants_ts
   module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_features_workload_reconciliation_utils_getKubernetesResourceReference_ts
   module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_types_kubernetesDriver_ts
+  module_src_features_workload_reconciliation_application_use_cases_waitForKubernetesReadinessAsync_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_getKubernetesOutputsAsync_ts
   module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_getKubernetesStatusAsync_ts
   module_src_features_workload_reconciliation_composition_createKubernetesDriver_ts --&gt; module_src_features_workload_reconciliation_application_use_cases_planKubernetesResourcesAsync_ts
@@ -3342,10 +3552,16 @@ graph LR
   module_src_kubectlApi_test_ts --&gt; module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts
   module_src_kubectlApi_test_ts --&gt; module_src_index_ts
   module_src_kubernetesApi_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_index_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_kubernetesApi_test_ts
+  module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_kubernetesApi_test_ts
+  module_src_kubernetesReadiness_test_ts --&gt; module_src_index_ts
   module_src_kubernetesTemplates_test_ts --&gt; module_src_index_ts
   module_src_kubernetesTemplates_test_ts --&gt; module_src_kubernetesApi_test_ts
+  module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_index_ts
   module_src_types_kubectl_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_types_kubernetesDriver_ts --&gt; module_src_types_kubernetesResources_ts
 </pre>
@@ -3360,6 +3576,7 @@ graph LR
                 module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts[&quot;src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts&quot;]
                 module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts[&quot;src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts&quot;]
                 module_src_features_workload_reconciliation_adapters_kubectlResource_ts[&quot;src/features/workload-reconciliation/adapters/kubectlResource.ts&quot;]
+                module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts[&quot;src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts&quot;]
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts&quot;]
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesExposure_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts&quot;]
                 module_src_features_workload_reconciliation_application_use_cases_createKubernetesPrerequisites_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts&quot;]
@@ -3389,8 +3606,12 @@ graph LR
                 module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
                 module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
+                module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
                 module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
+                module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
+                module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
                 module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
+                module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
                 module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
                 module_src_types_kubernetesDriver_ts[&quot;src/types/kubernetesDriver.ts&quot;]
                 module_src_types_kubernetesResources_ts[&quot;src/types/kubernetesResources.ts&quot;]
@@ -3472,6 +3693,7 @@ graph LR
   module_src_features_workload_reconciliation_adapters_createKubectlKubernetesApi_ts[&quot;src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts&quot;]
   module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts[&quot;src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts&quot;]
   module_src_features_workload_reconciliation_adapters_kubectlResource_ts[&quot;src/features/workload-reconciliation/adapters/kubectlResource.ts&quot;]
+  module_src_features_workload_reconciliation_adapters_observeKubectlDeploymentPodFailureAsync_ts[&quot;src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts&quot;]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesController_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts&quot;]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesExposure_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts&quot;]
   module_src_features_workload_reconciliation_application_use_cases_createKubernetesPrerequisites_ts[&quot;src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts&quot;]
@@ -3501,8 +3723,12 @@ graph LR
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
   module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
+  module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
   module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
+  module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
+  module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
   module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
+  module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
   module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
   module_src_types_kubernetesDriver_ts[&quot;src/types/kubernetesDriver.ts&quot;]
   module_src_types_kubernetesResources_ts[&quot;src/types/kubernetesResources.ts&quot;]
@@ -3624,7 +3850,7 @@ sequenceDiagram
               <h3>createKubectlKubernetesApi</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:39:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:41:1</code
                 >
               </p>
               <p>
@@ -3640,7 +3866,7 @@ sequenceDiagram
               <h3>createCommand</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:68:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:81:1</code
                 >
               </p>
               <p>Bind an executable and exact kubeconfig context to every kubectl invocation.</p>
@@ -3652,7 +3878,7 @@ sequenceDiagram
               <h3>listOwnedAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:85:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:98:1</code
                 >
               </p>
               <p>
@@ -3666,7 +3892,7 @@ sequenceDiagram
               <h3>applyAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:122:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:135:1</code
                 >
               </p>
               <p>Apply one exact resource through standard input so values never enter argv.</p>
@@ -3678,7 +3904,7 @@ sequenceDiagram
               <h3>deleteAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:135:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:148:1</code
                 >
               </p>
               <p>Delete one exact resource identity and tolerate an already absent resource.</p>
@@ -3690,7 +3916,7 @@ sequenceDiagram
               <h3>observeAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:153:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:166:1</code
                 >
               </p>
               <p>
@@ -3699,15 +3925,27 @@ sequenceDiagram
             </article>
             <article
               class="item"
-              data-search="waitUntilReadyAsync src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts Poll live resource state until ready, terminal failure or timeout."
+              data-search="waitUntilReadyAsync src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts Poll live resource state until ready, persistent failure or timeout."
             >
               <h3>waitUntilReadyAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:175:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:188:1</code
                 >
               </p>
-              <p>Poll live resource state until ready, terminal failure or timeout.</p>
+              <p>Poll live resource state until ready, persistent failure or timeout.</p>
+            </article>
+            <article
+              class="item"
+              data-search="pollReadinessAsync src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts Poll one resource while preserving a bounded CrashLoopBackOff recovery window."
+            >
+              <h3>pollReadinessAsync</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:207:1</code
+                >
+              </p>
+              <p>Poll one resource while preserving a bounded CrashLoopBackOff recovery window.</p>
             </article>
             <article
               class="item"
@@ -3716,7 +3954,7 @@ sequenceDiagram
               <h3>ensureSuccess</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:196:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:253:1</code
                 >
               </p>
               <p>Throw a sanitized failure that never includes stdin, stdout or stderr content.</p>
@@ -3728,7 +3966,7 @@ sequenceDiagram
               <h3>signalOption</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:201:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:258:1</code
                 >
               </p>
               <p>Build an optional signal bag without assigning undefined.</p>
@@ -3740,7 +3978,7 @@ sequenceDiagram
               <h3>delayAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:206:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:263:1</code
                 >
               </p>
               <p>Wait between API observations and abort promptly when requested.</p>
@@ -3752,7 +3990,7 @@ sequenceDiagram
               <h3>onAbort</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:213:11</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:270:11</code
                 >
               </p>
               <p class="empty">No description available.</p>
@@ -3764,7 +4002,7 @@ sequenceDiagram
               <h3>abortError</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:226:1</code
+                  >src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts:283:1</code
                 >
               </p>
               <p>Normalize an AbortSignal reason to an Error for predictable rejection handling.</p>
@@ -3861,9 +4099,21 @@ sequenceDiagram
             >
               <h3>labelsInclude</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:65:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:58:1</code>
               </p>
               <p>Match a required subset of labels without dynamic object-property access.</p>
+            </article>
+            <article
+              class="item"
+              data-search="observeDeployment src/features/workload-reconciliation/adapters/kubectlResource.ts Map Deployment replicas, generation and terminal rollout conditions to readiness."
+            >
+              <h3>observeDeployment</h3>
+              <p class="muted">
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:70:1</code>
+              </p>
+              <p>
+                Map Deployment replicas, generation and terminal rollout conditions to readiness.
+              </p>
             </article>
             <article
               class="item"
@@ -3871,7 +4121,7 @@ sequenceDiagram
             >
               <h3>parseComparisonResource</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:77:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:90:1</code>
               </p>
               <p>
                 Prefer kubectl&#39;s exact last-applied shape to avoid server-default drift during
@@ -3884,7 +4134,7 @@ sequenceDiagram
             >
               <h3>readLastApplied</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:88:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:101:1</code>
               </p>
               <p>Read kubectl&#39;s comparison annotation before stripping bookkeeping metadata.</p>
             </article>
@@ -3894,9 +4144,22 @@ sequenceDiagram
             >
               <h3>parseResource</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:98:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:111:1</code>
               </p>
               <p>Parse the generic resource fields owned by the shared Kubernetes driver.</p>
+            </article>
+            <article
+              class="item"
+              data-search="readDeploymentFailure src/features/workload-reconciliation/adapters/kubectlResource.ts Read one terminal Deployment condition without exposing provider-controlled messages."
+            >
+              <h3>readDeploymentFailure</h3>
+              <p class="muted">
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:134:1</code>
+              </p>
+              <p>
+                Read one terminal Deployment condition without exposing provider-controlled
+                messages.
+              </p>
             </article>
             <article
               class="item"
@@ -3904,7 +4167,7 @@ sequenceDiagram
             >
               <h3>readPublicOutputs</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:121:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:155:1</code>
               </p>
               <p>
                 Read only endpoint values that Kubernetes explicitly exposes as public routing
@@ -3913,13 +4176,13 @@ sequenceDiagram
             </article>
             <article
               class="item"
-              data-search="withOutputs src/features/workload-reconciliation/adapters/kubectlResource.ts Add optional public outputs to a resource observation."
+              data-search="withOutputs src/features/workload-reconciliation/adapters/kubectlResource.ts Add optional public outputs and sanitized detail to a resource observation."
             >
               <h3>withOutputs</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:142:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:176:1</code>
               </p>
-              <p>Add optional public outputs to a resource observation.</p>
+              <p>Add optional public outputs and sanitized detail to a resource observation.</p>
             </article>
             <article
               class="item"
@@ -3927,7 +4190,7 @@ sequenceDiagram
             >
               <h3>withoutLastApplied</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:150:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:189:1</code>
               </p>
               <p>
                 Remove kubectl&#39;s bookkeeping annotation from driver-owned comparison metadata.
@@ -3939,7 +4202,7 @@ sequenceDiagram
             >
               <h3>isRecord</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:159:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:198:1</code>
               </p>
               <p>Narrow an unknown value to a plain record.</p>
             </article>
@@ -3949,7 +4212,7 @@ sequenceDiagram
             >
               <h3>isUnknownArray</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:164:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:203:1</code>
               </p>
               <p>Narrow an unknown value to an array whose entries remain unknown.</p>
             </article>
@@ -3959,7 +4222,7 @@ sequenceDiagram
             >
               <h3>getValue</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:169:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:208:1</code>
               </p>
               <p>
                 Read a property through entry iteration to avoid trusting dynamic object prototypes.
@@ -3971,7 +4234,7 @@ sequenceDiagram
             >
               <h3>readString</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:176:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:215:1</code>
               </p>
               <p>Read one required string field.</p>
             </article>
@@ -3981,7 +4244,7 @@ sequenceDiagram
             >
               <h3>optionalString</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:185:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:224:1</code>
               </p>
               <p>Read one optional string field.</p>
             </article>
@@ -3991,7 +4254,7 @@ sequenceDiagram
             >
               <h3>readRecord</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:196:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:235:1</code>
               </p>
               <p>Read one required record field.</p>
             </article>
@@ -4001,7 +4264,7 @@ sequenceDiagram
             >
               <h3>optionalRecord</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:206:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:245:1</code>
               </p>
               <p>Read one optional record field.</p>
             </article>
@@ -4011,7 +4274,7 @@ sequenceDiagram
             >
               <h3>readNumber</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:217:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:256:1</code>
               </p>
               <p>Read one optional finite number field.</p>
             </article>
@@ -4021,7 +4284,7 @@ sequenceDiagram
             >
               <h3>optionalStringRecord</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:226:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:265:1</code>
               </p>
               <p>Read one optional string record field.</p>
             </article>
@@ -4031,9 +4294,59 @@ sequenceDiagram
             >
               <h3>getStringValue</h3>
               <p class="muted">
-                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:244:1</code>
+                <code>src/features/workload-reconciliation/adapters/kubectlResource.ts:283:1</code>
               </p>
               <p>Read a string value from a validated string record.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-features-workload-reconciliation-adapters-observekubectldeploymentpodfailureasync-ts"
+          class="view"
+          data-view="src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>
+              src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts
+            </h2>
+            <article
+              class="item"
+              data-search="observeKubectlDeploymentPodFailureAsync src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts Inspect Pods belonging to one pending Deployment for actionable startup failures."
+            >
+              <h3>observeKubectlDeploymentPodFailureAsync</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts:46:1</code
+                >
+              </p>
+              <p>
+                Inspect Pods belonging to one pending Deployment for actionable startup failures.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="parseDeploymentPodFailure src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts Parse only sanitized Pod identity, phase and waiting-reason fields."
+            >
+              <h3>parseDeploymentPodFailure</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts:68:1</code
+                >
+              </p>
+              <p>Parse only sanitized Pod identity, phase and waiting-reason fields.</p>
+            </article>
+            <article
+              class="item"
+              data-search="parsePodFailureLine src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts Map one sanitized Pod status line to a readiness failure when applicable."
+            >
+              <h3>parsePodFailureLine</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts:76:1</code
+                >
+              </p>
+              <p>Map one sanitized Pod status line to a readiness failure when applicable.</p>
             </article>
           </section>
         </section>
@@ -4061,12 +4374,26 @@ sequenceDiagram
             </article>
             <article
               class="item"
+              data-search="createInitContainers src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts Seed explicitly opted-in persistent volumes from the workload image before startup."
+            >
+              <h3>createInitContainers</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:75:1</code
+                >
+              </p>
+              <p>
+                Seed explicitly opted-in persistent volumes from the workload image before startup.
+              </p>
+            </article>
+            <article
+              class="item"
               data-search="createContainer src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts Create the portable container projection."
             >
               <h3>createContainer</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:58:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:100:1</code
                 >
               </p>
               <p>Create the portable container projection.</p>
@@ -4078,7 +4405,7 @@ sequenceDiagram
               <h3>createEnvironment</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:84:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:127:1</code
                 >
               </p>
               <p>Create literal and secret-backed environment entries.</p>
@@ -4090,7 +4417,7 @@ sequenceDiagram
               <h3>createResources</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:98:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:141:1</code
                 >
               </p>
               <p>Create Kubernetes request quantities from portable workload resources.</p>
@@ -4102,7 +4429,7 @@ sequenceDiagram
               <h3>createProbe</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:110:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:153:1</code
                 >
               </p>
               <p>Project portable health intent into Kubernetes probe fields.</p>
@@ -4114,7 +4441,7 @@ sequenceDiagram
               <h3>createVolumes</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:124:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:167:1</code
                 >
               </p>
               <p>Create pod volumes for files and persistence.</p>
@@ -4126,7 +4453,7 @@ sequenceDiagram
               <h3>createVolumeMounts</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:144:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:187:1</code
                 >
               </p>
               <p>Create exact file and persistence mount points.</p>
@@ -4138,7 +4465,7 @@ sequenceDiagram
               <h3>isEnvironmentSecret</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:169:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:212:1</code
                 >
               </p>
               <p>Narrow a secret target to an environment entry.</p>
@@ -4150,7 +4477,7 @@ sequenceDiagram
               <h3>isFileSecret</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:176:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:219:1</code
                 >
               </p>
               <p>Narrow a secret target to a mounted file.</p>
@@ -4535,17 +4862,83 @@ sequenceDiagram
             </h2>
             <article
               class="item"
-              data-search="reconcileKubernetesResourcesAsync src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts Apply desired changes and prune only obsolete, non-persistent Infra-owned resources."
+              data-search="reconcileKubernetesResourcesAsync src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts Apply desired changes dependency-first and prune only obsolete, non-persistent Infra resources."
             >
               <h3>reconcileKubernetesResourcesAsync</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts:17:1</code
+                  >src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts:27:1</code
                 >
               </p>
               <p>
-                Apply desired changes and prune only obsolete, non-persistent Infra-owned resources.
+                Apply desired changes dependency-first and prune only obsolete, non-persistent Infra
+                resources.
               </p>
+            </article>
+            <article
+              class="item"
+              data-search="applyKubernetesChangesAsync src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts Apply prepared changes while enforcing readiness-relevant dependency gates."
+            >
+              <h3>applyKubernetesChangesAsync</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts:72:1</code
+                >
+              </p>
+              <p>Apply prepared changes while enforcing readiness-relevant dependency gates.</p>
+            </article>
+            <article
+              class="item"
+              data-search="waitForDependenciesAsync src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts Wait for readiness-relevant dependencies before applying one desired Kubernetes resource."
+            >
+              <h3>waitForDependenciesAsync</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts:112:1</code
+                >
+              </p>
+              <p>
+                Wait for readiness-relevant dependencies before applying one desired Kubernetes
+                resource.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="waitForDependencyAsync src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts Wait for one dependency within the reconciliation pass shared readiness deadline."
+            >
+              <h3>waitForDependencyAsync</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts:133:1</code
+                >
+              </p>
+              <p>
+                Wait for one dependency within the reconciliation pass shared readiness deadline.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="createDependencyReadinessDiagnostic src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts Create an actionable diagnostic for a dependency that did not become ready."
+            >
+              <h3>createDependencyReadinessDiagnostic</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts:153:1</code
+                >
+              </p>
+              <p>Create an actionable diagnostic for a dependency that did not become ready.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createReconcileFailure src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts Create the generic failure returned when reconciliation throws unexpectedly."
+            >
+              <h3>createReconcileFailure</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts:167:1</code
+                >
+              </p>
+              <p>Create the generic failure returned when reconciliation throws unexpectedly.</p>
             </article>
           </section>
         </section>
@@ -4722,6 +5115,42 @@ sequenceDiagram
                 >
               </p>
               <p>Wait dependency-first for required Kubernetes resources to report ready.</p>
+            </article>
+            <article
+              class="item"
+              data-search="waitForDesiredResourceAsync src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts Wait for one resource within the remaining shared readiness deadline."
+            >
+              <h3>waitForDesiredResourceAsync</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts:55:1</code
+                >
+              </p>
+              <p>Wait for one resource within the remaining shared readiness deadline.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createReadinessStatus src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts Map one observation to the resource status returned by the driver."
+            >
+              <h3>createReadinessStatus</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts:75:1</code
+                >
+              </p>
+              <p>Map one observation to the resource status returned by the driver.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createReadinessDiagnostic src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts Create the first actionable readiness diagnostic for dependency-first failure."
+            >
+              <h3>createReadinessDiagnostic</h3>
+              <p class="muted">
+                <code
+                  >src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts:87:1</code
+                >
+              </p>
+              <p>Create the first actionable readiness diagnostic for dependency-first failure.</p>
             </article>
           </section>
         </section>
@@ -5031,7 +5460,7 @@ sequenceDiagram
               data-search="success src/kubectlApi.test.ts Create a successful command fixture with JSON output."
             >
               <h3>success</h3>
-              <p class="muted"><code>src/kubectlApi.test.ts:202:1</code></p>
+              <p class="muted"><code>src/kubectlApi.test.ts:203:1</code></p>
               <p>Create a successful command fixture with JSON output.</p>
             </article>
             <article
@@ -5039,7 +5468,7 @@ sequenceDiagram
               data-search="createResource src/kubectlApi.test.ts Create one live Kubernetes API fixture with optional server-owned fields."
             >
               <h3>createResource</h3>
-              <p class="muted"><code>src/kubectlApi.test.ts:211:1</code></p>
+              <p class="muted"><code>src/kubectlApi.test.ts:212:1</code></p>
               <p>Create one live Kubernetes API fixture with optional server-owned fields.</p>
             </article>
             <article
@@ -5047,7 +5476,7 @@ sequenceDiagram
               data-search="withoutStatus src/kubectlApi.test.ts Remove server-owned status fields from a resource fixture."
             >
               <h3>withoutStatus</h3>
-              <p class="muted"><code>src/kubectlApi.test.ts:243:1</code></p>
+              <p class="muted"><code>src/kubectlApi.test.ts:244:1</code></p>
               <p>Remove server-owned status fields from a resource fixture.</p>
             </article>
           </section>
@@ -5083,6 +5512,32 @@ sequenceDiagram
               <h3>referencesEqual</h3>
               <p class="muted"><code>src/kubernetesApi.test.ts:90:1</code></p>
               <p>Compare resources by standard Kubernetes identity fields.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-kubernetesdependencyreconciliation-test-ts"
+          class="view"
+          data-view="src/kubernetesDependencyReconciliation.test.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/kubernetesDependencyReconciliation.test.ts</h2>
+            <article
+              class="item"
+              data-search="createDependencyRequest src/kubernetesDependencyReconciliation.test.ts Create two workloads whose second Deployment requires the first to be ready."
+            >
+              <h3>createDependencyRequest</h3>
+              <p class="muted"><code>src/kubernetesDependencyReconciliation.test.ts:71:1</code></p>
+              <p>Create two workloads whose second Deployment requires the first to be ready.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createExecutionContext src/kubernetesDependencyReconciliation.test.ts Create one local execution context for dependency reconciliation tests."
+            >
+              <h3>createExecutionContext</h3>
+              <p class="muted"><code>src/kubernetesDependencyReconciliation.test.ts:90:1</code></p>
+              <p>Create one local execution context for dependency reconciliation tests.</p>
             </article>
           </section>
         </section>
@@ -5137,6 +5592,85 @@ sequenceDiagram
           </section>
         </section>
         <section
+          id="view-src-kubernetespublishedports-test-ts"
+          class="view"
+          data-view="src/kubernetesPublishedPorts.test.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/kubernetesPublishedPorts.test.ts</h2>
+            <article
+              class="item"
+              data-search="createRequest src/kubernetesPublishedPorts.test.ts Create the minimal driver request for one workload projection."
+            >
+              <h3>createRequest</h3>
+              <p class="muted"><code>src/kubernetesPublishedPorts.test.ts:26:1</code></p>
+              <p>Create the minimal driver request for one workload projection.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-kubernetesreadiness-test-ts"
+          class="view"
+          data-view="src/kubernetesReadiness.test.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/kubernetesReadiness.test.ts</h2>
+            <article
+              class="item"
+              data-search="createRequest src/kubernetesReadiness.test.ts Create one readiness request containing dependency-ordered public persistent workload resources."
+            >
+              <h3>createRequest</h3>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:189:1</code></p>
+              <p>
+                Create one readiness request containing dependency-ordered public persistent
+                workload resources.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="createPendingDeployment src/kubernetesReadiness.test.ts Create one pending live Deployment fixture."
+            >
+              <h3>createPendingDeployment</h3>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:218:1</code></p>
+              <p>Create one pending live Deployment fixture.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createReadyDeployment src/kubernetesReadiness.test.ts Create one ready live Deployment fixture."
+            >
+              <h3>createReadyDeployment</h3>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:235:1</code></p>
+              <p>Create one ready live Deployment fixture.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createDeploymentReference src/kubernetesReadiness.test.ts Create the matching Deployment reference."
+            >
+              <h3>createDeploymentReference</h3>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:243:1</code></p>
+              <p>Create the matching Deployment reference.</p>
+            </article>
+            <article
+              class="item"
+              data-search="success src/kubernetesReadiness.test.ts Create one successful command fixture with JSON or preformatted output."
+            >
+              <h3>success</h3>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:253:1</code></p>
+              <p>Create one successful command fixture with JSON or preformatted output.</p>
+            </article>
+            <article
+              class="item"
+              data-search="delayAsync src/kubernetesReadiness.test.ts Wait for the requested deterministic test interval."
+            >
+              <h3>delayAsync</h3>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:262:1</code></p>
+              <p>Wait for the requested deterministic test interval.</p>
+            </article>
+          </section>
+        </section>
+        <section
           id="view-src-kubernetestemplates-test-ts"
           class="view"
           data-view="src/kubernetesTemplates.test.ts"
@@ -5167,6 +5701,32 @@ sequenceDiagram
               <h3>createSecretReference</h3>
               <p class="muted"><code>src/kubernetesTemplates.test.ts:100:1</code></p>
               <p>Create a canonical test secret reference.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-kubernetesvolumeseeding-test-ts"
+          class="view"
+          data-view="src/kubernetesVolumeSeeding.test.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/kubernetesVolumeSeeding.test.ts</h2>
+            <article
+              class="item"
+              data-search="createWorkload src/kubernetesVolumeSeeding.test.ts Create a portable persistence fixture with optional image initialization."
+            >
+              <h3>createWorkload</h3>
+              <p class="muted"><code>src/kubernetesVolumeSeeding.test.ts:60:1</code></p>
+              <p>Create a portable persistence fixture with optional image initialization.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createExecutionContext src/kubernetesVolumeSeeding.test.ts Create the runtime-neutral execution context used by volume projection tests."
+            >
+              <h3>createExecutionContext</h3>
+              <p class="muted"><code>src/kubernetesVolumeSeeding.test.ts:77:1</code></p>
+              <p>Create the runtime-neutral execution context used by volume projection tests.</p>
             </article>
           </section>
         </section>

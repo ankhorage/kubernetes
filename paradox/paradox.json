@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.5.0",
+      "value": "v0.7.3",
       "color": "cb3837"
     },
     {
@@ -80,6 +80,7 @@
       "dependencies": [
         "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
         "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts",
         "src/types/kubectl.ts",
         "src/types/kubernetesResources.ts"
       ],
@@ -102,6 +103,12 @@
         "parseKubectlResourceList",
         "parseOptionalKubectlResource"
       ]
+    },
+    {
+      "path": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/types/kubectl.ts", "src/types/kubernetesResources.ts"],
+      "exports": ["observeKubectlDeploymentPodFailureAsync"]
     },
     {
       "path": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
@@ -233,9 +240,11 @@
       "dependencies": [
         "src/features/workload-reconciliation/application/use-cases/getKubernetesOutputsAsync.ts",
         "src/features/workload-reconciliation/application/use-cases/prepareKubernetesChangesAsync.ts",
+        "src/features/workload-reconciliation/constants.ts",
         "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
         "src/features/workload-reconciliation/utils/readKubernetesOwnedResource.ts",
-        "src/types/kubernetesDriver.ts"
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
       ],
       "exports": ["reconcileKubernetesResourcesAsync"]
     },
@@ -271,8 +280,10 @@
       "isEntrypoint": false,
       "dependencies": [
         "src/features/workload-reconciliation/application/use-cases/projectKubernetesResourcesAsync.ts",
+        "src/features/workload-reconciliation/constants.ts",
         "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
-        "src/types/kubernetesDriver.ts"
+        "src/types/kubernetesDriver.ts",
+        "src/types/kubernetesResources.ts"
       ],
       "exports": ["waitForKubernetesReadinessAsync"]
     },
@@ -295,7 +306,11 @@
       "path": "src/features/workload-reconciliation/constants.ts",
       "isEntrypoint": false,
       "dependencies": [],
-      "exports": ["KUBERNETES_OWNERSHIP"]
+      "exports": [
+        "KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS",
+        "KUBERNETES_OWNERSHIP",
+        "KUBERNETES_READINESS_KINDS"
+      ]
     },
     {
       "path": "src/features/workload-reconciliation/utils/areKubernetesResourcesEquivalent.ts",
@@ -414,15 +429,39 @@
       "exports": ["FakeKubernetesApi"]
     },
     {
+      "path": "src/kubernetesDependencyReconciliation.test.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
+      "exports": []
+    },
+    {
       "path": "src/kubernetesDriver.test.ts",
       "isEntrypoint": false,
       "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
       "exports": []
     },
     {
+      "path": "src/kubernetesPublishedPorts.test.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
+      "exports": []
+    },
+    {
+      "path": "src/kubernetesReadiness.test.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/index.ts"],
+      "exports": []
+    },
+    {
       "path": "src/kubernetesTemplates.test.ts",
       "isEntrypoint": false,
       "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
+      "exports": []
+    },
+    {
+      "path": "src/kubernetesVolumeSeeding.test.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/index.ts"],
       "exports": []
     },
     {
@@ -477,7 +516,7 @@
       "modulePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 39,
+        "line": 41,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -541,7 +580,7 @@
       "modulePath": "src/types/kubectl.ts",
       "sourceLocation": {
         "filePath": "src/types/kubectl.ts",
-        "line": 29,
+        "line": 31,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -571,6 +610,13 @@
           "kind": "property",
           "type": "string",
           "required": true,
+          "description": null
+        },
+        {
+          "name": "crashLoopRecoveryGraceSeconds",
+          "kind": "property",
+          "type": "number | undefined",
+          "required": false,
           "description": null
         },
         {
@@ -1348,7 +1394,7 @@
       "description": "Create a concrete Kubernetes API backed by an authenticated kubectl context.\n\nCommands are executed as argv arrays without a shell. Secret manifests are supplied only on\nstandard input and are never included in errors or observations.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 39,
+        "line": 41,
         "column": 1
       }
     },
@@ -1357,7 +1403,7 @@
       "description": "Bind an executable and exact kubeconfig context to every kubectl invocation.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 68,
+        "line": 81,
         "column": 1
       }
     },
@@ -1366,7 +1412,7 @@
       "description": "List only resources selected by the driver's namespace and ownership labels.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 85,
+        "line": 98,
         "column": 1
       }
     },
@@ -1375,7 +1421,7 @@
       "description": "Apply one exact resource through standard input so values never enter argv.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 122,
+        "line": 135,
         "column": 1
       }
     },
@@ -1384,7 +1430,7 @@
       "description": "Delete one exact resource identity and tolerate an already absent resource.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 135,
+        "line": 148,
         "column": 1
       }
     },
@@ -1393,16 +1439,25 @@
       "description": "Read one live resource and map its standard readiness and public endpoint state.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 153,
+        "line": 166,
         "column": 1
       }
     },
     {
       "name": "waitUntilReadyAsync",
-      "description": "Poll live resource state until ready, terminal failure or timeout.",
+      "description": "Poll live resource state until ready, persistent failure or timeout.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 175,
+        "line": 188,
+        "column": 1
+      }
+    },
+    {
+      "name": "pollReadinessAsync",
+      "description": "Poll one resource while preserving a bounded CrashLoopBackOff recovery window.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "line": 207,
         "column": 1
       }
     },
@@ -1411,7 +1466,7 @@
       "description": "Throw a sanitized failure that never includes stdin, stdout or stderr content.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 196,
+        "line": 253,
         "column": 1
       }
     },
@@ -1420,7 +1475,7 @@
       "description": "Build an optional signal bag without assigning undefined.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 201,
+        "line": 258,
         "column": 1
       }
     },
@@ -1429,7 +1484,7 @@
       "description": "Wait between API observations and abort promptly when requested.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 206,
+        "line": 263,
         "column": 1
       }
     },
@@ -1438,7 +1493,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 213,
+        "line": 270,
         "column": 11
       }
     },
@@ -1447,7 +1502,7 @@
       "description": "Normalize an AbortSignal reason to an Error for predictable rejection handling.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-        "line": 226,
+        "line": 283,
         "column": 1
       }
     },
@@ -1510,7 +1565,16 @@
       "description": "Match a required subset of labels without dynamic object-property access.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 65,
+        "line": 58,
+        "column": 1
+      }
+    },
+    {
+      "name": "observeDeployment",
+      "description": "Map Deployment replicas, generation and terminal rollout conditions to readiness.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 70,
         "column": 1
       }
     },
@@ -1519,7 +1583,7 @@
       "description": "Prefer kubectl's exact last-applied shape to avoid server-default drift during planning.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 77,
+        "line": 90,
         "column": 1
       }
     },
@@ -1528,7 +1592,7 @@
       "description": "Read kubectl's comparison annotation before stripping bookkeeping metadata.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 88,
+        "line": 101,
         "column": 1
       }
     },
@@ -1537,7 +1601,16 @@
       "description": "Parse the generic resource fields owned by the shared Kubernetes driver.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 98,
+        "line": 111,
+        "column": 1
+      }
+    },
+    {
+      "name": "readDeploymentFailure",
+      "description": "Read one terminal Deployment condition without exposing provider-controlled messages.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "line": 134,
         "column": 1
       }
     },
@@ -1546,16 +1619,16 @@
       "description": "Read only endpoint values that Kubernetes explicitly exposes as public routing state.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 121,
+        "line": 155,
         "column": 1
       }
     },
     {
       "name": "withOutputs",
-      "description": "Add optional public outputs to a resource observation.",
+      "description": "Add optional public outputs and sanitized detail to a resource observation.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 142,
+        "line": 176,
         "column": 1
       }
     },
@@ -1564,7 +1637,7 @@
       "description": "Remove kubectl's bookkeeping annotation from driver-owned comparison metadata.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 150,
+        "line": 189,
         "column": 1
       }
     },
@@ -1573,7 +1646,7 @@
       "description": "Narrow an unknown value to a plain record.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 159,
+        "line": 198,
         "column": 1
       }
     },
@@ -1582,7 +1655,7 @@
       "description": "Narrow an unknown value to an array whose entries remain unknown.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 164,
+        "line": 203,
         "column": 1
       }
     },
@@ -1591,7 +1664,7 @@
       "description": "Read a property through entry iteration to avoid trusting dynamic object prototypes.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 169,
+        "line": 208,
         "column": 1
       }
     },
@@ -1600,7 +1673,7 @@
       "description": "Read one required string field.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 176,
+        "line": 215,
         "column": 1
       }
     },
@@ -1609,7 +1682,7 @@
       "description": "Read one optional string field.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 185,
+        "line": 224,
         "column": 1
       }
     },
@@ -1618,7 +1691,7 @@
       "description": "Read one required record field.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 196,
+        "line": 235,
         "column": 1
       }
     },
@@ -1627,7 +1700,7 @@
       "description": "Read one optional record field.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 206,
+        "line": 245,
         "column": 1
       }
     },
@@ -1636,7 +1709,7 @@
       "description": "Read one optional finite number field.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 217,
+        "line": 256,
         "column": 1
       }
     },
@@ -1645,7 +1718,7 @@
       "description": "Read one optional string record field.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 226,
+        "line": 265,
         "column": 1
       }
     },
@@ -1654,7 +1727,34 @@
       "description": "Read a string value from a validated string record.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
-        "line": 244,
+        "line": 283,
+        "column": 1
+      }
+    },
+    {
+      "name": "observeKubectlDeploymentPodFailureAsync",
+      "description": "Inspect Pods belonging to one pending Deployment for actionable startup failures.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts",
+        "line": 46,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseDeploymentPodFailure",
+      "description": "Parse only sanitized Pod identity, phase and waiting-reason fields.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts",
+        "line": 68,
+        "column": 1
+      }
+    },
+    {
+      "name": "parsePodFailureLine",
+      "description": "Map one sanitized Pod status line to a readiness failure when applicable.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts",
+        "line": 76,
         "column": 1
       }
     },
@@ -1668,11 +1768,20 @@
       }
     },
     {
+      "name": "createInitContainers",
+      "description": "Seed explicitly opted-in persistent volumes from the workload image before startup.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
+        "line": 75,
+        "column": 1
+      }
+    },
+    {
       "name": "createContainer",
       "description": "Create the portable container projection.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 58,
+        "line": 100,
         "column": 1
       }
     },
@@ -1681,7 +1790,7 @@
       "description": "Create literal and secret-backed environment entries.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 84,
+        "line": 127,
         "column": 1
       }
     },
@@ -1690,7 +1799,7 @@
       "description": "Create Kubernetes request quantities from portable workload resources.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 98,
+        "line": 141,
         "column": 1
       }
     },
@@ -1699,7 +1808,7 @@
       "description": "Project portable health intent into Kubernetes probe fields.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 110,
+        "line": 153,
         "column": 1
       }
     },
@@ -1708,7 +1817,7 @@
       "description": "Create pod volumes for files and persistence.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 124,
+        "line": 167,
         "column": 1
       }
     },
@@ -1717,7 +1826,7 @@
       "description": "Create exact file and persistence mount points.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 144,
+        "line": 187,
         "column": 1
       }
     },
@@ -1726,7 +1835,7 @@
       "description": "Narrow a secret target to an environment entry.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 169,
+        "line": 212,
         "column": 1
       }
     },
@@ -1735,7 +1844,7 @@
       "description": "Narrow a secret target to a mounted file.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 176,
+        "line": 219,
         "column": 1
       }
     },
@@ -1930,10 +2039,55 @@
     },
     {
       "name": "reconcileKubernetesResourcesAsync",
-      "description": "Apply desired changes and prune only obsolete, non-persistent Infra-owned resources.",
+      "description": "Apply desired changes dependency-first and prune only obsolete, non-persistent Infra resources.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
-        "line": 17,
+        "line": 27,
+        "column": 1
+      }
+    },
+    {
+      "name": "applyKubernetesChangesAsync",
+      "description": "Apply prepared changes while enforcing readiness-relevant dependency gates.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "line": 72,
+        "column": 1
+      }
+    },
+    {
+      "name": "waitForDependenciesAsync",
+      "description": "Wait for readiness-relevant dependencies before applying one desired Kubernetes resource.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "line": 112,
+        "column": 1
+      }
+    },
+    {
+      "name": "waitForDependencyAsync",
+      "description": "Wait for one dependency within the reconciliation pass shared readiness deadline.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "line": 133,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDependencyReadinessDiagnostic",
+      "description": "Create an actionable diagnostic for a dependency that did not become ready.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "line": 153,
+        "column": 1
+      }
+    },
+    {
+      "name": "createReconcileFailure",
+      "description": "Create the generic failure returned when reconciliation throws unexpectedly.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "line": 167,
         "column": 1
       }
     },
@@ -2024,6 +2178,33 @@
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
         "line": 19,
+        "column": 1
+      }
+    },
+    {
+      "name": "waitForDesiredResourceAsync",
+      "description": "Wait for one resource within the remaining shared readiness deadline.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "line": 55,
+        "column": 1
+      }
+    },
+    {
+      "name": "createReadinessStatus",
+      "description": "Map one observation to the resource status returned by the driver.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "line": 75,
+        "column": 1
+      }
+    },
+    {
+      "name": "createReadinessDiagnostic",
+      "description": "Create the first actionable readiness diagnostic for dependency-first failure.",
+      "sourceLocation": {
+        "filePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "line": 87,
         "column": 1
       }
     },
@@ -2167,7 +2348,7 @@
       "description": "Create a successful command fixture with JSON output.",
       "sourceLocation": {
         "filePath": "src/kubectlApi.test.ts",
-        "line": 202,
+        "line": 203,
         "column": 1
       }
     },
@@ -2176,7 +2357,7 @@
       "description": "Create one live Kubernetes API fixture with optional server-owned fields.",
       "sourceLocation": {
         "filePath": "src/kubectlApi.test.ts",
-        "line": 211,
+        "line": 212,
         "column": 1
       }
     },
@@ -2185,7 +2366,7 @@
       "description": "Remove server-owned status fields from a resource fixture.",
       "sourceLocation": {
         "filePath": "src/kubectlApi.test.ts",
-        "line": 243,
+        "line": 244,
         "column": 1
       }
     },
@@ -2212,6 +2393,24 @@
       "description": "Compare resources by standard Kubernetes identity fields.",
       "sourceLocation": {
         "filePath": "src/kubernetesApi.test.ts",
+        "line": 90,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDependencyRequest",
+      "description": "Create two workloads whose second Deployment requires the first to be ready.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesDependencyReconciliation.test.ts",
+        "line": 71,
+        "column": 1
+      }
+    },
+    {
+      "name": "createExecutionContext",
+      "description": "Create one local execution context for dependency reconciliation tests.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesDependencyReconciliation.test.ts",
         "line": 90,
         "column": 1
       }
@@ -2262,6 +2461,69 @@
       }
     },
     {
+      "name": "createRequest",
+      "description": "Create the minimal driver request for one workload projection.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesPublishedPorts.test.ts",
+        "line": 26,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRequest",
+      "description": "Create one readiness request containing dependency-ordered public persistent workload resources.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesReadiness.test.ts",
+        "line": 189,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPendingDeployment",
+      "description": "Create one pending live Deployment fixture.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesReadiness.test.ts",
+        "line": 218,
+        "column": 1
+      }
+    },
+    {
+      "name": "createReadyDeployment",
+      "description": "Create one ready live Deployment fixture.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesReadiness.test.ts",
+        "line": 235,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDeploymentReference",
+      "description": "Create the matching Deployment reference.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesReadiness.test.ts",
+        "line": 243,
+        "column": 1
+      }
+    },
+    {
+      "name": "success",
+      "description": "Create one successful command fixture with JSON or preformatted output.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesReadiness.test.ts",
+        "line": 253,
+        "column": 1
+      }
+    },
+    {
+      "name": "delayAsync",
+      "description": "Wait for the requested deterministic test interval.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesReadiness.test.ts",
+        "line": 262,
+        "column": 1
+      }
+    },
+    {
       "name": "createTemplateRequest",
       "description": "Create a runtime request covering public and privileged template segments.",
       "sourceLocation": {
@@ -2285,6 +2547,24 @@
       "sourceLocation": {
         "filePath": "src/kubernetesTemplates.test.ts",
         "line": 100,
+        "column": 1
+      }
+    },
+    {
+      "name": "createWorkload",
+      "description": "Create a portable persistence fixture with optional image initialization.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesVolumeSeeding.test.ts",
+        "line": 60,
+        "column": 1
+      }
+    },
+    {
+      "name": "createExecutionContext",
+      "description": "Create the runtime-neutral execution context used by volume projection tests.",
+      "sourceLocation": {
+        "filePath": "src/kubernetesVolumeSeeding.test.ts",
+        "line": 77,
         "column": 1
       }
     }
@@ -2363,6 +2643,16 @@
         "sourcePath": "src/kubernetesApi.test.ts"
       },
       {
+        "fromPath": "src/kubernetesDependencyReconciliation.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesDependencyReconciliation.test.ts",
+        "toPath": "src/kubernetesApi.test.ts",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
         "fromPath": "src/kubernetesDriver.test.ts",
         "toPath": "src/index.ts",
         "sourcePath": "src/kubernetesDriver.test.ts"
@@ -2373,6 +2663,21 @@
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
+        "fromPath": "src/kubernetesPublishedPorts.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesPublishedPorts.test.ts",
+        "toPath": "src/kubernetesApi.test.ts",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesReadiness.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
         "fromPath": "src/kubernetesTemplates.test.ts",
         "toPath": "src/index.ts",
         "sourcePath": "src/kubernetesTemplates.test.ts"
@@ -2381,6 +2686,11 @@
         "fromPath": "src/kubernetesTemplates.test.ts",
         "toPath": "src/kubernetesApi.test.ts",
         "sourcePath": "src/kubernetesTemplates.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesVolumeSeeding.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
       },
       {
         "fromPath": "examples/basic-usage/index.ts",
@@ -2418,6 +2728,11 @@
         "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
       },
       {
+        "fromPath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
+        "toPath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
         "fromPath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts",
         "toPath": "src/types/kubectl.ts",
         "sourcePath": "src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts"
@@ -2426,6 +2741,16 @@
         "fromPath": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
         "toPath": "src/types/kubernetesResources.ts",
         "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts",
+        "toPath": "src/types/kubectl.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts"
       },
       {
         "fromPath": "src/features/workload-reconciliation/composition/createKubernetesDriver.ts",
@@ -2824,6 +3149,16 @@
       },
       {
         "fromPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
+        "toPath": "src/features/workload-reconciliation/constants.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts",
         "toPath": "src/features/workload-reconciliation/utils/getKubernetesResourceReference.ts",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
       },
@@ -2880,6 +3215,16 @@
       {
         "fromPath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
         "toPath": "src/types/kubernetesDriver.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "toPath": "src/types/kubernetesResources.ts",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromPath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts",
+        "toPath": "src/features/workload-reconciliation/constants.ts",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
       },
       {
@@ -2991,6 +3336,60 @@
         "sourcePath": "src/kubernetesApi.test.ts"
       },
       {
+        "fromSymbol": "src/kubernetesDependencyReconciliation.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDependencyReconciliation.test.ts",
+        "toSymbol": "createKubernetesDriver",
+        "callExpression": "createKubernetesDriver",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDependencyReconciliation.test.ts",
+        "toSymbol": "reconcileAsync",
+        "callExpression": "driver.reconcileAsync",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDependencyReconciliation.test.ts",
+        "toSymbol": "createDependencyRequest",
+        "callExpression": "createDependencyRequest",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesDependencyReconciliation.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromSymbol": "DependencyRecordingApi",
+        "toSymbol": "FakeKubernetesApi",
+        "callExpression": "super",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromSymbol": "applyAsync",
+        "toSymbol": "applyAsync",
+        "callExpression": "super.applyAsync",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromSymbol": "waitUntilReadyAsync",
+        "toSymbol": "waitUntilReadyAsync",
+        "callExpression": "super.waitUntilReadyAsync",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromSymbol": "createDependencyRequest",
+        "toSymbol": "createExecutionContext",
+        "callExpression": "createExecutionContext",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
         "fromSymbol": "src/kubernetesDriver.test.ts",
         "toSymbol": "it",
         "callExpression": "it",
@@ -3099,6 +3498,120 @@
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
+        "fromSymbol": "src/kubernetesPublishedPorts.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesPublishedPorts.test.ts",
+        "toSymbol": "createKubernetesDriver",
+        "callExpression": "createKubernetesDriver",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesPublishedPorts.test.ts",
+        "toSymbol": "projectAsync",
+        "callExpression": "driver.projectAsync",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesPublishedPorts.test.ts",
+        "toSymbol": "createRequest",
+        "callExpression": "createRequest",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesPublishedPorts.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "createKubernetesDriver",
+        "callExpression": "createKubernetesDriver",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "waitUntilReadyAsync",
+        "callExpression": "driver.waitUntilReadyAsync",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "createRequest",
+        "callExpression": "createRequest",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "success",
+        "callExpression": "success",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "createPendingDeployment",
+        "callExpression": "createPendingDeployment",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "createKubectlKubernetesApi",
+        "callExpression": "createKubectlKubernetesApi",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "waitUntilReadyAsync",
+        "callExpression": "api.waitUntilReadyAsync",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "createDeploymentReference",
+        "callExpression": "createDeploymentReference",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "createReadyDeployment",
+        "callExpression": "createReadyDeployment",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesReadiness.test.ts",
+        "toSymbol": "observeAsync",
+        "callExpression": "api.observeAsync",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "waitUntilReadyAsync",
+        "toSymbol": "delayAsync",
+        "callExpression": "delayAsync",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "createReadyDeployment",
+        "toSymbol": "createPendingDeployment",
+        "callExpression": "createPendingDeployment",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
         "fromSymbol": "src/kubernetesTemplates.test.ts",
         "toSymbol": "it",
         "callExpression": "it",
@@ -3145,6 +3658,36 @@
         "toSymbol": "createExecutionContext",
         "callExpression": "createExecutionContext",
         "sourcePath": "src/kubernetesTemplates.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesVolumeSeeding.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesVolumeSeeding.test.ts",
+        "toSymbol": "projectKubernetesResourcesAsync",
+        "callExpression": "projectKubernetesResourcesAsync",
+        "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesVolumeSeeding.test.ts",
+        "toSymbol": "createExecutionContext",
+        "callExpression": "createExecutionContext",
+        "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesVolumeSeeding.test.ts",
+        "toSymbol": "createWorkload",
+        "callExpression": "createWorkload",
+        "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesVolumeSeeding.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
       },
       {
         "fromSymbol": "examples/basic-usage/index.ts",
@@ -3298,14 +3841,32 @@
       },
       {
         "fromSymbol": "waitUntilReadyAsync",
+        "toSymbol": "pollReadinessAsync",
+        "callExpression": "pollReadinessAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "pollReadinessAsync",
         "toSymbol": "observeAsync",
         "callExpression": "observeAsync",
         "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
       },
       {
-        "fromSymbol": "waitUntilReadyAsync",
+        "fromSymbol": "pollReadinessAsync",
+        "toSymbol": "observeKubectlDeploymentPodFailureAsync",
+        "callExpression": "observeKubectlDeploymentPodFailureAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "pollReadinessAsync",
         "toSymbol": "delayAsync",
         "callExpression": "delayAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
+      },
+      {
+        "fromSymbol": "pollReadinessAsync",
+        "toSymbol": "pollReadinessAsync",
+        "callExpression": "pollReadinessAsync",
         "sourcePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts"
       },
       {
@@ -3406,8 +3967,14 @@
       },
       {
         "fromSymbol": "observeKubectlResource",
-        "toSymbol": "readNumber",
-        "callExpression": "readNumber",
+        "toSymbol": "observeDeployment",
+        "callExpression": "observeDeployment",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlResource",
+        "toSymbol": "optionalString",
+        "callExpression": "optionalString",
         "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
       },
       {
@@ -3417,9 +3984,21 @@
         "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
       },
       {
-        "fromSymbol": "observeKubectlResource",
-        "toSymbol": "optionalString",
-        "callExpression": "optionalString",
+        "fromSymbol": "observeDeployment",
+        "toSymbol": "readNumber",
+        "callExpression": "readNumber",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeDeployment",
+        "toSymbol": "readDeploymentFailure",
+        "callExpression": "readDeploymentFailure",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeDeployment",
+        "toSymbol": "withOutputs",
+        "callExpression": "withOutputs",
         "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
       },
       {
@@ -3498,6 +4077,30 @@
         "fromSymbol": "parseResource",
         "toSymbol": "withoutLastApplied",
         "callExpression": "withoutLastApplied",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readDeploymentFailure",
+        "toSymbol": "getValue",
+        "callExpression": "getValue",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readDeploymentFailure",
+        "toSymbol": "isUnknownArray",
+        "callExpression": "isUnknownArray",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/adapters/kubectlResource.ts",
+        "toSymbol": "optionalString",
+        "callExpression": "optionalString",
+        "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "readDeploymentFailure",
+        "toSymbol": "optionalString",
+        "callExpression": "optionalString",
         "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
       },
       {
@@ -3583,6 +4186,18 @@
         "toSymbol": "isRecord",
         "callExpression": "isRecord",
         "sourcePath": "src/features/workload-reconciliation/adapters/kubectlResource.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlDeploymentPodFailureAsync",
+        "toSymbol": "runAsync",
+        "callExpression": "command.runAsync",
+        "sourcePath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts"
+      },
+      {
+        "fromSymbol": "observeKubectlDeploymentPodFailureAsync",
+        "toSymbol": "parseDeploymentPodFailure",
+        "callExpression": "parseDeploymentPodFailure",
+        "sourcePath": "src/features/workload-reconciliation/adapters/observeKubectlDeploymentPodFailureAsync.ts"
       },
       {
         "fromSymbol": "planAsync",
@@ -3688,6 +4303,12 @@
       },
       {
         "fromSymbol": "createKubernetesController",
+        "toSymbol": "createInitContainers",
+        "callExpression": "createInitContainers",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createKubernetesController",
         "toSymbol": "createKubernetesDesiredResource",
         "callExpression": "createKubernetesDesiredResource",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
@@ -3705,15 +4326,15 @@
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
       },
       {
-        "fromSymbol": "createContainer",
-        "toSymbol": "createEnvironment",
-        "callExpression": "createEnvironment",
-        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
-      },
-      {
         "fromSymbol": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
         "toSymbol": "toKubernetesName",
         "callExpression": "toKubernetesName",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
+      },
+      {
+        "fromSymbol": "createContainer",
+        "toSymbol": "createEnvironment",
+        "callExpression": "createEnvironment",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts"
       },
       {
@@ -4048,32 +4669,74 @@
       },
       {
         "fromSymbol": "reconcileKubernetesResourcesAsync",
-        "toSymbol": "applyAsync",
-        "callExpression": "options.api.applyAsync",
-        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
-      },
-      {
-        "fromSymbol": "reconcileKubernetesResourcesAsync",
-        "toSymbol": "deleteAsync",
-        "callExpression": "options.api.deleteAsync",
-        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
-      },
-      {
-        "fromSymbol": "reconcileKubernetesResourcesAsync",
-        "toSymbol": "getKubernetesResourceReference",
-        "callExpression": "getKubernetesResourceReference",
-        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
-      },
-      {
-        "fromSymbol": "reconcileKubernetesResourcesAsync",
-        "toSymbol": "readKubernetesOwnedResource",
-        "callExpression": "readKubernetesOwnedResource",
+        "toSymbol": "applyKubernetesChangesAsync",
+        "callExpression": "applyKubernetesChangesAsync",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
       },
       {
         "fromSymbol": "reconcileKubernetesResourcesAsync",
         "toSymbol": "getKubernetesOutputsAsync",
         "callExpression": "getKubernetesOutputsAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "reconcileKubernetesResourcesAsync",
+        "toSymbol": "createReconcileFailure",
+        "callExpression": "createReconcileFailure",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "applyKubernetesChangesAsync",
+        "toSymbol": "waitForDependenciesAsync",
+        "callExpression": "waitForDependenciesAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "applyKubernetesChangesAsync",
+        "toSymbol": "applyAsync",
+        "callExpression": "options.api.applyAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "applyKubernetesChangesAsync",
+        "toSymbol": "deleteAsync",
+        "callExpression": "options.api.deleteAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "applyKubernetesChangesAsync",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "applyKubernetesChangesAsync",
+        "toSymbol": "readKubernetesOwnedResource",
+        "callExpression": "readKubernetesOwnedResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForDependenciesAsync",
+        "toSymbol": "waitForDependencyAsync",
+        "callExpression": "waitForDependencyAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForDependenciesAsync",
+        "toSymbol": "createDependencyReadinessDiagnostic",
+        "callExpression": "createDependencyReadinessDiagnostic",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForDependencyAsync",
+        "toSymbol": "waitUntilReadyAsync",
+        "callExpression": "options.api.waitUntilReadyAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForDependencyAsync",
+        "toSymbol": "getKubernetesResourceReference",
+        "callExpression": "getKubernetesResourceReference",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/reconcileKubernetesResourcesAsync.ts"
       },
       {
@@ -4168,12 +4831,30 @@
       },
       {
         "fromSymbol": "waitForKubernetesReadinessAsync",
+        "toSymbol": "waitForDesiredResourceAsync",
+        "callExpression": "waitForDesiredResourceAsync",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForKubernetesReadinessAsync",
+        "toSymbol": "createReadinessStatus",
+        "callExpression": "createReadinessStatus",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForKubernetesReadinessAsync",
+        "toSymbol": "createReadinessDiagnostic",
+        "callExpression": "createReadinessDiagnostic",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
+      },
+      {
+        "fromSymbol": "waitForDesiredResourceAsync",
         "toSymbol": "waitUntilReadyAsync",
         "callExpression": "options.api.waitUntilReadyAsync",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"
       },
       {
-        "fromSymbol": "waitForKubernetesReadinessAsync",
+        "fromSymbol": "waitForDesiredResourceAsync",
         "toSymbol": "getKubernetesResourceReference",
         "callExpression": "getKubernetesResourceReference",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/waitForKubernetesReadinessAsync.ts"

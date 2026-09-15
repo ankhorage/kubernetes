@@ -8,7 +8,7 @@
     "modulePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
     "sourceLocation": {
       "filePath": "src/features/workload-reconciliation/adapters/createKubectlKubernetesApi.ts",
-      "line": 39,
+      "line": 41,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -72,7 +72,7 @@
     "modulePath": "src/types/kubectl.ts",
     "sourceLocation": {
       "filePath": "src/types/kubectl.ts",
-      "line": 29,
+      "line": 31,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -102,6 +102,13 @@
         "kind": "property",
         "type": "string",
         "required": true,
+        "description": null
+      },
+      {
+        "name": "crashLoopRecoveryGraceSeconds",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
         "description": null
       },
       {
