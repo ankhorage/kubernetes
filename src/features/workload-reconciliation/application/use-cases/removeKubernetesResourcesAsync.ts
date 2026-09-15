@@ -84,11 +84,10 @@ function isConfirmed(request: KubernetesDriverRequest, destroy: InfraDestroyRequ
   );
 }
 
-/*** Decide whether explicit persistence policy authorizes this exact owner. */
+/*** Delete persistent data only when the exact resource has explicit deletion authorization. */
 function canDelete(owner: InfraOwnedResource, destroy: InfraDestroyRequest): boolean {
   if (!owner.persistent) return true;
   return (
-    owner.retention === 'delete-on-destroy' &&
     destroy.persistence.policy === 'delete' &&
     destroy.persistence.confirmedResources.some((identity) =>
       identitiesEqual(identity, owner.identity),
