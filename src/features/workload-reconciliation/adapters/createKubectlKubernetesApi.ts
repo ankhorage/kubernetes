@@ -27,6 +27,31 @@ const NAMESPACED_RESOURCE_TYPES = [
   'services',
   'ingresses.networking.k8s.io',
 ].join(',');
+const DEPLOYMENT_POD_LABEL = 'app.kubernetes.io/name';
+const TERMINAL_POD_WAITING_REASONS = new Set([
+  'CrashLoopBackOff',
+  'CreateContainerConfigError',
+  'CreateContainerError',
+  'ErrImagePull',
+  'ImagePullBackOff',
+  'InvalidImageName',
+  'RunContainerError',
+]);
+const POD_FAILURE_JSON_PATH = [
+  '{range .items[*]}',
+  '{.metadata.name}{"\\t"}',
+  '{.status.phase}{"\\t"}',
+  '{range .status.initContainerStatuses[*]}',
+  '{.name}{"="}{.state.waiting.reason}{";"}',
+  '{end}',
+  '{range .status.containerStatuses[*]}',
+  '{.name}{"="}{.state.waiting.reason}{";"}',
+  '{end}',
+  '{range .status.ephemeralContainerStatuses[*]}',
+  '{.name}{"="}{.state.waiting.reason}{";"}',
+  '{end}{"\\n"}',
+  '{end}',
+].join('');
 
 /***
  * Create a concrete Kubernetes API backed by an authenticated kubectl context.
@@ -180,7 +205,11 @@ async function waitUntilReadyAsync(
 ): Promise<KubernetesResourceObservation> {
   const deadline = Date.now() + options.timeoutSeconds * 1_000;
   for (;;) {
-    const observation = await observeAsync(command, resource, options.signal);
+    const observed = await observeAsync(command, resource, options.signal);
+    const observation =
+      observed.state === 'pending' && resource.kind === 'Deployment'
+        ? ((await observeDeploymentPodFailureAsync(command, resource, options.signal)) ?? observed)
+        : observed;
     if (observation.state === 'ready' || observation.state === 'failed') return observation;
     if (Date.now() >= deadline) {
       return {
@@ -190,6 +219,55 @@ async function waitUntilReadyAsync(
     }
     await delayAsync(Math.min(pollIntervalMs, Math.max(0, deadline - Date.now())), options.signal);
   }
+}
+
+/*** Inspect Pods belonging to one pending Deployment for actionable startup failures. */
+async function observeDeploymentPodFailureAsync(
+  command: KubectlCommand,
+  resource: KubernetesResourceReference,
+  signal?: AbortSignal,
+): Promise<KubernetesResourceObservation | undefined> {
+  const result = await command.runAsync(
+    [
+      'get',
+      'pods',
+      ...(resource.namespace === undefined ? [] : ['--namespace', resource.namespace]),
+      '-l',
+      `${DEPLOYMENT_POD_LABEL}=${resource.name}`,
+      '-o',
+      `jsonpath=${POD_FAILURE_JSON_PATH}`,
+    ],
+    signalOption(signal),
+  );
+  ensureSuccess(result);
+  return parseDeploymentPodFailure(result.stdout);
+}
+
+/*** Parse only sanitized Pod identity, phase and waiting-reason fields. */
+function parseDeploymentPodFailure(value: string): KubernetesResourceObservation | undefined {
+  return value
+    .split('\n')
+    .map(parsePodFailureLine)
+    .find(
+      (observation): observation is KubernetesResourceObservation => observation !== undefined,
+    );
+}
+
+/*** Map one sanitized Pod status line to a terminal readiness observation when applicable. */
+function parsePodFailureLine(line: string): KubernetesResourceObservation | undefined {
+  const [podName = '', phase = '', statuses = ''] = line.trim().split('\t');
+  if (podName.length === 0) return undefined;
+  if (phase === 'Failed') return { state: 'failed', detail: `Pod ${podName} failed.` };
+  const failure = statuses
+    .split(';')
+    .map((status) => status.split('=', 2))
+    .find(([, reason]) => reason !== undefined && TERMINAL_POD_WAITING_REASONS.has(reason));
+  const [containerName, reason] = failure ?? [];
+  if (containerName === undefined || reason === undefined) return undefined;
+  return {
+    state: 'failed',
+    detail: `Pod ${podName} container ${containerName} is ${reason}.`,
+  };
 }
 
 /*** Throw a sanitized failure that never includes stdin, stdout or stderr content. */
