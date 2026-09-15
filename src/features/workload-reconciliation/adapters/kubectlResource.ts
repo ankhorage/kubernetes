@@ -43,9 +43,12 @@ export function observeKubectlResource(
     const available = readNumber(status, 'availableReplicas') ?? 0;
     const generation = readNumber(metadata, 'generation') ?? 0;
     const observedGeneration = readNumber(status, 'observedGeneration') ?? 0;
+    const ready = available >= desired && observedGeneration >= generation;
+    const failure = ready ? undefined : readDeploymentFailure(status);
     return withOutputs(
-      available >= desired && observedGeneration >= generation ? 'ready' : 'pending',
+      ready ? 'ready' : failure === undefined ? 'pending' : 'failed',
       publicOutputs,
+      failure,
     );
   }
   if (kind === 'PersistentVolumeClaim') {
@@ -117,6 +120,27 @@ function parseResource(value: unknown): KubernetesResource {
   };
 }
 
+/*** Read one terminal Deployment condition without exposing provider-controlled messages. */
+function readDeploymentFailure(
+  status: Readonly<Record<string, unknown>> | undefined,
+): string | undefined {
+  const conditions = getValue(status, 'conditions');
+  if (!isUnknownArray(conditions)) return undefined;
+  const failure = conditions.filter(isRecord).find((condition) => {
+    const type = optionalString(condition, 'type');
+    const conditionStatus = optionalString(condition, 'status');
+    const reason = optionalString(condition, 'reason');
+    return (
+      (type === 'ReplicaFailure' && conditionStatus === 'True') ||
+      (type === 'Progressing' &&
+        conditionStatus === 'False' &&
+        reason === 'ProgressDeadlineExceeded')
+    );
+  });
+  if (failure === undefined) return undefined;
+  return `Deployment is ${optionalString(failure, 'reason') ?? 'DeploymentFailure'}.`;
+}
+
 /*** Read only endpoint values that Kubernetes explicitly exposes as public routing state. */
 function readPublicOutputs(
   kind: string,
@@ -138,12 +162,17 @@ function readPublicOutputs(
   return endpoint === undefined ? undefined : { endpoint };
 }
 
-/*** Add optional public outputs to a resource observation. */
+/*** Add optional public outputs and sanitized detail to a resource observation. */
 function withOutputs(
   state: KubernetesResourceObservation['state'],
   publicOutputs?: Readonly<Record<string, string>>,
+  detail?: string,
 ): KubernetesResourceObservation {
-  return { state, ...(publicOutputs === undefined ? {} : { publicOutputs }) };
+  return {
+    state,
+    ...(detail === undefined ? {} : { detail }),
+    ...(publicOutputs === undefined ? {} : { publicOutputs }),
+  };
 }
 
 /*** Remove kubectl's bookkeeping annotation from driver-owned comparison metadata. */
