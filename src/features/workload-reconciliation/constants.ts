@@ -11,3 +11,13 @@ export const KUBERNETES_OWNERSHIP = {
   retentionAnnotation: 'infra.ankhorage.dev/retention',
   dependenciesAnnotation: 'infra.ankhorage.dev/depends-on',
 } as const;
+
+export const KUBERNETES_READINESS_KINDS: ReadonlySet<string> = new Set([
+  'Namespace',
+  'PersistentVolumeClaim',
+  'Deployment',
+  'Service',
+  'Ingress',
+]);
+
+export const KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS = 300;
