@@ -11,6 +11,7 @@ import type {
 } from '../../../../types/kubernetesDriver';
 import type {
   KubernetesDesiredResource,
+  KubernetesPreparedChange,
   KubernetesResourceObservation,
 } from '../../../../types/kubernetesResources';
 import {
@@ -31,65 +32,80 @@ export async function reconcileKubernetesResourcesAsync(
   if (!prepared.ok) return prepared;
 
   const desiredByResourceId = new Map(
-    prepared.value.projection.resources.map((desired) => [desired.owner.identity.resourceId, desired]),
+    prepared.value.projection.resources.map((desired) => [
+      desired.owner.identity.resourceId,
+      desired,
+    ]),
   );
   const timeoutSeconds =
     options.defaultReadinessTimeoutSeconds ?? KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS;
   const deadline = Date.now() + timeoutSeconds * 1_000;
 
   try {
-    const retained: InfraOwnedResource[] = [];
-    for (const change of prepared.value.changes) {
-      if (
-        (change.action.operation === 'create' || change.action.operation === 'update') &&
-        change.desired !== undefined
-      ) {
-        const dependencyFailure = await waitForDependenciesAsync(
-          options,
-          request,
-          change.desired,
-          desiredByResourceId,
-          deadline,
-        );
-        if (dependencyFailure !== undefined) {
-          return { ok: false, diagnostics: [dependencyFailure] };
-        }
-        await options.api.applyAsync(change.desired.resource, request.context.signal);
-      }
-      if (change.action.operation === 'delete' && change.actual !== undefined) {
-        await options.api.deleteAsync(
-          getKubernetesResourceReference(change.actual),
-          request.context.signal,
-        );
-      }
-      if (change.action.operation === 'retain' && change.actual !== undefined) {
-        const owner = readKubernetesOwnedResource(change.actual, request);
-        if (owner !== undefined) retained.push(owner);
-      }
-    }
-
+    const reconciled = await applyKubernetesChangesAsync(
+      options,
+      request,
+      prepared.value.changes,
+      desiredByResourceId,
+      deadline,
+    );
+    if (!reconciled.ok) return reconciled;
     const outputs = await getKubernetesOutputsAsync(options, request);
     if (!outputs.ok) return outputs;
     return {
       ok: true,
       value: {
-        resources: [...prepared.value.projection.resources.map(({ owner }) => owner), ...retained],
+        resources: [
+          ...prepared.value.projection.resources.map(({ owner }) => owner),
+          ...reconciled.value,
+        ],
         outputs: outputs.value,
       },
       diagnostics: [],
     };
   } catch {
-    return {
-      ok: false,
-      diagnostics: [
-        {
-          severity: 'error',
-          code: 'kubernetes-reconcile-failed',
-          message: 'Kubernetes resources could not be reconciled safely.',
-        },
-      ],
-    };
+    return createReconcileFailure();
   }
+}
+
+/*** Apply prepared changes while enforcing readiness-relevant dependency gates. */
+async function applyKubernetesChangesAsync(
+  options: KubernetesDriverOptions,
+  request: KubernetesDriverRequest,
+  changes: readonly KubernetesPreparedChange[],
+  desiredByResourceId: ReadonlyMap<string, KubernetesDesiredResource>,
+  deadline: number,
+): Promise<InfraResult<readonly InfraOwnedResource[]>> {
+  const retained: InfraOwnedResource[] = [];
+  for (const change of changes) {
+    if (
+      (change.action.operation === 'create' || change.action.operation === 'update') &&
+      change.desired !== undefined
+    ) {
+      const dependencyFailure = await waitForDependenciesAsync(
+        options,
+        request,
+        change.desired,
+        desiredByResourceId,
+        deadline,
+      );
+      if (dependencyFailure !== undefined) {
+        return { ok: false, diagnostics: [dependencyFailure] };
+      }
+      await options.api.applyAsync(change.desired.resource, request.context.signal);
+    }
+    if (change.action.operation === 'delete' && change.actual !== undefined) {
+      await options.api.deleteAsync(
+        getKubernetesResourceReference(change.actual),
+        request.context.signal,
+      );
+    }
+    if (change.action.operation === 'retain' && change.actual !== undefined) {
+      const owner = readKubernetesOwnedResource(change.actual, request);
+      if (owner !== undefined) retained.push(owner);
+    }
+  }
+  return { ok: true, value: retained, diagnostics: [] };
 }
 
 /*** Wait for readiness-relevant dependencies before applying one desired Kubernetes resource. */
@@ -144,5 +160,19 @@ function createDependencyReadinessDiagnostic(
     code: 'kubernetes-dependency-readiness-failed',
     message: `Kubernetes dependency ${dependency.owner.identity.resourceId} is ${observation.state}.${detail}`,
     owner: dependency.owner.identity,
+  };
+}
+
+/*** Create the generic failure returned when reconciliation throws unexpectedly. */
+function createReconcileFailure(): InfraResult<InfraReconcileResult> {
+  return {
+    ok: false,
+    diagnostics: [
+      {
+        severity: 'error',
+        code: 'kubernetes-reconcile-failed',
+        message: 'Kubernetes resources could not be reconciled safely.',
+      },
+    ],
   };
 }
