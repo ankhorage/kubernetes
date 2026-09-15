@@ -28,7 +28,8 @@ const NAMESPACED_RESOURCE_TYPES = [
   'ingresses.networking.k8s.io',
 ].join(',');
 const DEPLOYMENT_POD_LABEL = 'app.kubernetes.io/name';
-const TERMINAL_POD_WAITING_REASONS = new Set([
+const DEFAULT_CRASH_LOOP_RECOVERY_GRACE_SECONDS = 30;
+const STARTUP_FAILURE_POD_WAITING_REASONS = new Set([
   'CrashLoopBackOff',
   'CreateContainerConfigError',
   'CreateContainerError',
@@ -68,8 +69,13 @@ export function createKubectlKubernetesApi(options: KubectlKubernetesApiOptions)
   const runner = options.runner ?? createSubprocessKubernetesCommandRunner();
   const executable = options.executable ?? 'kubectl';
   const pollIntervalMs = options.pollIntervalMs ?? 250;
+  const crashLoopRecoveryGraceSeconds =
+    options.crashLoopRecoveryGraceSeconds ?? DEFAULT_CRASH_LOOP_RECOVERY_GRACE_SECONDS;
   if (!Number.isInteger(pollIntervalMs) || pollIntervalMs < 0) {
     throw new TypeError('kubectl pollIntervalMs must be a non-negative integer.');
+  }
+  if (!Number.isInteger(crashLoopRecoveryGraceSeconds) || crashLoopRecoveryGraceSeconds < 0) {
+    throw new TypeError('kubectl crashLoopRecoveryGraceSeconds must be a non-negative integer.');
   }
   const command = createCommand(runner, executable, options.context);
   return {
@@ -78,7 +84,13 @@ export function createKubectlKubernetesApi(options: KubectlKubernetesApiOptions)
     deleteAsync: (resource, signal) => deleteAsync(command, resource, signal),
     observeAsync: (resource, signal) => observeAsync(command, resource, signal),
     waitUntilReadyAsync: (resource, waitOptions) =>
-      waitUntilReadyAsync(command, resource, waitOptions, pollIntervalMs),
+      waitUntilReadyAsync(
+        command,
+        resource,
+        waitOptions,
+        pollIntervalMs,
+        crashLoopRecoveryGraceSeconds * 1_000,
+      ),
   };
 }
 
@@ -87,6 +99,11 @@ interface KubectlCommand {
     arguments_: readonly string[],
     options?: { readonly stdin?: string; readonly signal?: AbortSignal },
   ): Promise<KubernetesCommandResult>;
+}
+
+interface DeploymentPodFailure {
+  readonly observation: KubernetesResourceObservation;
+  readonly recoverable: boolean;
 }
 
 /*** Bind an executable and exact kubeconfig context to every kubectl invocation. */
@@ -196,29 +213,69 @@ async function observeAsync(
   return observeKubectlResource(parseKubectlJsonRecord(result.stdout));
 }
 
-/*** Poll live resource state until ready, terminal failure or timeout. */
+/*** Poll live resource state until ready, persistent failure or timeout. */
 async function waitUntilReadyAsync(
   command: KubectlCommand,
   resource: KubernetesResourceReference,
   options: { readonly timeoutSeconds: number; readonly signal?: AbortSignal },
   pollIntervalMs: number,
+  crashLoopRecoveryGraceMilliseconds: number,
 ): Promise<KubernetesResourceObservation> {
   const deadline = Date.now() + options.timeoutSeconds * 1_000;
-  for (;;) {
-    const observed = await observeAsync(command, resource, options.signal);
-    const observation =
-      observed.state === 'pending' && resource.kind === 'Deployment'
-        ? ((await observeDeploymentPodFailureAsync(command, resource, options.signal)) ?? observed)
-        : observed;
-    if (observation.state === 'ready' || observation.state === 'failed') return observation;
-    if (Date.now() >= deadline) {
-      return {
-        state: 'degraded',
-        detail: `Timed out waiting for ${resource.kind}/${resource.name}.`,
-      };
-    }
-    await delayAsync(Math.min(pollIntervalMs, Math.max(0, deadline - Date.now())), options.signal);
+  return pollReadinessAsync(
+    command,
+    resource,
+    options,
+    pollIntervalMs,
+    crashLoopRecoveryGraceMilliseconds,
+    deadline,
+  );
+}
+
+/*** Poll one resource while preserving a bounded CrashLoopBackOff recovery window. */
+async function pollReadinessAsync(
+  command: KubectlCommand,
+  resource: KubernetesResourceReference,
+  options: { readonly timeoutSeconds: number; readonly signal?: AbortSignal },
+  pollIntervalMs: number,
+  crashLoopRecoveryGraceMilliseconds: number,
+  deadline: number,
+  crashLoopStartedAt?: number,
+): Promise<KubernetesResourceObservation> {
+  const observed = await observeAsync(command, resource, options.signal);
+  if (observed.state === 'ready' || observed.state === 'failed') return observed;
+  const failure =
+    observed.state === 'pending' && resource.kind === 'Deployment'
+      ? await observeDeploymentPodFailureAsync(command, resource, options.signal)
+      : undefined;
+  if (failure !== undefined && !failure.recoverable) return failure.observation;
+
+  const now = Date.now();
+  const nextCrashLoopStartedAt =
+    failure?.recoverable === true ? (crashLoopStartedAt ?? now) : undefined;
+  if (
+    failure !== undefined &&
+    nextCrashLoopStartedAt !== undefined &&
+    now - nextCrashLoopStartedAt >= crashLoopRecoveryGraceMilliseconds
+  ) {
+    return failure.observation;
   }
+  if (now >= deadline) {
+    return {
+      state: 'degraded',
+      detail: `Timed out waiting for ${resource.kind}/${resource.name}.`,
+    };
+  }
+  await delayAsync(Math.min(pollIntervalMs, Math.max(0, deadline - now)), options.signal);
+  return pollReadinessAsync(
+    command,
+    resource,
+    options,
+    pollIntervalMs,
+    crashLoopRecoveryGraceMilliseconds,
+    deadline,
+    nextCrashLoopStartedAt,
+  );
 }
 
 /*** Inspect Pods belonging to one pending Deployment for actionable startup failures. */
@@ -226,7 +283,7 @@ async function observeDeploymentPodFailureAsync(
   command: KubectlCommand,
   resource: KubernetesResourceReference,
   signal?: AbortSignal,
-): Promise<KubernetesResourceObservation | undefined> {
+): Promise<DeploymentPodFailure | undefined> {
   const result = await command.runAsync(
     [
       'get',
@@ -244,27 +301,34 @@ async function observeDeploymentPodFailureAsync(
 }
 
 /*** Parse only sanitized Pod identity, phase and waiting-reason fields. */
-function parseDeploymentPodFailure(value: string): KubernetesResourceObservation | undefined {
+function parseDeploymentPodFailure(value: string): DeploymentPodFailure | undefined {
   return value
     .split('\n')
     .map(parsePodFailureLine)
-    .find((observation): observation is KubernetesResourceObservation => observation !== undefined);
+    .find((failure): failure is DeploymentPodFailure => failure !== undefined);
 }
 
-/*** Map one sanitized Pod status line to a terminal readiness observation when applicable. */
-function parsePodFailureLine(line: string): KubernetesResourceObservation | undefined {
+/*** Map one sanitized Pod status line to a readiness failure when applicable. */
+function parsePodFailureLine(line: string): DeploymentPodFailure | undefined {
   const [podName = '', phase = '', statuses = ''] = line.trim().split('\t');
   if (podName.length === 0) return undefined;
-  if (phase === 'Failed') return { state: 'failed', detail: `Pod ${podName} failed.` };
+  if (phase === 'Failed') {
+    return { observation: { state: 'failed', detail: `Pod ${podName} failed.` }, recoverable: false };
+  }
   const failure = statuses
     .split(';')
     .map((status) => status.split('=', 2))
-    .find(([, reason]) => reason !== undefined && TERMINAL_POD_WAITING_REASONS.has(reason));
+    .find(([, reason]) =>
+      reason === undefined ? false : STARTUP_FAILURE_POD_WAITING_REASONS.has(reason),
+    );
   const [containerName, reason] = failure ?? [];
   if (containerName === undefined || reason === undefined) return undefined;
   return {
-    state: 'failed',
-    detail: `Pod ${podName} container ${containerName} is ${reason}.`,
+    observation: {
+      state: 'failed',
+      detail: `Pod ${podName} container ${containerName} is ${reason}.`,
+    },
+    recoverable: reason === 'CrashLoopBackOff',
   };
 }
 
