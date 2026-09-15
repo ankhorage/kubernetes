@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.7.3
+
+### Patch Changes
+
+- 97fccc2: Allow transient Deployment `CrashLoopBackOff` states to recover within a bounded readiness grace period while keeping hard startup failures immediately fatal.
+
 ## 0.7.2
 
 ### Patch Changes
