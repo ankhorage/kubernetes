@@ -71,7 +71,9 @@ function createExecutionContext(): InfraExecutionContext {
   };
 }
 
-function createDestroyRequest(persistence: InfraDestroyRequest['persistence']): InfraDestroyRequest {
+function createDestroyRequest(
+  persistence: InfraDestroyRequest['persistence'],
+): InfraDestroyRequest {
   return {
     projectId: 'sample',
     environment: 'production',
