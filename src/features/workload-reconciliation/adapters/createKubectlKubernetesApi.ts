@@ -18,6 +18,7 @@ import {
   parseKubectlResourceList,
   parseOptionalKubectlResource,
 } from './kubectlResource';
+import { observeKubectlDeploymentPodFailureAsync } from './observeKubectlDeploymentPodFailureAsync';
 
 const NAMESPACED_RESOURCE_TYPES = [
   'configmaps',
@@ -27,32 +28,7 @@ const NAMESPACED_RESOURCE_TYPES = [
   'services',
   'ingresses.networking.k8s.io',
 ].join(',');
-const DEPLOYMENT_POD_LABEL = 'app.kubernetes.io/name';
 const DEFAULT_CRASH_LOOP_RECOVERY_GRACE_SECONDS = 30;
-const STARTUP_FAILURE_POD_WAITING_REASONS = new Set([
-  'CrashLoopBackOff',
-  'CreateContainerConfigError',
-  'CreateContainerError',
-  'ErrImagePull',
-  'ImagePullBackOff',
-  'InvalidImageName',
-  'RunContainerError',
-]);
-const POD_FAILURE_JSON_PATH = [
-  '{range .items[*]}',
-  '{.metadata.name}{"\\t"}',
-  '{.status.phase}{"\\t"}',
-  '{range .status.initContainerStatuses[*]}',
-  '{.name}{"="}{.state.waiting.reason}{";"}',
-  '{end}',
-  '{range .status.containerStatuses[*]}',
-  '{.name}{"="}{.state.waiting.reason}{";"}',
-  '{end}',
-  '{range .status.ephemeralContainerStatuses[*]}',
-  '{.name}{"="}{.state.waiting.reason}{";"}',
-  '{end}{"\\n"}',
-  '{end}',
-].join('');
 
 /***
  * Create a concrete Kubernetes API backed by an authenticated kubectl context.
@@ -99,11 +75,6 @@ interface KubectlCommand {
     arguments_: readonly string[],
     options?: { readonly stdin?: string; readonly signal?: AbortSignal },
   ): Promise<KubernetesCommandResult>;
-}
-
-interface DeploymentPodFailure {
-  readonly observation: KubernetesResourceObservation;
-  readonly recoverable: boolean;
 }
 
 /*** Bind an executable and exact kubeconfig context to every kubectl invocation. */
@@ -246,7 +217,7 @@ async function pollReadinessAsync(
   if (observed.state === 'ready' || observed.state === 'failed') return observed;
   const failure =
     observed.state === 'pending' && resource.kind === 'Deployment'
-      ? await observeDeploymentPodFailureAsync(command, resource, options.signal)
+      ? await observeKubectlDeploymentPodFailureAsync(command, resource, options.signal)
       : undefined;
   if (failure !== undefined && !failure.recoverable) return failure.observation;
 
@@ -276,60 +247,6 @@ async function pollReadinessAsync(
     deadline,
     nextCrashLoopStartedAt,
   );
-}
-
-/*** Inspect Pods belonging to one pending Deployment for actionable startup failures. */
-async function observeDeploymentPodFailureAsync(
-  command: KubectlCommand,
-  resource: KubernetesResourceReference,
-  signal?: AbortSignal,
-): Promise<DeploymentPodFailure | undefined> {
-  const result = await command.runAsync(
-    [
-      'get',
-      'pods',
-      ...(resource.namespace === undefined ? [] : ['--namespace', resource.namespace]),
-      '-l',
-      `${DEPLOYMENT_POD_LABEL}=${resource.name}`,
-      '-o',
-      `jsonpath=${POD_FAILURE_JSON_PATH}`,
-    ],
-    signalOption(signal),
-  );
-  ensureSuccess(result);
-  return parseDeploymentPodFailure(result.stdout);
-}
-
-/*** Parse only sanitized Pod identity, phase and waiting-reason fields. */
-function parseDeploymentPodFailure(value: string): DeploymentPodFailure | undefined {
-  return value
-    .split('\n')
-    .map(parsePodFailureLine)
-    .find((failure): failure is DeploymentPodFailure => failure !== undefined);
-}
-
-/*** Map one sanitized Pod status line to a readiness failure when applicable. */
-function parsePodFailureLine(line: string): DeploymentPodFailure | undefined {
-  const [podName = '', phase = '', statuses = ''] = line.trim().split('\t');
-  if (podName.length === 0) return undefined;
-  if (phase === 'Failed') {
-    return { observation: { state: 'failed', detail: `Pod ${podName} failed.` }, recoverable: false };
-  }
-  const failure = statuses
-    .split(';')
-    .map((status) => status.split('=', 2))
-    .find(([, reason]) =>
-      reason === undefined ? false : STARTUP_FAILURE_POD_WAITING_REASONS.has(reason),
-    );
-  const [containerName, reason] = failure ?? [];
-  if (containerName === undefined || reason === undefined) return undefined;
-  return {
-    observation: {
-      state: 'failed',
-      detail: `Pod ${podName} container ${containerName} is ${reason}.`,
-    },
-    recoverable: reason === 'CrashLoopBackOff',
-  };
 }
 
 /*** Throw a sanitized failure that never includes stdin, stdout or stderr content. */
