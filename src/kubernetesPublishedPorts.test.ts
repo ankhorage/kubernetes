@@ -1,8 +1,8 @@
 import type { InfraExecutionContext, InfraWorkloadSpec } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('projects an optional published workload port as an exact Kubernetes host port', async () => {
