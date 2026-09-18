@@ -6,8 +6,8 @@ import type {
 } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('requires explicit resource confirmation before deleting retained persistence', async () => {
