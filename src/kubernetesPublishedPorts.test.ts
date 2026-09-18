@@ -1,6 +1,7 @@
 import type { InfraExecutionContext, InfraWorkloadSpec } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { createKubernetesDriver } from './index';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
@@ -33,9 +34,7 @@ function createRequest(workload: InfraWorkloadSpec) {
         runtime: { provider: 'minikube' },
       },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () => Promise.resolve({ ok: true, value: '', diagnostics: [] }),
     },
