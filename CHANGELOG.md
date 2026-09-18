@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.8.2
+
+### Patch Changes
+
+- 5277af2: Consume the Contracts 22 canonical workload port, file, persistence, and dependency registries.
+
 ## 0.8.1
 
 ### Patch Changes
