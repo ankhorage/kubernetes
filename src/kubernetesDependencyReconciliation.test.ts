@@ -6,8 +6,8 @@ import type {
   KubernetesResourceObservation,
   KubernetesResourceReference,
 } from './index';
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('waits for a workload dependency before applying the dependent Deployment', async () => {
