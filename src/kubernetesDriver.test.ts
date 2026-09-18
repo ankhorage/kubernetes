@@ -224,19 +224,21 @@ function createRequest() {
   const workload: InfraWorkloadSpec = {
     id: 'api',
     artifact: { kind: 'image', image: 'registry.example/api@sha256:abc' },
-    ports: [{ name: 'http', port: 8080 }],
+    ports: { http: { port: 8080 } },
     environment: {
       MODE: { kind: 'literal', value: 'test' },
       API_KEY: { kind: 'secret', reference: createSecretReference('api-key') },
     },
-    files: [
-      { path: '/etc/app/config.json', content: { kind: 'literal', value: '{}' } },
-      {
-        path: '/etc/app/credential',
-        content: { kind: 'secret', reference: createSecretReference('credential') },
+    files: {
+      '/etc/app/config.json': { kind: 'literal', value: '{}' },
+      '/etc/app/credential': {
+        kind: 'secret',
+        reference: createSecretReference('credential'),
       },
-    ],
-    persistence: [{ id: 'data', mountPath: '/data', sizeGiB: 1, retention: 'delete-on-destroy' }],
+    },
+    persistence: {
+      data: { id: 'data', mountPath: '/data', sizeGiB: 1, retention: 'delete-on-destroy' },
+    },
     health: { kind: 'http', port: 8080, path: '/health' },
     resources: { cpuMillis: 100, memoryMiB: 128 },
     exposure: 'public',
