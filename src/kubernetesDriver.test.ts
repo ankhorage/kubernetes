@@ -6,8 +6,8 @@ import type {
 import { isInfraAdapterDescriptor } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { createKubernetesDriver, projectKubernetesResourcesAsync } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('projects deterministic standard resources without claiming a provider identity', async () => {
