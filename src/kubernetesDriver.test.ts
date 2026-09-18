@@ -219,7 +219,6 @@ it('fails closed when a keyed bootstrap credential field is missing', async () =
   expect(api.applied).toHaveLength(0);
 });
 
-/*** Create a complete generic workload request used by the API-boundary fixture. */
 function createRequest() {
   const workload: InfraWorkloadSpec = {
     id: 'api',
@@ -250,7 +249,6 @@ function createRequest() {
   };
 }
 
-/*** Create the execution context without a technology-specific runtime fixture. */
 function createExecutionContext(): InfraExecutionContext {
   return {
     projectId: 'sample',
@@ -276,7 +274,6 @@ function createExecutionContext(): InfraExecutionContext {
   };
 }
 
-/*** Create a workload that consumes one keyed control-plane credential. */
 function createCredentialRequest(token: string | undefined) {
   const request = createRequest();
   const [workload] = request.workloads;
@@ -311,7 +308,6 @@ function createCredentialRequest(token: string | undefined) {
   };
 }
 
-/*** Create one canonical secret reference. */
 function createSecretReference(ref: string) {
   return {
     source: 'secret-store' as const,
@@ -322,7 +318,6 @@ function createSecretReference(ref: string) {
   };
 }
 
-/*** Create a confirmed destruction request with retained persistence. */
 function createRetainedDestroyRequest() {
   return {
     projectId: 'sample',
