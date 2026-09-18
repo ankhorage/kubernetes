@@ -75,7 +75,9 @@ const IMAGE_SEED_SCRIPT = [
 function createInitContainers(
   workload: InfraWorkloadSpec,
 ): readonly Readonly<Record<string, unknown>>[] {
-  return (workload.persistence ?? [])
+  return Object.entries(workload.persistence ?? {})
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([, volume]) => volume)
     .filter(({ seed }) => seed === 'image')
     .map((volume) => ({
       name: `seed-${toKubernetesName(volume.id)}`,
@@ -109,12 +111,14 @@ function createContainer(
     ...(workload.command === undefined ? {} : { command: workload.command }),
     ...(workload.args === undefined ? {} : { args: workload.args }),
     env: createEnvironment(name, values),
-    ports: (workload.ports ?? []).map((port) => ({
-      name: toKubernetesName(port.name),
-      containerPort: port.port,
-      ...(port.publishedPort === undefined ? {} : { hostPort: port.publishedPort }),
-      protocol: (port.protocol ?? 'tcp').toUpperCase(),
-    })),
+    ports: Object.entries(workload.ports ?? {})
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([portName, port]) => ({
+        name: toKubernetesName(portName),
+        containerPort: port.port,
+        ...(port.publishedPort === undefined ? {} : { hostPort: port.publishedPort }),
+        protocol: (port.protocol ?? 'tcp').toUpperCase(),
+      })),
     volumeMounts: createVolumeMounts(workload, values),
     ...(resources === undefined ? {} : { resources: createResources(resources) }),
     ...(health === undefined
@@ -176,10 +180,12 @@ function createVolumes(
     ...(values.secrets.some((secret) => secret.target.kind === 'file')
       ? [{ name: 'secret-files', secret: { secretName: `${name}-secrets` } }]
       : []),
-    ...(workload.persistence ?? []).map((volume) => ({
-      name: `volume-${toKubernetesName(volume.id)}`,
-      persistentVolumeClaim: { claimName: `${name}-${toKubernetesName(volume.id)}` },
-    })),
+    ...Object.entries(workload.persistence ?? {})
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([, volume]) => ({
+        name: `volume-${toKubernetesName(volume.id)}`,
+        persistentVolumeClaim: { claimName: `${name}-${toKubernetesName(volume.id)}` },
+      })),
   ];
 }
 
@@ -201,10 +207,12 @@ function createVolumeMounts(
       subPath: secret.key,
       readOnly: true,
     })),
-    ...(workload.persistence ?? []).map((volume) => ({
-      name: `volume-${toKubernetesName(volume.id)}`,
-      mountPath: volume.mountPath,
-    })),
+    ...Object.entries(workload.persistence ?? {})
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([, volume]) => ({
+        name: `volume-${toKubernetesName(volume.id)}`,
+        mountPath: volume.mountPath,
+      })),
   ];
 }
 

@@ -2,6 +2,7 @@ import type { InfraExecutionContext, InfraWorkloadSpec } from '@ankhorage/contra
 import { expect, it } from 'bun:test';
 
 import { projectKubernetesResourcesAsync } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 
 it('projects an idempotent fail-closed init container for image-seeded persistence', async () => {
   const projected = await projectKubernetesResourcesAsync({
@@ -61,15 +62,15 @@ function createWorkload(seed: 'image' | undefined): InfraWorkloadSpec {
   return {
     id: 'database',
     artifact: { kind: 'image', image: 'supabase/postgres:17.6.1.136' },
-    persistence: [
-      {
+    persistence: {
+      config: {
         id: 'config',
         mountPath: '/etc/postgresql-custom',
         sizeGiB: 1,
         ...(seed === undefined ? {} : { seed }),
         retention: 'retain',
       },
-    ],
+    },
   };
 }
 
@@ -84,9 +85,7 @@ function createExecutionContext(): InfraExecutionContext {
         runtime: { provider: 'k3s' },
       },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () => Promise.resolve({ ok: true, value: '', diagnostics: [] }),
     },

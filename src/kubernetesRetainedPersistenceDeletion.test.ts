@@ -7,6 +7,7 @@ import type {
 import { expect, it } from 'bun:test';
 
 import { createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('requires explicit resource confirmation before deleting retained persistence', async () => {
@@ -35,14 +36,14 @@ function createRequest() {
   const workload: InfraWorkloadSpec = {
     id: 'database',
     artifact: { kind: 'image', image: 'postgres:17' },
-    persistence: [
-      {
+    persistence: {
+      data: {
         id: 'data',
         mountPath: '/var/lib/postgresql/data',
         sizeGiB: 20,
         retention: 'retain',
       },
-    ],
+    },
   };
   return {
     context: createExecutionContext(),
@@ -62,9 +63,7 @@ function createExecutionContext(): InfraExecutionContext {
       },
       networking: {},
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () => Promise.resolve({ ok: true, value: 'unused', diagnostics: [] }),
     },

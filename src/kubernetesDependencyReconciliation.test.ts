@@ -7,6 +7,7 @@ import type {
   KubernetesResourceReference,
 } from './index';
 import { createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('waits for a workload dependency before applying the dependent Deployment', async () => {
@@ -77,7 +78,7 @@ function createDependencyRequest() {
   const api: InfraWorkloadSpec = {
     id: 'api',
     artifact: { kind: 'image', image: 'registry.example/api@sha256:def' },
-    dependsOn: ['database'],
+    dependsOn: { database: true },
   };
   return {
     context: createExecutionContext(),
@@ -97,9 +98,7 @@ function createExecutionContext(): InfraExecutionContext {
         runtime: { provider: 'minikube' },
       },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () => Promise.resolve({ ok: true, value: '', diagnostics: [] }),
     },

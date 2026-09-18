@@ -7,6 +7,7 @@ import { isInfraAdapterDescriptor } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
 import { createKubernetesDriver, projectKubernetesResourcesAsync } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('projects deterministic standard resources without claiming a provider identity', async () => {
@@ -219,24 +220,22 @@ it('fails closed when a keyed bootstrap credential field is missing', async () =
   expect(api.applied).toHaveLength(0);
 });
 
-/*** Create a complete generic workload request used by the API-boundary fixture. */
 function createRequest() {
   const workload: InfraWorkloadSpec = {
     id: 'api',
     artifact: { kind: 'image', image: 'registry.example/api@sha256:abc' },
-    ports: [{ name: 'http', port: 8080 }],
+    ports: { http: { port: 8080 } },
     environment: {
       MODE: { kind: 'literal', value: 'test' },
       API_KEY: { kind: 'secret', reference: createSecretReference('api-key') },
     },
-    files: [
-      { path: '/etc/app/config.json', content: { kind: 'literal', value: '{}' } },
-      {
-        path: '/etc/app/credential',
-        content: { kind: 'secret', reference: createSecretReference('credential') },
-      },
-    ],
-    persistence: [{ id: 'data', mountPath: '/data', sizeGiB: 1, retention: 'delete-on-destroy' }],
+    files: {
+      '/etc/app/config.json': { kind: 'literal', value: '{}' },
+      '/etc/app/credential': { kind: 'secret', reference: createSecretReference('credential') },
+    },
+    persistence: {
+      data: { id: 'data', mountPath: '/data', sizeGiB: 1, retention: 'delete-on-destroy' },
+    },
     health: { kind: 'http', port: 8080, path: '/health' },
     resources: { cpuMillis: 100, memoryMiB: 128 },
     exposure: 'public',
@@ -248,7 +247,6 @@ function createRequest() {
   };
 }
 
-/*** Create the execution context without a technology-specific runtime fixture. */
 function createExecutionContext(): InfraExecutionContext {
   return {
     projectId: 'sample',
@@ -260,9 +258,7 @@ function createExecutionContext(): InfraExecutionContext {
       },
       networking: { domain: 'api.example.ch' },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () =>
         Promise.resolve({
@@ -274,7 +270,6 @@ function createExecutionContext(): InfraExecutionContext {
   };
 }
 
-/*** Create a workload that consumes one keyed control-plane credential. */
 function createCredentialRequest(token: string | undefined) {
   const request = createRequest();
   const [workload] = request.workloads;
@@ -284,14 +279,7 @@ function createCredentialRequest(token: string | undefined) {
     ...request,
     context: {
       ...request.context,
-      credentials: {
-        resolveAsync: () =>
-          Promise.resolve({
-            ok: true as const,
-            value: credentials,
-            diagnostics: [],
-          }),
-      },
+      credentials: createCredentialPort(credentials),
     },
     workloads: [
       {
@@ -309,7 +297,6 @@ function createCredentialRequest(token: string | undefined) {
   };
 }
 
-/*** Create one canonical secret reference. */
 function createSecretReference(ref: string) {
   return {
     source: 'secret-store' as const,
@@ -320,7 +307,6 @@ function createSecretReference(ref: string) {
   };
 }
 
-/*** Create a confirmed destruction request with retained persistence. */
 function createRetainedDestroyRequest() {
   return {
     projectId: 'sample',

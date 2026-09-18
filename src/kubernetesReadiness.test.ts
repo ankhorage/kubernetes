@@ -13,6 +13,7 @@ import type {
   KubernetesResourceReference,
 } from './index';
 import { createKubectlKubernetesApi, createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 
 it('shares one readiness deadline and stops at the first failed dependency', async () => {
   const api = new FailingReadinessApi();
@@ -197,9 +198,7 @@ function createRequest(): KubernetesDriverRequest {
       },
       networking: { domain: 'api.example.ch' },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () => Promise.resolve({ ok: true, value: '', diagnostics: [] }),
     },
@@ -207,8 +206,8 @@ function createRequest(): KubernetesDriverRequest {
   const workload: InfraWorkloadSpec = {
     id: 'api',
     artifact: { kind: 'image', image: 'registry.example/api@sha256:abc' },
-    ports: [{ name: 'http', port: 8080 }],
-    persistence: [{ id: 'data', mountPath: '/data', sizeGiB: 1, retention: 'retain' }],
+    ports: { http: { port: 8080 } },
+    persistence: { data: { id: 'data', mountPath: '/data', sizeGiB: 1, retention: 'retain' } },
     exposure: 'public',
   };
   return { context, ownerAdapter: 'minikube', workloads: [workload] };

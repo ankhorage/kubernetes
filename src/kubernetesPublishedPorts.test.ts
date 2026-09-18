@@ -2,6 +2,7 @@ import type { InfraExecutionContext, InfraWorkloadSpec } from '@ankhorage/contra
 import { expect, it } from 'bun:test';
 
 import { createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('projects an optional published workload port as an exact Kubernetes host port', async () => {
@@ -10,11 +11,11 @@ it('projects an optional published workload port as an exact Kubernetes host por
     id: 'api',
     artifact: { kind: 'image', image: 'registry.example/api@sha256:abc' },
     exposure: 'public',
-    ports: [{ name: 'http', port: 8080, publishedPort: 18_080 }],
+    ports: { http: { port: 8080, publishedPort: 18_080 } },
   };
   const projected = await driver.projectAsync(createRequest(workload));
   const unpublished = await driver.projectAsync(
-    createRequest({ ...workload, ports: [{ name: 'http', port: 8080 }] }),
+    createRequest({ ...workload, ports: { http: { port: 8080 } } }),
   );
 
   expect(projected.ok).toBe(true);
@@ -33,9 +34,7 @@ function createRequest(workload: InfraWorkloadSpec) {
         runtime: { provider: 'minikube' },
       },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () => Promise.resolve({ ok: true, value: '', diagnostics: [] }),
     },

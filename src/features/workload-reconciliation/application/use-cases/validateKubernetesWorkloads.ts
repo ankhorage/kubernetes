@@ -15,7 +15,7 @@ export function validateKubernetesWorkloads(
       });
     }
     ids.add(workload.id);
-    for (const dependency of workload.dependsOn ?? []) {
+    for (const dependency of Object.keys(workload.dependsOn ?? {}).sort()) {
       if (!workloads.some((candidate) => candidate.id === dependency)) {
         diagnostics.push({
           severity: 'error',

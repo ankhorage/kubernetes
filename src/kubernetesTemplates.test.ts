@@ -2,6 +2,7 @@ import type { InfraExecutionContext, InfraWorkloadSpec } from '@ankhorage/contra
 import { expect, it } from 'bun:test';
 
 import { createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
 it('materializes privileged templates only at apply and keeps public templates public', async () => {
@@ -86,9 +87,7 @@ function createExecutionContext(): InfraExecutionContext {
         runtime: { provider: 'docker-compose' },
       },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () =>
         Promise.resolve({ ok: true, value: 'resolved-secret-value', diagnostics: [] }),

@@ -27,7 +27,9 @@ export function createKubernetesPrerequisites(
     resources.push(secret.resource);
     owners.push(secret.resource.owner.identity);
   }
-  for (const volume of input.workload.persistence ?? []) {
+  for (const [, volume] of Object.entries(input.workload.persistence ?? {}).sort(
+    ([left], [right]) => left.localeCompare(right),
+  )) {
     const claim = createPersistentVolumeClaim(request, input, volume);
     resources.push(claim);
     owners.push(claim.owner.identity);
@@ -115,7 +117,7 @@ function createSecret(
 function createPersistentVolumeClaim(
   request: KubernetesDriverRequest,
   input: CreateKubernetesPrerequisitesInput,
-  volume: NonNullable<InfraWorkloadSpec['persistence']>[number],
+  volume: NonNullable<InfraWorkloadSpec['persistence']>[string],
 ): KubernetesDesiredResource {
   const volumeName = toKubernetesName(volume.id);
   return createKubernetesDesiredResource(request, {

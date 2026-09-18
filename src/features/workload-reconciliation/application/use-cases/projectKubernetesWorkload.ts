@@ -27,10 +27,12 @@ export function projectKubernetesWorkload(
     workload: input.workload,
     values: values.value,
   });
-  const declaredDependencies = (input.workload.dependsOn ?? []).flatMap((id) => {
-    const owner = input.workloadOwners.get(id);
-    return owner === undefined ? [] : [owner];
-  });
+  const declaredDependencies = Object.keys(input.workload.dependsOn ?? {})
+    .sort()
+    .flatMap((id) => {
+      const owner = input.workloadOwners.get(id);
+      return owner === undefined ? [] : [owner];
+    });
   const controller = createKubernetesController(request, {
     namespace: input.namespace,
     workloadName,
