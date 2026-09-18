@@ -6,6 +6,7 @@ import type {
   KubernetesResourceObservation,
   KubernetesResourceReference,
 } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { createKubernetesDriver } from './index';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
@@ -97,9 +98,7 @@ function createExecutionContext(): InfraExecutionContext {
         runtime: { provider: 'minikube' },
       },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () => Promise.resolve({ ok: true, value: '', diagnostics: [] }),
     },
