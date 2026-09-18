@@ -114,11 +114,11 @@ function createContainer(
     ports: Object.entries(workload.ports ?? {})
       .sort(([left], [right]) => left.localeCompare(right))
       .map(([portName, port]) => ({
-      name: toKubernetesName(portName),
-      containerPort: port.port,
-      ...(port.publishedPort === undefined ? {} : { hostPort: port.publishedPort }),
-      protocol: (port.protocol ?? 'tcp').toUpperCase(),
-    })),
+        name: toKubernetesName(portName),
+        containerPort: port.port,
+        ...(port.publishedPort === undefined ? {} : { hostPort: port.publishedPort }),
+        protocol: (port.protocol ?? 'tcp').toUpperCase(),
+      })),
     volumeMounts: createVolumeMounts(workload, values),
     ...(resources === undefined ? {} : { resources: createResources(resources) }),
     ...(health === undefined
@@ -183,9 +183,9 @@ function createVolumes(
     ...Object.entries(workload.persistence ?? {})
       .sort(([left], [right]) => left.localeCompare(right))
       .map(([, volume]) => ({
-      name: `volume-${toKubernetesName(volume.id)}`,
-      persistentVolumeClaim: { claimName: `${name}-${toKubernetesName(volume.id)}` },
-    })),
+        name: `volume-${toKubernetesName(volume.id)}`,
+        persistentVolumeClaim: { claimName: `${name}-${toKubernetesName(volume.id)}` },
+      })),
   ];
 }
 
