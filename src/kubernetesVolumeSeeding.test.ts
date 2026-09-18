@@ -61,15 +61,15 @@ function createWorkload(seed: 'image' | undefined): InfraWorkloadSpec {
   return {
     id: 'database',
     artifact: { kind: 'image', image: 'supabase/postgres:17.6.1.136' },
-    persistence: [
-      {
+    persistence: {
+      config: {
         id: 'config',
         mountPath: '/etc/postgresql-custom',
         sizeGiB: 1,
         ...(seed === undefined ? {} : { seed }),
         retention: 'retain',
       },
-    ],
+    },
   };
 }
 
