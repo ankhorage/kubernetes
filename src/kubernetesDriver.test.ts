@@ -6,6 +6,7 @@ import type {
 import { isInfraAdapterDescriptor } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { createKubernetesDriver, projectKubernetesResourcesAsync } from './index';
 import { FakeKubernetesApi } from './kubernetesApi.test';
 
@@ -257,9 +258,7 @@ function createExecutionContext(): InfraExecutionContext {
       },
       networking: { domain: 'api.example.ch' },
     },
-    credentials: {
-      resolveAsync: () => Promise.resolve({ ok: true, value: {}, diagnostics: [] }),
-    },
+    credentials: createCredentialPort(),
     secrets: {
       resolveAsync: () =>
         Promise.resolve({
@@ -280,14 +279,7 @@ function createCredentialRequest(token: string | undefined) {
     ...request,
     context: {
       ...request.context,
-      credentials: {
-        resolveAsync: () =>
-          Promise.resolve({
-            ok: true as const,
-            value: credentials,
-            diagnostics: [],
-          }),
-      },
+      credentials: createCredentialPort(credentials),
     },
     workloads: [
       {
