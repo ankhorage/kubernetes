@@ -10,11 +10,11 @@ it('projects an optional published workload port as an exact Kubernetes host por
     id: 'api',
     artifact: { kind: 'image', image: 'registry.example/api@sha256:abc' },
     exposure: 'public',
-    ports: [{ name: 'http', port: 8080, publishedPort: 18_080 }],
+    ports: { http: { port: 8080, publishedPort: 18_080 } },
   };
   const projected = await driver.projectAsync(createRequest(workload));
   const unpublished = await driver.projectAsync(
-    createRequest({ ...workload, ports: [{ name: 'http', port: 8080 }] }),
+    createRequest({ ...workload, ports: { http: { port: 8080 } } }),
   );
 
   expect(projected.ok).toBe(true);
