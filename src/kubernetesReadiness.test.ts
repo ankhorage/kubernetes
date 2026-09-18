@@ -12,8 +12,8 @@ import type {
   KubernetesResourceObservation,
   KubernetesResourceReference,
 } from './index';
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
 import { createKubectlKubernetesApi, createKubernetesDriver } from './index';
+import { createCredentialPort } from './infraExecutionContextFixtures.test';
 
 it('shares one readiness deadline and stops at the first failed dependency', async () => {
   const api = new FailingReadinessApi();
