@@ -230,10 +230,7 @@ function createRequest() {
     },
     files: {
       '/etc/app/config.json': { kind: 'literal', value: '{}' },
-      '/etc/app/credential': {
-        kind: 'secret',
-        reference: createSecretReference('credential'),
-      },
+      '/etc/app/credential': { kind: 'secret', reference: createSecretReference('credential') },
     },
     persistence: {
       data: { id: 'data', mountPath: '/data', sizeGiB: 1, retention: 'delete-on-destroy' },
