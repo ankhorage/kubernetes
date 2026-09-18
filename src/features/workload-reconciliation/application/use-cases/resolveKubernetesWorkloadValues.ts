@@ -37,11 +37,13 @@ export function resolveKubernetesWorkloadValues(
       `env-${name}`,
     );
   }
-  for (const [index, file] of (workload.files ?? []).entries()) {
+  for (const [index, [path, value]] of Object.entries(workload.files ?? {})
+    .sort(([left], [right]) => left.localeCompare(right))
+    .entries()) {
     assignValue(
       outputs,
-      file.content,
-      { kind: 'file', path: file.path },
+      value,
+      { kind: 'file', path },
       files,
       secrets,
       diagnostics,
