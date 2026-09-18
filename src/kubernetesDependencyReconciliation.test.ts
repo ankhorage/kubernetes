@@ -77,7 +77,7 @@ function createDependencyRequest() {
   const api: InfraWorkloadSpec = {
     id: 'api',
     artifact: { kind: 'image', image: 'registry.example/api@sha256:def' },
-    dependsOn: ['database'],
+    dependsOn: { database: true },
   };
   return {
     context: createExecutionContext(),
