@@ -32,7 +32,9 @@ function createService(
   request: KubernetesDriverRequest,
   input: CreateKubernetesExposureInput,
 ): KubernetesDesiredResource | undefined {
-  const ports = input.workload.ports ?? [];
+  const ports = Object.entries(input.workload.ports ?? {}).sort(([left], [right]) =>
+    left.localeCompare(right),
+  );
   if (ports.length === 0) return undefined;
   const hasIngress =
     input.workload.exposure === 'public' && request.context.desired.networking?.domain;
@@ -51,18 +53,21 @@ function createService(
       spec: {
         type: input.workload.exposure === 'public' && !hasIngress ? 'LoadBalancer' : 'ClusterIP',
         selector: { 'app.kubernetes.io/name': input.workloadName },
-        ports: ports.map(createServicePort),
+        ports: ports.map(([name, port]) => createServicePort(name, port)),
       },
     },
   });
 }
 
 /*** Project one generic port into a Service port. */
-function createServicePort(port: InfraWorkloadPort): Readonly<Record<string, unknown>> {
+function createServicePort(
+  name: string,
+  port: InfraWorkloadPort,
+): Readonly<Record<string, unknown>> {
   return {
-    name: toKubernetesName(port.name),
+    name: toKubernetesName(name),
     port: port.port,
-    targetPort: toKubernetesName(port.name),
+    targetPort: toKubernetesName(name),
     protocol: (port.protocol ?? 'tcp').toUpperCase(),
   };
 }
@@ -74,9 +79,9 @@ function createIngress(
   service: InfraResourceIdentity,
 ): KubernetesDesiredResource | undefined {
   const domain = request.context.desired.networking?.domain;
-  const port = (input.workload.ports ?? []).find(
-    (candidate) => (candidate.protocol ?? 'tcp') === 'tcp',
-  );
+  const port = Object.entries(input.workload.ports ?? {})
+    .sort(([left], [right]) => left.localeCompare(right))
+    .find(([, candidate]) => (candidate.protocol ?? 'tcp') === 'tcp');
   if (input.workload.exposure !== 'public' || domain === undefined || port === undefined) {
     return undefined;
   }
@@ -104,7 +109,7 @@ function createIngress(
                   backend: {
                     service: {
                       name: input.workloadName,
-                      port: { name: toKubernetesName(port.name) },
+                      port: { name: toKubernetesName(port[0]) },
                     },
                   },
                 },
