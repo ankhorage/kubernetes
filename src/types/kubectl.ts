@@ -1,4 +1,4 @@
-import type { KubernetesApi } from './kubernetesResources';
+import type { KubernetesApi } from './kubernetesResources.js';
 
 export interface KubernetesCommandRequest {
   readonly executable: string;

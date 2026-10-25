@@ -1,6 +1,6 @@
 import type { InfraResourceIdentity } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../types/kubernetesDriver';
+import type { KubernetesDriverRequest } from '../../../types/kubernetesDriver.js';
 
 /*** Create a runtime-owned Infra identity without provider-specific assumptions. */
 export function createKubernetesIdentity(

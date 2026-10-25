@@ -5,10 +5,10 @@ import type {
   KubernetesResource,
   KubernetesResourceObservation,
   KubernetesResourceReference,
-} from './index';
-import { createKubernetesDriver } from './index';
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
-import { FakeKubernetesApi } from './kubernetesApi.test';
+} from './index.js';
+import { createKubernetesDriver } from './index.js';
+import { createCredentialPort } from './infraExecutionContextFixtures.test.js';
+import { FakeKubernetesApi } from './kubernetesApi.test.js';
 
 it('waits for a workload dependency before applying the dependent Deployment', async () => {
   const api = new DependencyRecordingApi();

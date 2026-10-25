@@ -3,21 +3,21 @@ import type { InfraPlanAction, InfraResult } from '@ankhorage/contracts/infra';
 import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
-} from '../../../../types/kubernetesDriver';
+} from '../../../../types/kubernetesDriver.js';
 import type {
   KubernetesDesiredResource,
   KubernetesPreparedChange,
   KubernetesPreparedChanges,
   KubernetesResource,
-} from '../../../../types/kubernetesResources';
-import { areKubernetesResourcesEquivalent } from '../../utils/areKubernetesResourcesEquivalent';
-import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery';
-import { getKubernetesResourceKey } from '../../utils/getKubernetesResourceKey';
-import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
-import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource';
-import { sortKubernetesResourcesForRemoval } from '../../utils/sortKubernetesResourcesForRemoval';
-import { materializeKubernetesSecretsAsync } from './materializeKubernetesSecretsAsync';
-import { projectKubernetesResourcesAsync } from './projectKubernetesResourcesAsync';
+} from '../../../../types/kubernetesResources.js';
+import { areKubernetesResourcesEquivalent } from '../../utils/areKubernetesResourcesEquivalent.js';
+import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery.js';
+import { getKubernetesResourceKey } from '../../utils/getKubernetesResourceKey.js';
+import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference.js';
+import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource.js';
+import { sortKubernetesResourcesForRemoval } from '../../utils/sortKubernetesResourcesForRemoval.js';
+import { materializeKubernetesSecretsAsync } from './materializeKubernetesSecretsAsync.js';
+import { projectKubernetesResourcesAsync } from './projectKubernetesResourcesAsync.js';
 
 /*** Prepare deterministic create, update, no-op, retain and stale-delete changes. */
 export async function prepareKubernetesChangesAsync(

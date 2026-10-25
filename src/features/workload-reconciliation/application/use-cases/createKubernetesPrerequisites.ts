@@ -1,14 +1,14 @@
 import type { InfraResourceIdentity, InfraWorkloadSpec } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver';
+import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver.js';
 import type {
   KubernetesDesiredResource,
   KubernetesResolvedWorkloadValues,
   KubernetesSecretBinding,
-} from '../../../../types/kubernetesResources';
-import { createKubernetesDesiredResource } from '../../utils/createKubernetesDesiredResource';
-import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
-import { toKubernetesName } from '../../utils/toKubernetesName';
+} from '../../../../types/kubernetesResources.js';
+import { createKubernetesDesiredResource } from '../../utils/createKubernetesDesiredResource.js';
+import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference.js';
+import { toKubernetesName } from '../../utils/toKubernetesName.js';
 
 /*** Create config, secret and persistent-volume prerequisites in dependency order. */
 export function createKubernetesPrerequisites(

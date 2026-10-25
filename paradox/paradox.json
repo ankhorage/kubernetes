@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.7.3",
+      "value": "v0.8.2",
       "color": "cb3837"
     },
     {
@@ -414,6 +414,12 @@
       ]
     },
     {
+      "path": "src/infraExecutionContextFixtures.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": ["createCredentialPort"]
+    },
+    {
       "path": "src/kubectlApi.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -431,37 +437,63 @@
     {
       "path": "src/kubernetesDependencyReconciliation.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
+      "dependencies": [
+        "src/index.ts",
+        "src/infraExecutionContextFixtures.test.ts",
+        "src/kubernetesApi.test.ts"
+      ],
       "exports": []
     },
     {
       "path": "src/kubernetesDriver.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
+      "dependencies": [
+        "src/index.ts",
+        "src/infraExecutionContextFixtures.test.ts",
+        "src/kubernetesApi.test.ts"
+      ],
       "exports": []
     },
     {
       "path": "src/kubernetesPublishedPorts.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
+      "dependencies": [
+        "src/index.ts",
+        "src/infraExecutionContextFixtures.test.ts",
+        "src/kubernetesApi.test.ts"
+      ],
       "exports": []
     },
     {
       "path": "src/kubernetesReadiness.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/index.ts"],
+      "dependencies": ["src/index.ts", "src/infraExecutionContextFixtures.test.ts"],
+      "exports": []
+    },
+    {
+      "path": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/index.ts",
+        "src/infraExecutionContextFixtures.test.ts",
+        "src/kubernetesApi.test.ts"
+      ],
       "exports": []
     },
     {
       "path": "src/kubernetesTemplates.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/index.ts", "src/kubernetesApi.test.ts"],
+      "dependencies": [
+        "src/index.ts",
+        "src/infraExecutionContextFixtures.test.ts",
+        "src/kubernetesApi.test.ts"
+      ],
       "exports": []
     },
     {
       "path": "src/kubernetesVolumeSeeding.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/index.ts"],
+      "dependencies": ["src/index.ts", "src/infraExecutionContextFixtures.test.ts"],
       "exports": []
     },
     {
@@ -1781,7 +1813,7 @@
       "description": "Create the portable container projection.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 100,
+        "line": 102,
         "column": 1
       }
     },
@@ -1790,7 +1822,7 @@
       "description": "Create literal and secret-backed environment entries.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 127,
+        "line": 131,
         "column": 1
       }
     },
@@ -1799,7 +1831,7 @@
       "description": "Create Kubernetes request quantities from portable workload resources.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 141,
+        "line": 145,
         "column": 1
       }
     },
@@ -1808,7 +1840,7 @@
       "description": "Project portable health intent into Kubernetes probe fields.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 153,
+        "line": 157,
         "column": 1
       }
     },
@@ -1817,7 +1849,7 @@
       "description": "Create pod volumes for files and persistence.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 167,
+        "line": 171,
         "column": 1
       }
     },
@@ -1826,7 +1858,7 @@
       "description": "Create exact file and persistence mount points.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 187,
+        "line": 193,
         "column": 1
       }
     },
@@ -1835,7 +1867,7 @@
       "description": "Narrow a secret target to an environment entry.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 212,
+        "line": 220,
         "column": 1
       }
     },
@@ -1844,7 +1876,7 @@
       "description": "Narrow a secret target to a mounted file.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts",
-        "line": 219,
+        "line": 227,
         "column": 1
       }
     },
@@ -1871,7 +1903,7 @@
       "description": "Project one generic port into a Service port.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
-        "line": 61,
+        "line": 63,
         "column": 1
       }
     },
@@ -1880,7 +1912,7 @@
       "description": "Create ingress only when public hostname intent and a TCP port both exist.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
-        "line": 71,
+        "line": 76,
         "column": 1
       }
     },
@@ -1898,7 +1930,7 @@
       "description": "Create portable file configuration without secret content.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
-        "line": 53,
+        "line": 55,
         "column": 1
       }
     },
@@ -1907,7 +1939,7 @@
       "description": "Create a value-free Secret skeleton plus runtime-only materialization bindings.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
-        "line": 79,
+        "line": 81,
         "column": 1
       }
     },
@@ -1916,7 +1948,7 @@
       "description": "Create one persistent volume claim from portable capacity and retention intent.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts",
-        "line": 115,
+        "line": 117,
         "column": 1
       }
     },
@@ -2120,7 +2152,7 @@
     },
     {
       "name": "canDelete",
-      "description": "Decide whether explicit persistence policy authorizes this exact owner.",
+      "description": "Delete persistent data only when the exact resource has explicit deletion authorization.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
         "line": 88,
@@ -2132,7 +2164,7 @@
       "description": "Compare canonical resource identities without object-reference assumptions.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts",
-        "line": 100,
+        "line": 99,
         "column": 1
       }
     },
@@ -2150,7 +2182,7 @@
       "description": "Assign one portable value without resolving privileged content.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
-        "line": 58,
+        "line": 60,
         "column": 1
       }
     },
@@ -2159,7 +2191,7 @@
       "description": "Resolve one scalar segment without materializing privileged content.",
       "sourceLocation": {
         "filePath": "src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts",
-        "line": 84,
+        "line": 86,
         "column": 1
       }
     },
@@ -2344,6 +2376,15 @@
       }
     },
     {
+      "name": "createCredentialPort",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/infraExecutionContextFixtures.test.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
       "name": "success",
       "description": "Create a successful command fixture with JSON output.",
       "sourceLocation": {
@@ -2402,7 +2443,7 @@
       "description": "Create two workloads whose second Deployment requires the first to be ready.",
       "sourceLocation": {
         "filePath": "src/kubernetesDependencyReconciliation.test.ts",
-        "line": 71,
+        "line": 72,
         "column": 1
       }
     },
@@ -2411,13 +2452,13 @@
       "description": "Create one local execution context for dependency reconciliation tests.",
       "sourceLocation": {
         "filePath": "src/kubernetesDependencyReconciliation.test.ts",
-        "line": 90,
+        "line": 91,
         "column": 1
       }
     },
     {
       "name": "createRequest",
-      "description": "Create a complete generic workload request used by the API-boundary fixture.",
+      "description": null,
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
         "line": 223,
@@ -2426,37 +2467,37 @@
     },
     {
       "name": "createExecutionContext",
-      "description": "Create the execution context without a technology-specific runtime fixture.",
+      "description": null,
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 252,
+        "line": 250,
         "column": 1
       }
     },
     {
       "name": "createCredentialRequest",
-      "description": "Create a workload that consumes one keyed control-plane credential.",
+      "description": null,
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 278,
+        "line": 273,
         "column": 1
       }
     },
     {
       "name": "createSecretReference",
-      "description": "Create one canonical secret reference.",
+      "description": null,
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 313,
+        "line": 300,
         "column": 1
       }
     },
     {
       "name": "createRetainedDestroyRequest",
-      "description": "Create a confirmed destruction request with retained persistence.",
+      "description": null,
       "sourceLocation": {
         "filePath": "src/kubernetesDriver.test.ts",
-        "line": 324,
+        "line": 310,
         "column": 1
       }
     },
@@ -2465,7 +2506,7 @@
       "description": "Create the minimal driver request for one workload projection.",
       "sourceLocation": {
         "filePath": "src/kubernetesPublishedPorts.test.ts",
-        "line": 26,
+        "line": 27,
         "column": 1
       }
     },
@@ -2474,7 +2515,7 @@
       "description": "Create one readiness request containing dependency-ordered public persistent workload resources.",
       "sourceLocation": {
         "filePath": "src/kubernetesReadiness.test.ts",
-        "line": 189,
+        "line": 190,
         "column": 1
       }
     },
@@ -2483,7 +2524,7 @@
       "description": "Create one pending live Deployment fixture.",
       "sourceLocation": {
         "filePath": "src/kubernetesReadiness.test.ts",
-        "line": 218,
+        "line": 217,
         "column": 1
       }
     },
@@ -2492,7 +2533,7 @@
       "description": "Create one ready live Deployment fixture.",
       "sourceLocation": {
         "filePath": "src/kubernetesReadiness.test.ts",
-        "line": 235,
+        "line": 234,
         "column": 1
       }
     },
@@ -2501,7 +2542,7 @@
       "description": "Create the matching Deployment reference.",
       "sourceLocation": {
         "filePath": "src/kubernetesReadiness.test.ts",
-        "line": 243,
+        "line": 242,
         "column": 1
       }
     },
@@ -2510,7 +2551,7 @@
       "description": "Create one successful command fixture with JSON or preformatted output.",
       "sourceLocation": {
         "filePath": "src/kubernetesReadiness.test.ts",
-        "line": 253,
+        "line": 252,
         "column": 1
       }
     },
@@ -2519,7 +2560,43 @@
       "description": "Wait for the requested deterministic test interval.",
       "sourceLocation": {
         "filePath": "src/kubernetesReadiness.test.ts",
-        "line": 262,
+        "line": 261,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRequest",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "line": 35,
+        "column": 1
+      }
+    },
+    {
+      "name": "createExecutionContext",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "line": 55,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDestroyRequest",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "line": 73,
+        "column": 1
+      }
+    },
+    {
+      "name": "createVolumeIdentity",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "line": 84,
         "column": 1
       }
     },
@@ -2528,7 +2605,7 @@
       "description": "Create a runtime request covering public and privileged template segments.",
       "sourceLocation": {
         "filePath": "src/kubernetesTemplates.test.ts",
-        "line": 35,
+        "line": 36,
         "column": 1
       }
     },
@@ -2537,7 +2614,7 @@
       "description": "Create an execution context whose secret resolver remains outside projections.",
       "sourceLocation": {
         "filePath": "src/kubernetesTemplates.test.ts",
-        "line": 79,
+        "line": 80,
         "column": 1
       }
     },
@@ -2546,7 +2623,7 @@
       "description": "Create a canonical test secret reference.",
       "sourceLocation": {
         "filePath": "src/kubernetesTemplates.test.ts",
-        "line": 100,
+        "line": 99,
         "column": 1
       }
     },
@@ -2555,7 +2632,7 @@
       "description": "Create a portable persistence fixture with optional image initialization.",
       "sourceLocation": {
         "filePath": "src/kubernetesVolumeSeeding.test.ts",
-        "line": 60,
+        "line": 61,
         "column": 1
       }
     },
@@ -2564,7 +2641,7 @@
       "description": "Create the runtime-neutral execution context used by volume projection tests.",
       "sourceLocation": {
         "filePath": "src/kubernetesVolumeSeeding.test.ts",
-        "line": 77,
+        "line": 78,
         "column": 1
       }
     }
@@ -2649,6 +2726,11 @@
       },
       {
         "fromPath": "src/kubernetesDependencyReconciliation.test.ts",
+        "toPath": "src/infraExecutionContextFixtures.test.ts",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesDependencyReconciliation.test.ts",
         "toPath": "src/kubernetesApi.test.ts",
         "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
       },
@@ -2659,12 +2741,22 @@
       },
       {
         "fromPath": "src/kubernetesDriver.test.ts",
+        "toPath": "src/infraExecutionContextFixtures.test.ts",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesDriver.test.ts",
         "toPath": "src/kubernetesApi.test.ts",
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
         "fromPath": "src/kubernetesPublishedPorts.test.ts",
         "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesPublishedPorts.test.ts",
+        "toPath": "src/infraExecutionContextFixtures.test.ts",
         "sourcePath": "src/kubernetesPublishedPorts.test.ts"
       },
       {
@@ -2678,8 +2770,33 @@
         "sourcePath": "src/kubernetesReadiness.test.ts"
       },
       {
+        "fromPath": "src/kubernetesReadiness.test.ts",
+        "toPath": "src/infraExecutionContextFixtures.test.ts",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toPath": "src/infraExecutionContextFixtures.test.ts",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toPath": "src/kubernetesApi.test.ts",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
         "fromPath": "src/kubernetesTemplates.test.ts",
         "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesTemplates.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesTemplates.test.ts",
+        "toPath": "src/infraExecutionContextFixtures.test.ts",
         "sourcePath": "src/kubernetesTemplates.test.ts"
       },
       {
@@ -2690,6 +2807,11 @@
       {
         "fromPath": "src/kubernetesVolumeSeeding.test.ts",
         "toPath": "src/index.ts",
+        "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
+      },
+      {
+        "fromPath": "src/kubernetesVolumeSeeding.test.ts",
+        "toPath": "src/infraExecutionContextFixtures.test.ts",
         "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
       },
       {
@@ -3390,6 +3512,12 @@
         "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
       },
       {
+        "fromSymbol": "createExecutionContext",
+        "toSymbol": "createCredentialPort",
+        "callExpression": "createCredentialPort",
+        "sourcePath": "src/kubernetesDependencyReconciliation.test.ts"
+      },
+      {
         "fromSymbol": "src/kubernetesDriver.test.ts",
         "toSymbol": "it",
         "callExpression": "it",
@@ -3492,9 +3620,21 @@
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
+        "fromSymbol": "createExecutionContext",
+        "toSymbol": "createCredentialPort",
+        "callExpression": "createCredentialPort",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
         "fromSymbol": "createCredentialRequest",
         "toSymbol": "createRequest",
         "callExpression": "createRequest",
+        "sourcePath": "src/kubernetesDriver.test.ts"
+      },
+      {
+        "fromSymbol": "createCredentialRequest",
+        "toSymbol": "createCredentialPort",
+        "callExpression": "createCredentialPort",
         "sourcePath": "src/kubernetesDriver.test.ts"
       },
       {
@@ -3525,6 +3665,12 @@
         "fromSymbol": "src/kubernetesPublishedPorts.test.ts",
         "toSymbol": "expect",
         "callExpression": "expect",
+        "sourcePath": "src/kubernetesPublishedPorts.test.ts"
+      },
+      {
+        "fromSymbol": "createRequest",
+        "toSymbol": "createCredentialPort",
+        "callExpression": "createCredentialPort",
         "sourcePath": "src/kubernetesPublishedPorts.test.ts"
       },
       {
@@ -3606,10 +3752,76 @@
         "sourcePath": "src/kubernetesReadiness.test.ts"
       },
       {
+        "fromSymbol": "createRequest",
+        "toSymbol": "createCredentialPort",
+        "callExpression": "createCredentialPort",
+        "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
         "fromSymbol": "createReadyDeployment",
         "toSymbol": "createPendingDeployment",
         "callExpression": "createPendingDeployment",
         "sourcePath": "src/kubernetesReadiness.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toSymbol": "createKubernetesDriver",
+        "callExpression": "createKubernetesDriver",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toSymbol": "createRequest",
+        "callExpression": "createRequest",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toSymbol": "reconcileAsync",
+        "callExpression": "driver.reconcileAsync",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toSymbol": "removeAsync",
+        "callExpression": "driver.removeAsync",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toSymbol": "createDestroyRequest",
+        "callExpression": "createDestroyRequest",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "src/kubernetesRetainedPersistenceDeletion.test.ts",
+        "toSymbol": "createVolumeIdentity",
+        "callExpression": "createVolumeIdentity",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "createRequest",
+        "toSymbol": "createExecutionContext",
+        "callExpression": "createExecutionContext",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
+      },
+      {
+        "fromSymbol": "createExecutionContext",
+        "toSymbol": "createCredentialPort",
+        "callExpression": "createCredentialPort",
+        "sourcePath": "src/kubernetesRetainedPersistenceDeletion.test.ts"
       },
       {
         "fromSymbol": "src/kubernetesTemplates.test.ts",
@@ -3660,6 +3872,12 @@
         "sourcePath": "src/kubernetesTemplates.test.ts"
       },
       {
+        "fromSymbol": "createExecutionContext",
+        "toSymbol": "createCredentialPort",
+        "callExpression": "createCredentialPort",
+        "sourcePath": "src/kubernetesTemplates.test.ts"
+      },
+      {
         "fromSymbol": "src/kubernetesVolumeSeeding.test.ts",
         "toSymbol": "it",
         "callExpression": "it",
@@ -3687,6 +3905,12 @@
         "fromSymbol": "src/kubernetesVolumeSeeding.test.ts",
         "toSymbol": "expect",
         "callExpression": "expect",
+        "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
+      },
+      {
+        "fromSymbol": "createExecutionContext",
+        "toSymbol": "createCredentialPort",
+        "callExpression": "createCredentialPort",
         "sourcePath": "src/kubernetesVolumeSeeding.test.ts"
       },
       {
@@ -4371,6 +4595,12 @@
         "fromSymbol": "createService",
         "toSymbol": "createKubernetesDesiredResource",
         "callExpression": "createKubernetesDesiredResource",
+        "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
+      },
+      {
+        "fromSymbol": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts",
+        "toSymbol": "createServicePort",
+        "callExpression": "createServicePort",
         "sourcePath": "src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts"
       },
       {

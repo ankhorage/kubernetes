@@ -1,8 +1,8 @@
 import type { InfraExecutionContext, InfraWorkloadSpec } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
-import { projectKubernetesResourcesAsync } from './index';
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
+import { projectKubernetesResourcesAsync } from './index.js';
+import { createCredentialPort } from './infraExecutionContextFixtures.test.js';
 
 it('projects an idempotent fail-closed init container for image-seeded persistence', async () => {
   const projected = await projectKubernetesResourcesAsync({

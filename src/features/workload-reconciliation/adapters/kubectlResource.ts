@@ -1,7 +1,7 @@
 import type {
   KubernetesResource,
   KubernetesResourceObservation,
-} from '../../../types/kubernetesResources';
+} from '../../../types/kubernetesResources.js';
 
 const LAST_APPLIED_ANNOTATION = 'kubectl.kubernetes.io/last-applied-configuration';
 

@@ -1,11 +1,11 @@
-import type { KubernetesDriver, KubernetesDriverOptions } from '../../../types/kubernetesDriver';
-import { getKubernetesOutputsAsync } from '../application/use-cases/getKubernetesOutputsAsync';
-import { getKubernetesStatusAsync } from '../application/use-cases/getKubernetesStatusAsync';
-import { planKubernetesResourcesAsync } from '../application/use-cases/planKubernetesResourcesAsync';
-import { projectKubernetesResourcesAsync } from '../application/use-cases/projectKubernetesResourcesAsync';
-import { reconcileKubernetesResourcesAsync } from '../application/use-cases/reconcileKubernetesResourcesAsync';
-import { removeKubernetesResourcesAsync } from '../application/use-cases/removeKubernetesResourcesAsync';
-import { waitForKubernetesReadinessAsync } from '../application/use-cases/waitForKubernetesReadinessAsync';
+import type { KubernetesDriver, KubernetesDriverOptions } from '../../../types/kubernetesDriver.js';
+import { getKubernetesOutputsAsync } from '../application/use-cases/getKubernetesOutputsAsync.js';
+import { getKubernetesStatusAsync } from '../application/use-cases/getKubernetesStatusAsync.js';
+import { planKubernetesResourcesAsync } from '../application/use-cases/planKubernetesResourcesAsync.js';
+import { projectKubernetesResourcesAsync } from '../application/use-cases/projectKubernetesResourcesAsync.js';
+import { reconcileKubernetesResourcesAsync } from '../application/use-cases/reconcileKubernetesResourcesAsync.js';
+import { removeKubernetesResourcesAsync } from '../application/use-cases/removeKubernetesResourcesAsync.js';
+import { waitForKubernetesReadinessAsync } from '../application/use-cases/waitForKubernetesReadinessAsync.js';
 
 /***
  * Create the shared Kubernetes workload driver entrypoint.

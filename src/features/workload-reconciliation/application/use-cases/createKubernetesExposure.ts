@@ -4,10 +4,10 @@ import type {
   InfraWorkloadSpec,
 } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver';
-import type { KubernetesDesiredResource } from '../../../../types/kubernetesResources';
-import { createKubernetesDesiredResource } from '../../utils/createKubernetesDesiredResource';
-import { toKubernetesName } from '../../utils/toKubernetesName';
+import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver.js';
+import type { KubernetesDesiredResource } from '../../../../types/kubernetesResources.js';
+import { createKubernetesDesiredResource } from '../../utils/createKubernetesDesiredResource.js';
+import { toKubernetesName } from '../../utils/toKubernetesName.js';
 
 /*** Create Services and optional Ingress from portable port and exposure intent. */
 export function createKubernetesExposure(

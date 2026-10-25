@@ -4,7 +4,7 @@ import type {
   KubernetesResource,
   KubernetesResourceObservation,
   KubernetesResourceReference,
-} from './index';
+} from './index.js';
 
 /** Generic in-memory Kubernetes API fixture proving the driver needs no named local runtime. */
 export class FakeKubernetesApi implements KubernetesApi {

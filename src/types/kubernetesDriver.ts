@@ -10,7 +10,7 @@ import type {
   InfraWorkloadSpec,
 } from '@ankhorage/contracts/infra';
 
-import type { KubernetesApi, KubernetesProjection } from './kubernetesResources';
+import type { KubernetesApi, KubernetesProjection } from './kubernetesResources.js';
 
 export interface KubernetesDriverOptions {
   readonly api: KubernetesApi;

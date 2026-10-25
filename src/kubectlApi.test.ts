@@ -1,13 +1,13 @@
 import { expect, it } from 'bun:test';
 
-import { createSubprocessKubernetesCommandRunner } from './features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner';
+import { createSubprocessKubernetesCommandRunner } from './features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.js';
 import type {
   KubernetesCommandRequest,
   KubernetesCommandResult,
   KubernetesCommandRunner,
   KubernetesResource,
-} from './index';
-import { createKubectlKubernetesApi } from './index';
+} from './index.js';
+import { createKubectlKubernetesApi } from './index.js';
 
 const ownership = {
   'app.kubernetes.io/managed-by': 'ankhorage-infra',

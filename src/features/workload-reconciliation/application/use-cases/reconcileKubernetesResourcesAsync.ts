@@ -8,20 +8,20 @@ import type {
 import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
-} from '../../../../types/kubernetesDriver';
+} from '../../../../types/kubernetesDriver.js';
 import type {
   KubernetesDesiredResource,
   KubernetesPreparedChange,
   KubernetesResourceObservation,
-} from '../../../../types/kubernetesResources';
+} from '../../../../types/kubernetesResources.js';
 import {
   KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS,
   KUBERNETES_READINESS_KINDS,
-} from '../../constants';
-import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
-import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource';
-import { getKubernetesOutputsAsync } from './getKubernetesOutputsAsync';
-import { prepareKubernetesChangesAsync } from './prepareKubernetesChangesAsync';
+} from '../../constants.js';
+import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference.js';
+import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource.js';
+import { getKubernetesOutputsAsync } from './getKubernetesOutputsAsync.js';
+import { prepareKubernetesChangesAsync } from './prepareKubernetesChangesAsync.js';
 
 /*** Apply desired changes dependency-first and prune only obsolete, non-persistent Infra resources. */
 export async function reconcileKubernetesResourcesAsync(

@@ -11,8 +11,8 @@ import type {
   KubernetesResolvedWorkloadValues,
   KubernetesSecretTarget,
   KubernetesSecretValueSegment,
-} from '../../../../types/kubernetesResources';
-import { toKubernetesName } from '../../utils/toKubernetesName';
+} from '../../../../types/kubernetesResources.js';
+import { toKubernetesName } from '../../utils/toKubernetesName.js';
 
 /*** Resolve public outputs while retaining privileged workload values as secret references. */
 export function resolveKubernetesWorkloadValues(

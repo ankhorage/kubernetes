@@ -4,13 +4,13 @@ import type {
   InfraWorkloadSpec,
 } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver';
-import type { KubernetesWorkloadProjection } from '../../../../types/kubernetesResources';
-import { toKubernetesName } from '../../utils/toKubernetesName';
-import { createKubernetesController } from './createKubernetesController';
-import { createKubernetesExposure } from './createKubernetesExposure';
-import { createKubernetesPrerequisites } from './createKubernetesPrerequisites';
-import { resolveKubernetesWorkloadValues } from './resolveKubernetesWorkloadValues';
+import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver.js';
+import type { KubernetesWorkloadProjection } from '../../../../types/kubernetesResources.js';
+import { toKubernetesName } from '../../utils/toKubernetesName.js';
+import { createKubernetesController } from './createKubernetesController.js';
+import { createKubernetesExposure } from './createKubernetesExposure.js';
+import { createKubernetesPrerequisites } from './createKubernetesPrerequisites.js';
+import { resolveKubernetesWorkloadValues } from './resolveKubernetesWorkloadValues.js';
 
 /*** Project one workload while retaining dependency-first resource ordering. */
 export function projectKubernetesWorkload(

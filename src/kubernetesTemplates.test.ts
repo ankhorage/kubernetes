@@ -1,9 +1,9 @@
 import type { InfraExecutionContext, InfraWorkloadSpec } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
-import { createKubernetesDriver } from './index';
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
-import { FakeKubernetesApi } from './kubernetesApi.test';
+import { createKubernetesDriver } from './index.js';
+import { createCredentialPort } from './infraExecutionContextFixtures.test.js';
+import { FakeKubernetesApi } from './kubernetesApi.test.js';
 
 it('materializes privileged templates only at apply and keeps public templates public', async () => {
   const api = new FakeKubernetesApi();

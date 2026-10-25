@@ -3,10 +3,10 @@ import type { InfraOutput, InfraResult } from '@ankhorage/contracts/infra';
 import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
-} from '../../../../types/kubernetesDriver';
-import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery';
-import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
-import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource';
+} from '../../../../types/kubernetesDriver.js';
+import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery.js';
+import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference.js';
+import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource.js';
 
 /*** Read safe public outputs exposed by Infra-owned Kubernetes resources. */
 export async function getKubernetesOutputsAsync(
