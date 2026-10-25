@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.9.0
+
+### Minor Changes
+
+- 27a49cd: Require the canonical Contracts 26 infrastructure workload and credential contracts, and publish Node ESM-safe internal module specifiers.
+
 ## 0.8.2
 
 ### Patch Changes
