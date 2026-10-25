@@ -1,14 +1,14 @@
 import type { InfraOwnedResource, InfraResourceIdentity } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../types/kubernetesDriver';
+import type { KubernetesDriverRequest } from '../../../types/kubernetesDriver.js';
 import type {
   KubernetesDesiredResource,
   KubernetesResource,
-} from '../../../types/kubernetesResources';
-import { KUBERNETES_OWNERSHIP } from '../constants';
-import { getKubernetesResourceKey } from './getKubernetesResourceKey';
-import { getKubernetesResourceReference } from './getKubernetesResourceReference';
-import { toKubernetesName } from './toKubernetesName';
+} from '../../../types/kubernetesResources.js';
+import { KUBERNETES_OWNERSHIP } from '../constants.js';
+import { getKubernetesResourceKey } from './getKubernetesResourceKey.js';
+import { getKubernetesResourceReference } from './getKubernetesResourceReference.js';
+import { toKubernetesName } from './toKubernetesName.js';
 
 /*** Attach canonical Infra ownership to a standard Kubernetes desired resource. */
 export function createKubernetesDesiredResource(

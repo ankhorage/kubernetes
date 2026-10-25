@@ -3,17 +3,17 @@ import type { InfraDiagnostic, InfraResourceStatus, InfraResult } from '@ankhora
 import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
-} from '../../../../types/kubernetesDriver';
+} from '../../../../types/kubernetesDriver.js';
 import type {
   KubernetesDesiredResource,
   KubernetesResourceObservation,
-} from '../../../../types/kubernetesResources';
+} from '../../../../types/kubernetesResources.js';
 import {
   KUBERNETES_DEFAULT_READINESS_TIMEOUT_SECONDS,
   KUBERNETES_READINESS_KINDS,
-} from '../../constants';
-import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
-import { projectKubernetesResourcesAsync } from './projectKubernetesResourcesAsync';
+} from '../../constants.js';
+import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference.js';
+import { projectKubernetesResourcesAsync } from './projectKubernetesResourcesAsync.js';
 
 /*** Wait dependency-first for required Kubernetes resources to report ready. */
 export async function waitForKubernetesReadinessAsync(

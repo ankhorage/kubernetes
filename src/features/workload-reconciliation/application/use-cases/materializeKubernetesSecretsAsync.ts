@@ -1,12 +1,12 @@
 import type { InfraDiagnostic, InfraResult } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver';
+import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver.js';
 import type {
   KubernetesDesiredResource,
   KubernetesProjection,
   KubernetesSecretValueSegment,
-} from '../../../../types/kubernetesResources';
-import { getKubernetesResourceKey } from '../../utils/getKubernetesResourceKey';
+} from '../../../../types/kubernetesResources.js';
+import { getKubernetesResourceKey } from '../../utils/getKubernetesResourceKey.js';
 
 /*** Resolve referenced secrets into ephemeral Kubernetes apply resources. */
 export async function materializeKubernetesSecretsAsync(

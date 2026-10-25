@@ -4,14 +4,14 @@ import type {
   InfraWorkloadSpec,
 } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver';
+import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver.js';
 import type {
   KubernetesDesiredResource,
   KubernetesResolvedWorkloadValues,
   KubernetesSecretTarget,
-} from '../../../../types/kubernetesResources';
-import { createKubernetesDesiredResource } from '../../utils/createKubernetesDesiredResource';
-import { toKubernetesName } from '../../utils/toKubernetesName';
+} from '../../../../types/kubernetesResources.js';
+import { createKubernetesDesiredResource } from '../../utils/createKubernetesDesiredResource.js';
+import { toKubernetesName } from '../../utils/toKubernetesName.js';
 
 /*** Create the standard Kubernetes workload controller and pod template. */
 export function createKubernetesController(

@@ -4,7 +4,7 @@ import type {
   KubernetesCommandRequest,
   KubernetesCommandResult,
   KubernetesCommandRunner,
-} from '../../../types/kubectl';
+} from '../../../types/kubectl.js';
 
 /*** Create the concrete shell-free subprocess boundary used by kubectl operations. */
 export function createSubprocessKubernetesCommandRunner(): KubernetesCommandRunner {

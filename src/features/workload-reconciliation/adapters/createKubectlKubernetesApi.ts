@@ -2,23 +2,23 @@ import type {
   KubectlKubernetesApiOptions,
   KubernetesCommandResult,
   KubernetesCommandRunner,
-} from '../../../types/kubectl';
+} from '../../../types/kubectl.js';
 import type {
   KubernetesApi,
   KubernetesOwnershipQuery,
   KubernetesResource,
   KubernetesResourceObservation,
   KubernetesResourceReference,
-} from '../../../types/kubernetesResources';
-import { createSubprocessKubernetesCommandRunner } from './createSubprocessKubernetesCommandRunner';
+} from '../../../types/kubernetesResources.js';
+import { createSubprocessKubernetesCommandRunner } from './createSubprocessKubernetesCommandRunner.js';
 import {
   labelsInclude,
   observeKubectlResource,
   parseKubectlJsonRecord,
   parseKubectlResourceList,
   parseOptionalKubectlResource,
-} from './kubectlResource';
-import { observeKubectlDeploymentPodFailureAsync } from './observeKubectlDeploymentPodFailureAsync';
+} from './kubectlResource.js';
+import { observeKubectlDeploymentPodFailureAsync } from './observeKubectlDeploymentPodFailureAsync.js';
 
 const NAMESPACED_RESOURCE_TYPES = [
   'configmaps',

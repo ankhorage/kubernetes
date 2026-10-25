@@ -9,11 +9,11 @@ import type {
 import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
-} from '../../../../types/kubernetesDriver';
-import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery';
-import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
-import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource';
-import { sortKubernetesResourcesForRemoval } from '../../utils/sortKubernetesResourcesForRemoval';
+} from '../../../../types/kubernetesDriver.js';
+import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery.js';
+import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference.js';
+import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource.js';
+import { sortKubernetesResourcesForRemoval } from '../../utils/sortKubernetesResourcesForRemoval.js';
 
 /*** Remove owned resources in reverse dependency order while enforcing persistence authorization. */
 export async function removeKubernetesResourcesAsync(

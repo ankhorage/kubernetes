@@ -1,6 +1,6 @@
 import type { InfraOwnedResource } from '@ankhorage/contracts/infra';
 
-import type { KubernetesResource } from '../../../types/kubernetesResources';
+import type { KubernetesResource } from '../../../types/kubernetesResources.js';
 
 export interface OwnedKubernetesResource {
   readonly resource: KubernetesResource;

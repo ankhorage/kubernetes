@@ -1,16 +1,16 @@
 import type { InfraResult } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver';
+import type { KubernetesDriverRequest } from '../../../../types/kubernetesDriver.js';
 import type {
   KubernetesDesiredResource,
   KubernetesProjection,
   KubernetesSecretBinding,
-} from '../../../../types/kubernetesResources';
-import { createKubernetesDesiredResource } from '../../utils/createKubernetesDesiredResource';
-import { createKubernetesIdentity } from '../../utils/createKubernetesIdentity';
-import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery';
-import { projectKubernetesWorkload } from './projectKubernetesWorkload';
-import { validateKubernetesWorkloads } from './validateKubernetesWorkloads';
+} from '../../../../types/kubernetesResources.js';
+import { createKubernetesDesiredResource } from '../../utils/createKubernetesDesiredResource.js';
+import { createKubernetesIdentity } from '../../utils/createKubernetesIdentity.js';
+import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery.js';
+import { projectKubernetesWorkload } from './projectKubernetesWorkload.js';
+import { validateKubernetesWorkloads } from './validateKubernetesWorkloads.js';
 
 /***
  * Project portable workload desired state into deterministic standard Kubernetes resources.

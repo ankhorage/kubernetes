@@ -1,4 +1,4 @@
-import type { KubernetesResourceReference } from '../../../types/kubernetesResources';
+import type { KubernetesResourceReference } from '../../../types/kubernetesResources.js';
 
 /*** Build a stable comparison key for a Kubernetes resource identity. */
 export function getKubernetesResourceKey(resource: KubernetesResourceReference): string {

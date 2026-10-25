@@ -3,10 +3,10 @@ import type { InfraResourceStatus, InfraResult } from '@ankhorage/contracts/infr
 import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
-} from '../../../../types/kubernetesDriver';
-import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery';
-import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference';
-import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource';
+} from '../../../../types/kubernetesDriver.js';
+import { getKubernetesOwnershipQuery } from '../../utils/getKubernetesOwnershipQuery.js';
+import { getKubernetesResourceReference } from '../../utils/getKubernetesResourceReference.js';
+import { readKubernetesOwnedResource } from '../../utils/readKubernetesOwnedResource.js';
 
 /*** Read provider-neutral status for every safely identified Infra-owned resource. */
 export async function getKubernetesStatusAsync(

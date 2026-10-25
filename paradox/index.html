@@ -486,6 +486,16 @@
               </button>
             </li>
             <li>
+              <button
+                class="nav-button"
+                type="button"
+                data-target="src/infraExecutionContextFixtures.test.ts"
+              >
+                src/infraExecutionContextFixtures.test.ts
+                <small>1 function</small>
+              </button>
+            </li>
+            <li>
               <button class="nav-button" type="button" data-target="src/kubectlApi.test.ts">
                 src/kubectlApi.test.ts
                 <small>3 functions</small>
@@ -537,6 +547,16 @@
               <button
                 class="nav-button"
                 type="button"
+                data-target="src/kubernetesRetainedPersistenceDeletion.test.ts"
+              >
+                src/kubernetesRetainedPersistenceDeletion.test.ts
+                <small>4 functions</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
                 data-target="src/kubernetesTemplates.test.ts"
               >
                 src/kubernetesTemplates.test.ts
@@ -563,7 +583,7 @@
             <div class="summary">
               <div><strong>22</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>43</strong><span class="muted">modules</span></div>
+              <div><strong>45</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -1148,6 +1168,15 @@
             </article>
             <article
               class="item"
+              data-search="src/infraExecutionContextFixtures.test.ts createCredentialPort"
+            >
+              <h3>src/infraExecutionContextFixtures.test.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+              <p><strong>Exports:</strong> <code>createCredentialPort</code></p>
+            </article>
+            <article
+              class="item"
               data-search="src/kubectlApi.test.ts src/features/workload-reconciliation/adapters/createSubprocessKubernetesCommandRunner.ts src/index.ts"
             >
               <h3>src/kubectlApi.test.ts</h3>
@@ -1171,62 +1200,91 @@
             </article>
             <article
               class="item"
-              data-search="src/kubernetesDependencyReconciliation.test.ts src/index.ts src/kubernetesApi.test.ts"
+              data-search="src/kubernetesDependencyReconciliation.test.ts src/index.ts src/infraExecutionContextFixtures.test.ts src/kubernetesApi.test.ts"
             >
               <h3>src/kubernetesDependencyReconciliation.test.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
                 <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/infraExecutionContextFixtures.test.ts</code>,
                 <code>src/kubernetesApi.test.ts</code>
               </p>
               <p><strong>Exports:</strong> <span class="empty">None</span></p>
             </article>
             <article
               class="item"
-              data-search="src/kubernetesDriver.test.ts src/index.ts src/kubernetesApi.test.ts"
+              data-search="src/kubernetesDriver.test.ts src/index.ts src/infraExecutionContextFixtures.test.ts src/kubernetesApi.test.ts"
             >
               <h3>src/kubernetesDriver.test.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
                 <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/infraExecutionContextFixtures.test.ts</code>,
                 <code>src/kubernetesApi.test.ts</code>
               </p>
               <p><strong>Exports:</strong> <span class="empty">None</span></p>
             </article>
             <article
               class="item"
-              data-search="src/kubernetesPublishedPorts.test.ts src/index.ts src/kubernetesApi.test.ts"
+              data-search="src/kubernetesPublishedPorts.test.ts src/index.ts src/infraExecutionContextFixtures.test.ts src/kubernetesApi.test.ts"
             >
               <h3>src/kubernetesPublishedPorts.test.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
                 <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/infraExecutionContextFixtures.test.ts</code>,
                 <code>src/kubernetesApi.test.ts</code>
               </p>
               <p><strong>Exports:</strong> <span class="empty">None</span></p>
             </article>
-            <article class="item" data-search="src/kubernetesReadiness.test.ts src/index.ts">
+            <article
+              class="item"
+              data-search="src/kubernetesReadiness.test.ts src/index.ts src/infraExecutionContextFixtures.test.ts"
+            >
               <h3>src/kubernetesReadiness.test.ts</h3>
               <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <code>src/index.ts</code></p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/infraExecutionContextFixtures.test.ts</code>
+              </p>
               <p><strong>Exports:</strong> <span class="empty">None</span></p>
             </article>
             <article
               class="item"
-              data-search="src/kubernetesTemplates.test.ts src/index.ts src/kubernetesApi.test.ts"
+              data-search="src/kubernetesRetainedPersistenceDeletion.test.ts src/index.ts src/infraExecutionContextFixtures.test.ts src/kubernetesApi.test.ts"
+            >
+              <h3>src/kubernetesRetainedPersistenceDeletion.test.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/infraExecutionContextFixtures.test.ts</code>,
+                <code>src/kubernetesApi.test.ts</code>
+              </p>
+              <p><strong>Exports:</strong> <span class="empty">None</span></p>
+            </article>
+            <article
+              class="item"
+              data-search="src/kubernetesTemplates.test.ts src/index.ts src/infraExecutionContextFixtures.test.ts src/kubernetesApi.test.ts"
             >
               <h3>src/kubernetesTemplates.test.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
                 <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/infraExecutionContextFixtures.test.ts</code>,
                 <code>src/kubernetesApi.test.ts</code>
               </p>
               <p><strong>Exports:</strong> <span class="empty">None</span></p>
             </article>
-            <article class="item" data-search="src/kubernetesVolumeSeeding.test.ts src/index.ts">
+            <article
+              class="item"
+              data-search="src/kubernetesVolumeSeeding.test.ts src/index.ts src/infraExecutionContextFixtures.test.ts"
+            >
               <h3>src/kubernetesVolumeSeeding.test.ts</h3>
               <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <code>src/index.ts</code></p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/index.ts</code>,
+                <code>src/infraExecutionContextFixtures.test.ts</code>
+              </p>
               <p><strong>Exports:</strong> <span class="empty">None</span></p>
             </article>
             <article
@@ -2809,6 +2867,9 @@
                 package__ankhorage_kubernetes -.-&gt;
                 module_src_features_workload_reconciliation_utils_toKubernetesName_ts
                 module_src_index_ts[&quot;src/index.ts&quot;]
+                module_src_infraExecutionContextFixtures_test_ts[&quot;src/infraExecutionContextFixtures.test.ts&quot;]
+                package__ankhorage_kubernetes -.-&gt;
+                module_src_infraExecutionContextFixtures_test_ts
                 module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubectlApi_test_ts
                 module_src_kubectlApi_test_ts --&gt;
@@ -2822,25 +2883,45 @@
                 module_src_kubernetesDependencyReconciliation_test_ts
                 module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_index_ts
                 module_src_kubernetesDependencyReconciliation_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
+                module_src_kubernetesDependencyReconciliation_test_ts --&gt;
                 module_src_kubernetesApi_test_ts
                 module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubernetesDriver_test_ts
                 module_src_kubernetesDriver_test_ts --&gt; module_src_index_ts
-                module_src_kubernetesDriver_test_ts --&gt; module_src_kubernetesApi_test_ts
+                module_src_kubernetesDriver_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts module_src_kubernetesDriver_test_ts
+                --&gt; module_src_kubernetesApi_test_ts
                 module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubernetesPublishedPorts_test_ts
                 module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesPublishedPorts_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
                 module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_kubernetesApi_test_ts
                 module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubernetesReadiness_test_ts
                 module_src_kubernetesReadiness_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesReadiness_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts[&quot;src/kubernetesRetainedPersistenceDeletion.test.ts&quot;]
+                package__ankhorage_kubernetes -.-&gt;
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt;
+                module_src_kubernetesApi_test_ts
                 module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubernetesTemplates_test_ts
                 module_src_kubernetesTemplates_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesTemplates_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
                 module_src_kubernetesTemplates_test_ts --&gt; module_src_kubernetesApi_test_ts
                 module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_kubernetesVolumeSeeding_test_ts
                 module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesVolumeSeeding_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
                 module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
                 package__ankhorage_kubernetes -.-&gt; module_src_types_kubectl_ts
                 module_src_types_kubectl_ts --&gt; module_src_types_kubernetesResources_ts
@@ -3027,6 +3108,8 @@ graph TD
   module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_features_workload_reconciliation_utils_toKubernetesName_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_infraExecutionContextFixtures_test_ts[&quot;src/infraExecutionContextFixtures.test.ts&quot;]
+  package__ankhorage_kubernetes -.-&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubectlApi_test_ts
   module_src_kubectlApi_test_ts --&gt; module_src_features_workload_reconciliation_adapters_createSubprocessKubernetesCommandRunner_ts
@@ -3037,25 +3120,36 @@ graph TD
   module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesDependencyReconciliation_test_ts
   module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesDriver_test_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesDriver_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesPublishedPorts_test_ts
   module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesReadiness_test_ts
   module_src_kubernetesReadiness_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesReadiness_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts[&quot;src/kubernetesRetainedPersistenceDeletion.test.ts&quot;]
+  package__ankhorage_kubernetes -.-&gt; module_src_kubernetesRetainedPersistenceDeletion_test_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesTemplates_test_ts
   module_src_kubernetesTemplates_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesTemplates_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesTemplates_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_kubernetesVolumeSeeding_test_ts
   module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
   package__ankhorage_kubernetes -.-&gt; module_src_types_kubectl_ts
   module_src_types_kubectl_ts --&gt; module_src_types_kubernetesResources_ts
@@ -3107,12 +3201,14 @@ graph TD
                 module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
                 module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
+                module_src_infraExecutionContextFixtures_test_ts[&quot;src/infraExecutionContextFixtures.test.ts&quot;]
                 module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
                 module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
                 module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
                 module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
                 module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
                 module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts[&quot;src/kubernetesRetainedPersistenceDeletion.test.ts&quot;]
                 module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
                 module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
                 module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
@@ -3383,15 +3479,29 @@ graph TD
                 module_src_kubernetesApi_test_ts --&gt; module_src_index_ts
                 module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_index_ts
                 module_src_kubernetesDependencyReconciliation_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
+                module_src_kubernetesDependencyReconciliation_test_ts --&gt;
                 module_src_kubernetesApi_test_ts module_src_kubernetesDriver_test_ts --&gt;
                 module_src_index_ts module_src_kubernetesDriver_test_ts --&gt;
-                module_src_kubernetesApi_test_ts module_src_kubernetesPublishedPorts_test_ts --&gt;
-                module_src_index_ts module_src_kubernetesPublishedPorts_test_ts --&gt;
-                module_src_kubernetesApi_test_ts module_src_kubernetesReadiness_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts module_src_kubernetesDriver_test_ts
+                --&gt; module_src_kubernetesApi_test_ts module_src_kubernetesPublishedPorts_test_ts
+                --&gt; module_src_index_ts module_src_kubernetesPublishedPorts_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
+                module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_kubernetesApi_test_ts
+                module_src_kubernetesReadiness_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesReadiness_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt;
+                module_src_kubernetesApi_test_ts module_src_kubernetesTemplates_test_ts --&gt;
                 module_src_index_ts module_src_kubernetesTemplates_test_ts --&gt;
-                module_src_index_ts module_src_kubernetesTemplates_test_ts --&gt;
-                module_src_kubernetesApi_test_ts module_src_kubernetesVolumeSeeding_test_ts --&gt;
-                module_src_index_ts module_src_types_kubectl_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts
+                module_src_kubernetesTemplates_test_ts --&gt; module_src_kubernetesApi_test_ts
+                module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_index_ts
+                module_src_kubernetesVolumeSeeding_test_ts --&gt;
+                module_src_infraExecutionContextFixtures_test_ts module_src_types_kubectl_ts --&gt;
                 module_src_types_kubernetesResources_ts module_src_types_kubernetesDriver_ts --&gt;
                 module_src_types_kubernetesResources_ts
               </div>
@@ -3431,12 +3541,14 @@ graph LR
   module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
   module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_infraExecutionContextFixtures_test_ts[&quot;src/infraExecutionContextFixtures.test.ts&quot;]
   module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
   module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
   module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
   module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
   module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
   module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts[&quot;src/kubernetesRetainedPersistenceDeletion.test.ts&quot;]
   module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
   module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
   module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
@@ -3553,15 +3665,24 @@ graph LR
   module_src_kubectlApi_test_ts --&gt; module_src_index_ts
   module_src_kubernetesApi_test_ts --&gt; module_src_index_ts
   module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesDependencyReconciliation_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesDriver_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesDriver_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesPublishedPorts_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesReadiness_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesReadiness_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesTemplates_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesTemplates_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesTemplates_test_ts --&gt; module_src_kubernetesApi_test_ts
   module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_index_ts
+  module_src_kubernetesVolumeSeeding_test_ts --&gt; module_src_infraExecutionContextFixtures_test_ts
   module_src_types_kubectl_ts --&gt; module_src_types_kubernetesResources_ts
   module_src_types_kubernetesDriver_ts --&gt; module_src_types_kubernetesResources_ts
 </pre>
@@ -3604,12 +3725,14 @@ graph LR
                 module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
                 module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
+                module_src_infraExecutionContextFixtures_test_ts[&quot;src/infraExecutionContextFixtures.test.ts&quot;]
                 module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
                 module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
                 module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
                 module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
                 module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
                 module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
+                module_src_kubernetesRetainedPersistenceDeletion_test_ts[&quot;src/kubernetesRetainedPersistenceDeletion.test.ts&quot;]
                 module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
                 module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
                 module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
@@ -3721,12 +3844,14 @@ graph LR
   module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts[&quot;src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts&quot;]
   module_src_features_workload_reconciliation_utils_toKubernetesName_ts[&quot;src/features/workload-reconciliation/utils/toKubernetesName.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_infraExecutionContextFixtures_test_ts[&quot;src/infraExecutionContextFixtures.test.ts&quot;]
   module_src_kubectlApi_test_ts[&quot;src/kubectlApi.test.ts&quot;]
   module_src_kubernetesApi_test_ts[&quot;src/kubernetesApi.test.ts&quot;]
   module_src_kubernetesDependencyReconciliation_test_ts[&quot;src/kubernetesDependencyReconciliation.test.ts&quot;]
   module_src_kubernetesDriver_test_ts[&quot;src/kubernetesDriver.test.ts&quot;]
   module_src_kubernetesPublishedPorts_test_ts[&quot;src/kubernetesPublishedPorts.test.ts&quot;]
   module_src_kubernetesReadiness_test_ts[&quot;src/kubernetesReadiness.test.ts&quot;]
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts[&quot;src/kubernetesRetainedPersistenceDeletion.test.ts&quot;]
   module_src_kubernetesTemplates_test_ts[&quot;src/kubernetesTemplates.test.ts&quot;]
   module_src_kubernetesVolumeSeeding_test_ts[&quot;src/kubernetesVolumeSeeding.test.ts&quot;]
   module_src_types_kubectl_ts[&quot;src/types/kubectl.ts&quot;]
@@ -4393,7 +4518,7 @@ sequenceDiagram
               <h3>createContainer</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:100:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:102:1</code
                 >
               </p>
               <p>Create the portable container projection.</p>
@@ -4405,7 +4530,7 @@ sequenceDiagram
               <h3>createEnvironment</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:127:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:131:1</code
                 >
               </p>
               <p>Create literal and secret-backed environment entries.</p>
@@ -4417,7 +4542,7 @@ sequenceDiagram
               <h3>createResources</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:141:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:145:1</code
                 >
               </p>
               <p>Create Kubernetes request quantities from portable workload resources.</p>
@@ -4429,7 +4554,7 @@ sequenceDiagram
               <h3>createProbe</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:153:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:157:1</code
                 >
               </p>
               <p>Project portable health intent into Kubernetes probe fields.</p>
@@ -4441,7 +4566,7 @@ sequenceDiagram
               <h3>createVolumes</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:167:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:171:1</code
                 >
               </p>
               <p>Create pod volumes for files and persistence.</p>
@@ -4453,7 +4578,7 @@ sequenceDiagram
               <h3>createVolumeMounts</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:187:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:193:1</code
                 >
               </p>
               <p>Create exact file and persistence mount points.</p>
@@ -4465,7 +4590,7 @@ sequenceDiagram
               <h3>isEnvironmentSecret</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:212:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:220:1</code
                 >
               </p>
               <p>Narrow a secret target to an environment entry.</p>
@@ -4477,7 +4602,7 @@ sequenceDiagram
               <h3>isFileSecret</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:219:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesController.ts:227:1</code
                 >
               </p>
               <p>Narrow a secret target to a mounted file.</p>
@@ -4525,7 +4650,7 @@ sequenceDiagram
               <h3>createServicePort</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts:61:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts:63:1</code
                 >
               </p>
               <p>Project one generic port into a Service port.</p>
@@ -4537,7 +4662,7 @@ sequenceDiagram
               <h3>createIngress</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts:71:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesExposure.ts:76:1</code
                 >
               </p>
               <p>Create ingress only when public hostname intent and a TCP port both exist.</p>
@@ -4573,7 +4698,7 @@ sequenceDiagram
               <h3>createConfigMap</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts:53:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts:55:1</code
                 >
               </p>
               <p>Create portable file configuration without secret content.</p>
@@ -4585,7 +4710,7 @@ sequenceDiagram
               <h3>createSecret</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts:79:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts:81:1</code
                 >
               </p>
               <p>Create a value-free Secret skeleton plus runtime-only materialization bindings.</p>
@@ -4597,7 +4722,7 @@ sequenceDiagram
               <h3>createPersistentVolumeClaim</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts:115:1</code
+                  >src/features/workload-reconciliation/application/use-cases/createKubernetesPrerequisites.ts:117:1</code
                 >
               </p>
               <p>Create one persistent volume claim from portable capacity and retention intent.</p>
@@ -4995,7 +5120,7 @@ sequenceDiagram
             </article>
             <article
               class="item"
-              data-search="canDelete src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts Decide whether explicit persistence policy authorizes this exact owner."
+              data-search="canDelete src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts Delete persistent data only when the exact resource has explicit deletion authorization."
             >
               <h3>canDelete</h3>
               <p class="muted">
@@ -5003,7 +5128,10 @@ sequenceDiagram
                   >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:88:1</code
                 >
               </p>
-              <p>Decide whether explicit persistence policy authorizes this exact owner.</p>
+              <p>
+                Delete persistent data only when the exact resource has explicit deletion
+                authorization.
+              </p>
             </article>
             <article
               class="item"
@@ -5012,7 +5140,7 @@ sequenceDiagram
               <h3>identitiesEqual</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:100:1</code
+                  >src/features/workload-reconciliation/application/use-cases/removeKubernetesResourcesAsync.ts:99:1</code
                 >
               </p>
               <p>Compare canonical resource identities without object-reference assumptions.</p>
@@ -5051,7 +5179,7 @@ sequenceDiagram
               <h3>assignValue</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts:58:1</code
+                  >src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts:60:1</code
                 >
               </p>
               <p>Assign one portable value without resolving privileged content.</p>
@@ -5063,7 +5191,7 @@ sequenceDiagram
               <h3>resolveSegment</h3>
               <p class="muted">
                 <code
-                  >src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts:84:1</code
+                  >src/features/workload-reconciliation/application/use-cases/resolveKubernetesWorkloadValues.ts:86:1</code
                 >
               </p>
               <p>Resolve one scalar segment without materializing privileged content.</p>
@@ -5448,6 +5576,24 @@ sequenceDiagram
           </section>
         </section>
         <section
+          id="view-src-infraexecutioncontextfixtures-test-ts"
+          class="view"
+          data-view="src/infraExecutionContextFixtures.test.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/infraExecutionContextFixtures.test.ts</h2>
+            <article
+              class="item"
+              data-search="createCredentialPort src/infraExecutionContextFixtures.test.ts "
+            >
+              <h3>createCredentialPort</h3>
+              <p class="muted"><code>src/infraExecutionContextFixtures.test.ts:4:1</code></p>
+              <p class="empty">No description available.</p>
+            </article>
+          </section>
+        </section>
+        <section
           id="view-src-kubectlapi-test-ts"
           class="view"
           data-view="src/kubectlApi.test.ts"
@@ -5528,7 +5674,7 @@ sequenceDiagram
               data-search="createDependencyRequest src/kubernetesDependencyReconciliation.test.ts Create two workloads whose second Deployment requires the first to be ready."
             >
               <h3>createDependencyRequest</h3>
-              <p class="muted"><code>src/kubernetesDependencyReconciliation.test.ts:71:1</code></p>
+              <p class="muted"><code>src/kubernetesDependencyReconciliation.test.ts:72:1</code></p>
               <p>Create two workloads whose second Deployment requires the first to be ready.</p>
             </article>
             <article
@@ -5536,7 +5682,7 @@ sequenceDiagram
               data-search="createExecutionContext src/kubernetesDependencyReconciliation.test.ts Create one local execution context for dependency reconciliation tests."
             >
               <h3>createExecutionContext</h3>
-              <p class="muted"><code>src/kubernetesDependencyReconciliation.test.ts:90:1</code></p>
+              <p class="muted"><code>src/kubernetesDependencyReconciliation.test.ts:91:1</code></p>
               <p>Create one local execution context for dependency reconciliation tests.</p>
             </article>
           </section>
@@ -5549,45 +5695,39 @@ sequenceDiagram
         >
           <section class="panel">
             <h2>src/kubernetesDriver.test.ts</h2>
-            <article
-              class="item"
-              data-search="createRequest src/kubernetesDriver.test.ts Create a complete generic workload request used by the API-boundary fixture."
-            >
+            <article class="item" data-search="createRequest src/kubernetesDriver.test.ts ">
               <h3>createRequest</h3>
               <p class="muted"><code>src/kubernetesDriver.test.ts:223:1</code></p>
-              <p>Create a complete generic workload request used by the API-boundary fixture.</p>
+              <p class="empty">No description available.</p>
             </article>
             <article
               class="item"
-              data-search="createExecutionContext src/kubernetesDriver.test.ts Create the execution context without a technology-specific runtime fixture."
+              data-search="createExecutionContext src/kubernetesDriver.test.ts "
             >
               <h3>createExecutionContext</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:252:1</code></p>
-              <p>Create the execution context without a technology-specific runtime fixture.</p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:250:1</code></p>
+              <p class="empty">No description available.</p>
             </article>
             <article
               class="item"
-              data-search="createCredentialRequest src/kubernetesDriver.test.ts Create a workload that consumes one keyed control-plane credential."
+              data-search="createCredentialRequest src/kubernetesDriver.test.ts "
             >
               <h3>createCredentialRequest</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:278:1</code></p>
-              <p>Create a workload that consumes one keyed control-plane credential.</p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:273:1</code></p>
+              <p class="empty">No description available.</p>
             </article>
-            <article
-              class="item"
-              data-search="createSecretReference src/kubernetesDriver.test.ts Create one canonical secret reference."
-            >
+            <article class="item" data-search="createSecretReference src/kubernetesDriver.test.ts ">
               <h3>createSecretReference</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:313:1</code></p>
-              <p>Create one canonical secret reference.</p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:300:1</code></p>
+              <p class="empty">No description available.</p>
             </article>
             <article
               class="item"
-              data-search="createRetainedDestroyRequest src/kubernetesDriver.test.ts Create a confirmed destruction request with retained persistence."
+              data-search="createRetainedDestroyRequest src/kubernetesDriver.test.ts "
             >
               <h3>createRetainedDestroyRequest</h3>
-              <p class="muted"><code>src/kubernetesDriver.test.ts:324:1</code></p>
-              <p>Create a confirmed destruction request with retained persistence.</p>
+              <p class="muted"><code>src/kubernetesDriver.test.ts:310:1</code></p>
+              <p class="empty">No description available.</p>
             </article>
           </section>
         </section>
@@ -5604,7 +5744,7 @@ sequenceDiagram
               data-search="createRequest src/kubernetesPublishedPorts.test.ts Create the minimal driver request for one workload projection."
             >
               <h3>createRequest</h3>
-              <p class="muted"><code>src/kubernetesPublishedPorts.test.ts:26:1</code></p>
+              <p class="muted"><code>src/kubernetesPublishedPorts.test.ts:27:1</code></p>
               <p>Create the minimal driver request for one workload projection.</p>
             </article>
           </section>
@@ -5622,7 +5762,7 @@ sequenceDiagram
               data-search="createRequest src/kubernetesReadiness.test.ts Create one readiness request containing dependency-ordered public persistent workload resources."
             >
               <h3>createRequest</h3>
-              <p class="muted"><code>src/kubernetesReadiness.test.ts:189:1</code></p>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:190:1</code></p>
               <p>
                 Create one readiness request containing dependency-ordered public persistent
                 workload resources.
@@ -5633,7 +5773,7 @@ sequenceDiagram
               data-search="createPendingDeployment src/kubernetesReadiness.test.ts Create one pending live Deployment fixture."
             >
               <h3>createPendingDeployment</h3>
-              <p class="muted"><code>src/kubernetesReadiness.test.ts:218:1</code></p>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:217:1</code></p>
               <p>Create one pending live Deployment fixture.</p>
             </article>
             <article
@@ -5641,7 +5781,7 @@ sequenceDiagram
               data-search="createReadyDeployment src/kubernetesReadiness.test.ts Create one ready live Deployment fixture."
             >
               <h3>createReadyDeployment</h3>
-              <p class="muted"><code>src/kubernetesReadiness.test.ts:235:1</code></p>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:234:1</code></p>
               <p>Create one ready live Deployment fixture.</p>
             </article>
             <article
@@ -5649,7 +5789,7 @@ sequenceDiagram
               data-search="createDeploymentReference src/kubernetesReadiness.test.ts Create the matching Deployment reference."
             >
               <h3>createDeploymentReference</h3>
-              <p class="muted"><code>src/kubernetesReadiness.test.ts:243:1</code></p>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:242:1</code></p>
               <p>Create the matching Deployment reference.</p>
             </article>
             <article
@@ -5657,7 +5797,7 @@ sequenceDiagram
               data-search="success src/kubernetesReadiness.test.ts Create one successful command fixture with JSON or preformatted output."
             >
               <h3>success</h3>
-              <p class="muted"><code>src/kubernetesReadiness.test.ts:253:1</code></p>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:252:1</code></p>
               <p>Create one successful command fixture with JSON or preformatted output.</p>
             </article>
             <article
@@ -5665,8 +5805,58 @@ sequenceDiagram
               data-search="delayAsync src/kubernetesReadiness.test.ts Wait for the requested deterministic test interval."
             >
               <h3>delayAsync</h3>
-              <p class="muted"><code>src/kubernetesReadiness.test.ts:262:1</code></p>
+              <p class="muted"><code>src/kubernetesReadiness.test.ts:261:1</code></p>
               <p>Wait for the requested deterministic test interval.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-kubernetesretainedpersistencedeletion-test-ts"
+          class="view"
+          data-view="src/kubernetesRetainedPersistenceDeletion.test.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/kubernetesRetainedPersistenceDeletion.test.ts</h2>
+            <article
+              class="item"
+              data-search="createRequest src/kubernetesRetainedPersistenceDeletion.test.ts "
+            >
+              <h3>createRequest</h3>
+              <p class="muted">
+                <code>src/kubernetesRetainedPersistenceDeletion.test.ts:35:1</code>
+              </p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createExecutionContext src/kubernetesRetainedPersistenceDeletion.test.ts "
+            >
+              <h3>createExecutionContext</h3>
+              <p class="muted">
+                <code>src/kubernetesRetainedPersistenceDeletion.test.ts:55:1</code>
+              </p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createDestroyRequest src/kubernetesRetainedPersistenceDeletion.test.ts "
+            >
+              <h3>createDestroyRequest</h3>
+              <p class="muted">
+                <code>src/kubernetesRetainedPersistenceDeletion.test.ts:73:1</code>
+              </p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createVolumeIdentity src/kubernetesRetainedPersistenceDeletion.test.ts "
+            >
+              <h3>createVolumeIdentity</h3>
+              <p class="muted">
+                <code>src/kubernetesRetainedPersistenceDeletion.test.ts:84:1</code>
+              </p>
+              <p class="empty">No description available.</p>
             </article>
           </section>
         </section>
@@ -5683,7 +5873,7 @@ sequenceDiagram
               data-search="createTemplateRequest src/kubernetesTemplates.test.ts Create a runtime request covering public and privileged template segments."
             >
               <h3>createTemplateRequest</h3>
-              <p class="muted"><code>src/kubernetesTemplates.test.ts:35:1</code></p>
+              <p class="muted"><code>src/kubernetesTemplates.test.ts:36:1</code></p>
               <p>Create a runtime request covering public and privileged template segments.</p>
             </article>
             <article
@@ -5691,7 +5881,7 @@ sequenceDiagram
               data-search="createExecutionContext src/kubernetesTemplates.test.ts Create an execution context whose secret resolver remains outside projections."
             >
               <h3>createExecutionContext</h3>
-              <p class="muted"><code>src/kubernetesTemplates.test.ts:79:1</code></p>
+              <p class="muted"><code>src/kubernetesTemplates.test.ts:80:1</code></p>
               <p>Create an execution context whose secret resolver remains outside projections.</p>
             </article>
             <article
@@ -5699,7 +5889,7 @@ sequenceDiagram
               data-search="createSecretReference src/kubernetesTemplates.test.ts Create a canonical test secret reference."
             >
               <h3>createSecretReference</h3>
-              <p class="muted"><code>src/kubernetesTemplates.test.ts:100:1</code></p>
+              <p class="muted"><code>src/kubernetesTemplates.test.ts:99:1</code></p>
               <p>Create a canonical test secret reference.</p>
             </article>
           </section>
@@ -5717,7 +5907,7 @@ sequenceDiagram
               data-search="createWorkload src/kubernetesVolumeSeeding.test.ts Create a portable persistence fixture with optional image initialization."
             >
               <h3>createWorkload</h3>
-              <p class="muted"><code>src/kubernetesVolumeSeeding.test.ts:60:1</code></p>
+              <p class="muted"><code>src/kubernetesVolumeSeeding.test.ts:61:1</code></p>
               <p>Create a portable persistence fixture with optional image initialization.</p>
             </article>
             <article
@@ -5725,7 +5915,7 @@ sequenceDiagram
               data-search="createExecutionContext src/kubernetesVolumeSeeding.test.ts Create the runtime-neutral execution context used by volume projection tests."
             >
               <h3>createExecutionContext</h3>
-              <p class="muted"><code>src/kubernetesVolumeSeeding.test.ts:77:1</code></p>
+              <p class="muted"><code>src/kubernetesVolumeSeeding.test.ts:78:1</code></p>
               <p>Create the runtime-neutral execution context used by volume projection tests.</p>
             </article>
           </section>

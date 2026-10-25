@@ -1,4 +1,4 @@
-import type { KubernetesResource } from '../../../types/kubernetesResources';
+import type { KubernetesResource } from '../../../types/kubernetesResources.js';
 
 /*** Compare desired and observed Kubernetes resources while ignoring server-owned metadata. */
 export function areKubernetesResourcesEquivalent(

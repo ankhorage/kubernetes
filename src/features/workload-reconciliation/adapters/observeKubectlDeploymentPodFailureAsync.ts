@@ -1,8 +1,8 @@
-import type { KubernetesCommandResult } from '../../../types/kubectl';
+import type { KubernetesCommandResult } from '../../../types/kubectl.js';
 import type {
   KubernetesResourceObservation,
   KubernetesResourceReference,
-} from '../../../types/kubernetesResources';
+} from '../../../types/kubernetesResources.js';
 
 const DEPLOYMENT_POD_LABEL = 'app.kubernetes.io/name';
 const STARTUP_FAILURE_POD_WAITING_REASONS = new Set([

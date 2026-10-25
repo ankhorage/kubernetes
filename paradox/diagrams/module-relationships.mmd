@@ -31,12 +31,14 @@ graph LR
   module_src_features_workload_reconciliation_utils_sortKubernetesResourcesForRemoval_ts["src/features/workload-reconciliation/utils/sortKubernetesResourcesForRemoval.ts"]
   module_src_features_workload_reconciliation_utils_toKubernetesName_ts["src/features/workload-reconciliation/utils/toKubernetesName.ts"]
   module_src_index_ts["src/index.ts"]
+  module_src_infraExecutionContextFixtures_test_ts["src/infraExecutionContextFixtures.test.ts"]
   module_src_kubectlApi_test_ts["src/kubectlApi.test.ts"]
   module_src_kubernetesApi_test_ts["src/kubernetesApi.test.ts"]
   module_src_kubernetesDependencyReconciliation_test_ts["src/kubernetesDependencyReconciliation.test.ts"]
   module_src_kubernetesDriver_test_ts["src/kubernetesDriver.test.ts"]
   module_src_kubernetesPublishedPorts_test_ts["src/kubernetesPublishedPorts.test.ts"]
   module_src_kubernetesReadiness_test_ts["src/kubernetesReadiness.test.ts"]
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts["src/kubernetesRetainedPersistenceDeletion.test.ts"]
   module_src_kubernetesTemplates_test_ts["src/kubernetesTemplates.test.ts"]
   module_src_kubernetesVolumeSeeding_test_ts["src/kubernetesVolumeSeeding.test.ts"]
   module_src_types_kubectl_ts["src/types/kubectl.ts"]
@@ -153,14 +155,23 @@ graph LR
   module_src_kubectlApi_test_ts --> module_src_index_ts
   module_src_kubernetesApi_test_ts --> module_src_index_ts
   module_src_kubernetesDependencyReconciliation_test_ts --> module_src_index_ts
+  module_src_kubernetesDependencyReconciliation_test_ts --> module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesDependencyReconciliation_test_ts --> module_src_kubernetesApi_test_ts
   module_src_kubernetesDriver_test_ts --> module_src_index_ts
+  module_src_kubernetesDriver_test_ts --> module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesDriver_test_ts --> module_src_kubernetesApi_test_ts
   module_src_kubernetesPublishedPorts_test_ts --> module_src_index_ts
+  module_src_kubernetesPublishedPorts_test_ts --> module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesPublishedPorts_test_ts --> module_src_kubernetesApi_test_ts
   module_src_kubernetesReadiness_test_ts --> module_src_index_ts
+  module_src_kubernetesReadiness_test_ts --> module_src_infraExecutionContextFixtures_test_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --> module_src_index_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --> module_src_infraExecutionContextFixtures_test_ts
+  module_src_kubernetesRetainedPersistenceDeletion_test_ts --> module_src_kubernetesApi_test_ts
   module_src_kubernetesTemplates_test_ts --> module_src_index_ts
+  module_src_kubernetesTemplates_test_ts --> module_src_infraExecutionContextFixtures_test_ts
   module_src_kubernetesTemplates_test_ts --> module_src_kubernetesApi_test_ts
   module_src_kubernetesVolumeSeeding_test_ts --> module_src_index_ts
+  module_src_kubernetesVolumeSeeding_test_ts --> module_src_infraExecutionContextFixtures_test_ts
   module_src_types_kubectl_ts --> module_src_types_kubernetesResources_ts
   module_src_types_kubernetesDriver_ts --> module_src_types_kubernetesResources_ts

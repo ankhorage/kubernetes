@@ -6,9 +6,9 @@ import type {
 import { isInfraAdapterDescriptor } from '@ankhorage/contracts/infra';
 import { expect, it } from 'bun:test';
 
-import { createKubernetesDriver, projectKubernetesResourcesAsync } from './index';
-import { createCredentialPort } from './infraExecutionContextFixtures.test';
-import { FakeKubernetesApi } from './kubernetesApi.test';
+import { createKubernetesDriver, projectKubernetesResourcesAsync } from './index.js';
+import { createCredentialPort } from './infraExecutionContextFixtures.test.js';
+import { FakeKubernetesApi } from './kubernetesApi.test.js';
 
 it('projects deterministic standard resources without claiming a provider identity', async () => {
   const api = new FakeKubernetesApi();
@@ -32,7 +32,7 @@ it('projects deterministic standard resources without claiming a provider identi
   ]);
   expect(JSON.stringify(first.value)).not.toContain('resolved-secret-value');
   expect(first.value.secretBindings).toHaveLength(2);
-  expect('infraAdapterDescriptor' in (await import('./index'))).toBe(false);
+  expect('infraAdapterDescriptor' in (await import('./index.js'))).toBe(false);
   expect(isInfraAdapterDescriptor(driver)).toBe(false);
 });
 

@@ -3,8 +3,8 @@ import type { InfraPlanAction, InfraResult } from '@ankhorage/contracts/infra';
 import type {
   KubernetesDriverOptions,
   KubernetesDriverRequest,
-} from '../../../../types/kubernetesDriver';
-import { prepareKubernetesChangesAsync } from './prepareKubernetesChangesAsync';
+} from '../../../../types/kubernetesDriver.js';
+import { prepareKubernetesChangesAsync } from './prepareKubernetesChangesAsync.js';
 
 /*** Produce a side-effect-free Kubernetes reconciliation plan. */
 export async function planKubernetesResourcesAsync(

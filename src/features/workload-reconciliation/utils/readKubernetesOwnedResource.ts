@@ -1,10 +1,10 @@
 import type { InfraOwnedResource, InfraResourceIdentity } from '@ankhorage/contracts/infra';
 
-import type { KubernetesDriverRequest } from '../../../types/kubernetesDriver';
-import type { KubernetesResource } from '../../../types/kubernetesResources';
-import { KUBERNETES_OWNERSHIP } from '../constants';
-import { getKubernetesResourceKey } from './getKubernetesResourceKey';
-import { getKubernetesResourceReference } from './getKubernetesResourceReference';
+import type { KubernetesDriverRequest } from '../../../types/kubernetesDriver.js';
+import type { KubernetesResource } from '../../../types/kubernetesResources.js';
+import { KUBERNETES_OWNERSHIP } from '../constants.js';
+import { getKubernetesResourceKey } from './getKubernetesResourceKey.js';
+import { getKubernetesResourceReference } from './getKubernetesResourceReference.js';
 
 /*** Read trusted ownership metadata, rejecting resources outside the active Infra identity. */
 export function readKubernetesOwnedResource(

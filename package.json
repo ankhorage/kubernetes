@@ -43,6 +43,7 @@
     "typecheck": "bun x tsc --noEmit -p tsconfig.json",
     "check-types": "bun run typecheck",
     "test": "bun test src",
+    "test:packed-consumer": "bun run build && bun consumer-tests/packedConsumer.ts",
     "docs": "paradox && ankhorage-prettier --write README.md paradox",
     "prepack": "bun run build",
     "lint": "ankhorage-eslint . --max-warnings=0",
@@ -55,12 +56,12 @@
     "version-packages": "ankhorage-changeset version"
   },
   "dependencies": {
-    "@ankhorage/contracts": "^22.0.3"
+    "@ankhorage/contracts": "^26.2.1"
   },
   "devDependencies": {
     "@ankhorage/devtools": "^1.14.6",
     "@ankhorage/paradox": "^0.1.24",
-    "@types/bun": "^1.4.1",
+    "@types/bun": "^1.4.2",
     "@types/node": "^26.4.1",
     "typescript": "~6.0.3"
   },

@@ -1,7 +1,7 @@
 import type {
   KubernetesResource,
   KubernetesResourceReference,
-} from '../../../types/kubernetesResources';
+} from '../../../types/kubernetesResources.js';
 
 /*** Return the immutable Kubernetes identity of a desired or observed resource. */
 export function getKubernetesResourceReference(
