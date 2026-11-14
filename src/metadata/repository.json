@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "kind": "library",
+  "title": "Ankhorage Kubernetes",
+  "summary": "Provides deterministic Kubernetes workload projection and reconciliation behind an authenticated Kubernetes API boundary.",
+  "purpose": "Share standard Kubernetes workload lifecycle behavior across runtime adapters without making Kubernetes itself a selectable provider.",
+  "domain": "Kubernetes workload reconciliation",
+  "responsibilities": [
+    "Project portable infrastructure workloads into deterministic Kubernetes resources.",
+    "Reconcile projected resources through an injected authenticated Kubernetes API.",
+    "Provide a shell-free kubectl-backed API implementation for trusted host composition."
+  ],
+  "boundaries": [
+    "Does not provision Kubernetes clusters or select infrastructure providers.",
+    "Does not own runtime-specific cluster bootstrap such as k3s or Minikube lifecycle.",
+    "Does not resolve secret values into projections or expose them in observations and errors."
+  ],
+  "audience": [
+    "Infrastructure runtime adapters that target Kubernetes-compatible clusters.",
+    "Hosts that need reusable Kubernetes projection and reconciliation behavior."
+  ],
+  "useCases": [
+    "Project portable workloads into Kubernetes Deployments, Services, volumes, configs, and secret references.",
+    "Reconcile the projected workload through an authenticated cluster API.",
+    "Compose a kubectl-backed Kubernetes API for an existing context."
+  ],
+  "architecture": {
+    "role": "A provider-neutral Kubernetes workload driver used as an implementation dependency by cluster runtime adapters.",
+    "invariants": [
+      "Portable infrastructure intent enters through published Contracts types.",
+      "Cluster authentication and command execution stay behind the Kubernetes API boundary.",
+      "Resolved secrets are excluded from deterministic projections and diagnostic evidence."
+    ]
+  },
+  "constraints": {
+    "configuration": [
+      "A host must supply authenticated Kubernetes access or configure the kubectl-backed API."
+    ],
+    "security": [
+      "kubectl commands are executed as argv arrays without a shell, and secret manifests are supplied through standard input."
+    ],
+    "limitations": ["Cluster provisioning and provider selection remain outside this package."]
+  }
+}
