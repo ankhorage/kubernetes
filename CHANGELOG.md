@@ -1,5 +1,11 @@
 # @ankhorage/kubernetes
 
+## 0.9.1
+
+### Patch Changes
+
+- 48cd31a: Add canonical repository metadata for tooling and managed-agent consumers.
+
 ## 0.9.0
 
 ### Minor Changes
